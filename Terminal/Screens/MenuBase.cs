@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Reflection;
 using System.Reflection.Metadata;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using Terminal.Models;
 
 namespace Terminal.Screens
 {
@@ -24,6 +26,7 @@ namespace Terminal.Screens
         }
 
         public abstract void Run();
+        protected abstract void ExecuteCommand(ConsoleKeyInfo input);
 
         protected virtual void DisplayHeader()
         {
@@ -92,6 +95,55 @@ namespace Terminal.Screens
             Console.WriteLine($"{OuterMargin}{BoxParts.VerticalLine}{InnerMargin}{leftContent}{filler}{rightContent}{InnerMargin}{BoxParts.VerticalLine}{OuterMargin}");
         }
 
-        protected abstract void ExecuteCommand(ConsoleKeyInfo input);
+        private int LengthOfMargins()
+        {
+            return (OuterMargin.Length * 2) + (BoxParts.VerticalLine.Length * 2) + (InnerMargin.Length * 2);
+        }
+
+        protected virtual void DisplayEnum(string text, Enum e, ConsoleKey key)
+        {
+            var paddedText = text.PadRight(30);
+            var options = Enum.GetNames(e.GetType());
+            var value = Enum.GetName(e.GetType(), e);
+            var content = EnumLineWithSelection(options, value);
+            var keySelector = $"({key})";
+
+            var count = Width - LengthOfMargins() - paddedText.Length - content.Length - keySelector.Length;
+            var filler = new string(' ', count);
+
+            DisplayCustomLine(
+                OuterMargin,
+                BoxParts.VerticalLine,
+                InnerMargin,
+                paddedText,
+                content,
+                filler,
+                keySelector,
+                InnerMargin,
+                BoxParts.VerticalLine,
+                OuterMargin
+            );
+        }
+
+        private string EnumLineWithSelection(string[] items, string value)
+        {
+            var line = "";
+
+            foreach (var item in items)
+            {
+                var box = item.Equals(value) ? CheckBoxIcons.CheckedBox : CheckBoxIcons.EmptyBox;
+                var section = $"{box} {item}";
+                line += section.PadRight(20);
+            }
+
+            return line;
+        }
+
+        protected virtual void DisplayCustomLine(params string[] parts)
+        {
+            var line = string.Join("", parts);
+            Console.WriteLine(line);
+        }
+        
     }
 }
