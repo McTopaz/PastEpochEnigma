@@ -74,13 +74,6 @@ namespace Terminal.Screens
             Console.WriteLine($"{OuterMargin}{BoxParts.VerticalLine}{filler}{BoxParts.VerticalLine}{OuterMargin}");
         }
 
-        protected virtual void TakeInput()
-        {
-            Console.Write($"{OuterMargin}{OuterMargin}Enter input: ");
-            var input = Console.ReadKey();
-            ExecuteCommand(input);
-        }
-
         protected virtual void DisplayLeftAlignedContent(string content)
         {
             var count = Width - (OuterMargin.Length * 2) - (InnerMargin.Length * 2) - 2 - content.Length;
@@ -93,6 +86,27 @@ namespace Terminal.Screens
             var count = Width - (OuterMargin.Length * 2) - (InnerMargin.Length * 2) - 2 - leftContent.Length - rightContent.Length;
             var filler = new string(' ', count);
             Console.WriteLine($"{OuterMargin}{BoxParts.VerticalLine}{InnerMargin}{leftContent}{filler}{rightContent}{InnerMargin}{BoxParts.VerticalLine}{OuterMargin}");
+        }
+
+        protected virtual void TakeInput()
+        {
+            Console.Write($"{OuterMargin}{OuterMargin}Enter input: ");
+            var input = Console.ReadKey();
+            ExecuteCommand(input);
+        }
+
+        protected virtual void DisplayUnknownInput()
+        {
+            Console.WriteLine();
+            Console.WriteLine();
+            DisplayInformation("Unknown key input");
+            Console.WriteLine();
+            Thread.Sleep(1500);
+        }
+
+        protected virtual void DisplayInformation(string information)
+        {
+            Console.WriteLine($"{OuterMargin}{OuterMargin}{information}");
         }
 
         private int LengthOfMargins()

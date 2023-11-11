@@ -17,6 +17,7 @@ namespace Terminal.Screens
 
         public override void Run()
         {
+            Console.Clear();
             base.DisplayHeader();
             base.DisplayLogo(Resources.MenuLogo);
             base.DisplayEmptyLine();
@@ -43,27 +44,26 @@ namespace Terminal.Screens
 
         protected override void ExecuteCommand(ConsoleKeyInfo input)
         {
-            // New game
-            if (input.Key == NewGameKey ||input.Key == ConsoleKey.D1)
+            if (input.Key == NewGameKey || input.Key == ConsoleKey.D1 || input.Key == ConsoleKey.NumPad1)
             {
             }
-            // Load game
-            else if (input.Key == LoadGameKey || input.Key == ConsoleKey.D2)
+            else if (input.Key == LoadGameKey || input.Key == ConsoleKey.D2 || input.Key == ConsoleKey.NumPad2)
             {
             }
-            // Options
-            else if (input.Key == OptionsKey || input.Key == ConsoleKey.D3)
+            else if (input.Key == OptionsKey || input.Key == ConsoleKey.D3 || input.Key == ConsoleKey.NumPad3)
             {
                 new Options().Run();
             }
-            // Introduction
-            else if (input.Key == IntroductionKey || input.Key == ConsoleKey.D4)
+            else if (input.Key == IntroductionKey || input.Key == ConsoleKey.D4 || input.Key == ConsoleKey.NumPad4)
             {
             }
-            // Exit
-            else if (input.Key == ExitKey || input.Key == ConsoleKey.Escape || input.Key == ConsoleKey.D5)
+            else if (input.Key == ExitKey || input.Key == ConsoleKey.Escape || input.Key == ConsoleKey.D5 || input.Key == ConsoleKey.NumPad5)
             {
                 Environment.Exit(0);
+            }
+            else
+            {
+                base.DisplayUnknownInput();
             }
         }
     }
