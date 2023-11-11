@@ -70,6 +70,17 @@ namespace Terminal {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to  __   __   __  ___     ___  __   __   ___ _  _     ___ _  _ _  __  _  _  __
+        ///|__| |__| |__   |     |___ |__| |  | |    |__|    |___ |\ | | | __ |\/| |__|
+        ///|    |  | ___|  |     |___ |    |__| |___ |  |    |___ | \| | |__| |  | |  |.
+        /// </summary>
+        internal static string MenuLogo {
+            get {
+                return ResourceManager.GetString("MenuLogo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to     ____             __     ______                 __       ______      _                      
         ///   / __ \____  _____/ /_   / ____/___  ____  _____/ /_     / ____/___  (_)___  ____ ___  ____ _
         ///  / /_/ / __ `/ ___/ __/  / __/ / __ \/ __ \/ ___/ __ \   / __/ / __ \/ / __ `/ __ `__ \/ __ `/
@@ -84,7 +95,17 @@ namespace Terminal {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to  ______      ___           _______ ___________
+        ///|   _  \    /   \         /       |           |
+        ///|  |_)  |  /  ^  \       |   (----`---|  |----`
+        ///|   ___/  /  /_\  \       \   \       |  |
+        ///|  |     /  _____  \  .----)   |      |  |
+        ///| _|    /__/     \__\ |_______/       |__|
+        /// _______  ______     ______     ______  __    __
+        ///|   ____||   _  \   /  __  \   /      ||  |  |  |
+        ///|  |__   |  |_)  | |  |  |  | |  ,----&apos;|  |__|  |
+        ///|   __|  |   ___/  |  |  |  | |  |     |   __   |
+        ///|  |____ |  |      |  `--&apos;  | | [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string SplashLogoVertical {
             get {
