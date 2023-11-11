@@ -15,6 +15,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Engine\Engine.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Assets\MenuLogo.txt" />
     <Resource Include="Assets\OptionsLogo.txt" />
     <Resource Include="Assets\SplashLogoHorizontal.txt" />
