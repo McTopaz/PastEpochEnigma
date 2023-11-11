@@ -9,12 +9,14 @@
 
   <ItemGroup>
     <None Remove="Assets\MenuLogo.txt" />
+    <None Remove="Assets\OptionsLogo.txt" />
     <None Remove="Assets\SplashLogoHorizontal.txt" />
     <None Remove="Assets\SplashLogoVertical.txt" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Assets\MenuLogo.txt" />
+    <Resource Include="Assets\OptionsLogo.txt" />
     <Resource Include="Assets\SplashLogoHorizontal.txt" />
     <Resource Include="Assets\SplashLogoVertical.txt" />
   </ItemGroup>

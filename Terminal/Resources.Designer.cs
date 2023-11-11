@@ -81,6 +81,17 @@ namespace Terminal {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to  __   __  ___ _  __  _  _ ____
+        ///|  | |__|  |  | |  | |\ | |__  
+        ///|__| |     |  | |__| | \| ___|.
+        /// </summary>
+        internal static string OptionsLogo {
+            get {
+                return ResourceManager.GetString("OptionsLogo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to     ____             __     ______                 __       ______      _                      
         ///   / __ \____  _____/ /_   / ____/___  ____  _____/ /_     / ____/___  (_)___  ____ ___  ____ _
         ///  / /_/ / __ `/ ___/ __/  / __/ / __ \/ __ \/ ___/ __ \   / __/ / __ \/ / __ `/ __ `__ \/ __ `/
