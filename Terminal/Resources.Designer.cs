@@ -70,6 +70,17 @@ namespace Terminal {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to _ _  _ ___ ____ ____ ___  _  _ ____ ___ _ ____ _  _
+        ///| |\ |  |  |__/ |  | |  \ |  | |     |  | |  | |\ |
+        ///| | \|  |  |  \ |__| |__/ |__| |___  |  | |__| | \|.
+        /// </summary>
+        internal static string IntroductionLogo {
+            get {
+                return ResourceManager.GetString("IntroductionLogo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to  __   __   __  ___     ___  __   __   ___ _  _     ___ _  _ _  __  _  _  __
         ///|__| |__| |__   |     |___ |__| |  | |    |__|    |___ |\ | | | __ |\/| |__|
         ///|    |  | ___|  |     |___ |    |__| |___ |  |    |___ | \| | |__| |  | |  |.

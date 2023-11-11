@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\IntroductionLogo.txt" />
     <None Remove="Assets\MenuLogo.txt" />
     <None Remove="Assets\OptionsLogo.txt" />
     <None Remove="Assets\SplashLogoHorizontal.txt" />
@@ -19,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\IntroductionLogo.txt" />
     <Resource Include="Assets\MenuLogo.txt" />
     <Resource Include="Assets\OptionsLogo.txt" />
     <Resource Include="Assets\SplashLogoHorizontal.txt" />
