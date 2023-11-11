@@ -14,6 +14,7 @@ namespace Terminal.Screens
 
         public override void Show()
         {
+            Console.Clear();
             base.DisplayHeader();
             base.DisplayLogo(Resources.OptionsLogo);
             base.DisplayEmptyLine();
