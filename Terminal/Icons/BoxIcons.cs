@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Terminal
+namespace Terminal.Icons
 {
-    internal static class BoxParts
+    internal static class BoxIcons
     {
         // Corners
         public const string LeftUpperCorner = "\u256D";

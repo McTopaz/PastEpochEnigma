@@ -8,6 +8,7 @@ using System.Reflection.Metadata;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using Terminal.Icons;
 using Terminal.Models;
 
 namespace Terminal.Screens
@@ -37,14 +38,14 @@ namespace Terminal.Screens
         protected virtual void DisplayHeader()
         {
             var count = Width - (OuterMargin.Length * 2) - 2;
-            var filler = string.Concat(Enumerable.Repeat(BoxParts.HorizontalLine, count));
+            var filler = string.Concat(Enumerable.Repeat(BoxIcons.HorizontalLine, count));
 
             DisplayCustomLine
             (
                 OuterMargin,
-                BoxParts.LeftUpperCorner,
+                BoxIcons.LeftUpperCorner,
                 filler,
-                BoxParts.RightUpperCorner,
+                BoxIcons.RightUpperCorner,
                 OuterMargin
             );
             DisplayEmptyLine();
@@ -53,15 +54,15 @@ namespace Terminal.Screens
         protected virtual void DisplayFooter()
         {
             var count = Width - (OuterMargin.Length * 2) - 2;
-            var filler = string.Concat(Enumerable.Repeat(BoxParts.HorizontalLine, count));
+            var filler = string.Concat(Enumerable.Repeat(BoxIcons.HorizontalLine, count));
 
             DisplayEmptyLine();
             DisplayCustomLine
             (
                 OuterMargin,
-                BoxParts.LeftLowerCorner,
+                BoxIcons.LeftLowerCorner,
                 filler,
-                BoxParts.RightLowerCorner,
+                BoxIcons.RightLowerCorner,
                 OuterMargin
             );
         }
@@ -97,9 +98,9 @@ namespace Terminal.Screens
             DisplayCustomLine
             (
                 OuterMargin,
-                BoxParts.VerticalLine,
+                BoxIcons.VerticalLine,
                 filler,
-                BoxParts.VerticalLine,
+                BoxIcons.VerticalLine,
                 OuterMargin
             );
         }
@@ -112,12 +113,12 @@ namespace Terminal.Screens
             DisplayCustomLine
             (
                 OuterMargin,
-                BoxParts.VerticalLine,
+                BoxIcons.VerticalLine,
                 InnerMargin,
                 content,
                 filler,
                 InnerMargin,
-                BoxParts.VerticalLine,
+                BoxIcons.VerticalLine,
                 OuterMargin
             );
         }
@@ -130,13 +131,13 @@ namespace Terminal.Screens
             DisplayCustomLine
             (
                 OuterMargin,
-                BoxParts.VerticalLine,
+                BoxIcons.VerticalLine,
                 InnerMargin,
                 leftContent,
                 filler,
                 rightContent,
                 InnerMargin,
-                BoxParts.VerticalLine,
+                BoxIcons.VerticalLine,
                 OuterMargin
             );
         }
@@ -164,7 +165,7 @@ namespace Terminal.Screens
 
         private int LengthOfMargins()
         {
-            return (OuterMargin.Length * 2) + (BoxParts.VerticalLine.Length * 2) + (InnerMargin.Length * 2);
+            return (OuterMargin.Length * 2) + (BoxIcons.VerticalLine.Length * 2) + (InnerMargin.Length * 2);
         }
 
         protected virtual void DisplayEnum(string text, Enum e, ConsoleKey key)
@@ -180,14 +181,14 @@ namespace Terminal.Screens
 
             DisplayCustomLine(
                 OuterMargin,
-                BoxParts.VerticalLine,
+                BoxIcons.VerticalLine,
                 InnerMargin,
                 paddedText,
                 content,
                 filler,
                 keySelector,
                 InnerMargin,
-                BoxParts.VerticalLine,
+                BoxIcons.VerticalLine,
                 OuterMargin
             );
         }
