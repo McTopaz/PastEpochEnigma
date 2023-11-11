@@ -7,4 +7,29 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Assets\SplashLogoHorizontal.txt" />
+    <None Remove="Assets\SplashLogoVertical.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\SplashLogoHorizontal.txt" />
+    <Resource Include="Assets\SplashLogoVertical.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>
