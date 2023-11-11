@@ -28,20 +28,42 @@ namespace Terminal.Screens
         public abstract void Show();
         protected abstract void ExecuteCommand(ConsoleKeyInfo input);
 
+        protected virtual void DisplayCustomLine(params string[] parts)
+        {
+            var line = string.Join("", parts);
+            Console.WriteLine(line);
+        }
+
         protected virtual void DisplayHeader()
         {
             var count = Width - (OuterMargin.Length * 2) - 2;
             var filler = string.Concat(Enumerable.Repeat(BoxParts.HorizontalLine, count));
-            Console.WriteLine($"{OuterMargin}{BoxParts.LeftUpperCorner}{filler}{BoxParts.RightUpperCorner}{OuterMargin}");
+
+            DisplayCustomLine
+            (
+                OuterMargin,
+                BoxParts.LeftUpperCorner,
+                filler,
+                BoxParts.RightUpperCorner,
+                OuterMargin
+            );
             DisplayEmptyLine();
         }
 
         protected virtual void DisplayFooter()
         {
-            DisplayEmptyLine();
             var count = Width - (OuterMargin.Length * 2) - 2;
             var filler = string.Concat(Enumerable.Repeat(BoxParts.HorizontalLine, count));
-            Console.WriteLine($"{OuterMargin}{BoxParts.LeftLowerCorner}{filler}{BoxParts.RightLowerCorner}{OuterMargin}");
+
+            DisplayEmptyLine();
+            DisplayCustomLine
+            (
+                OuterMargin,
+                BoxParts.LeftLowerCorner,
+                filler,
+                BoxParts.RightLowerCorner,
+                OuterMargin
+            );
         }
 
 
@@ -71,21 +93,52 @@ namespace Terminal.Screens
         {
             var count = Width - (OuterMargin.Length * 2) - 2;
             var filler = new string(' ', count);
-            Console.WriteLine($"{OuterMargin}{BoxParts.VerticalLine}{filler}{BoxParts.VerticalLine}{OuterMargin}");
+
+            DisplayCustomLine
+            (
+                OuterMargin,
+                BoxParts.VerticalLine,
+                filler,
+                BoxParts.VerticalLine,
+                OuterMargin
+            );
         }
 
         protected virtual void DisplayLeftAlignedContent(string content)
         {
             var count = Width - (OuterMargin.Length * 2) - (InnerMargin.Length * 2) - 2 - content.Length;
             var filler = new string(' ', count);
-            Console.WriteLine($"{OuterMargin}{BoxParts.VerticalLine}{InnerMargin}{content}{filler}{InnerMargin}{BoxParts.VerticalLine}{OuterMargin}");
+
+            DisplayCustomLine
+            (
+                OuterMargin,
+                BoxParts.VerticalLine,
+                InnerMargin,
+                content,
+                filler,
+                InnerMargin,
+                BoxParts.VerticalLine,
+                OuterMargin
+            );
         }
 
         protected virtual void DisplayAlignedContentAtSides(string leftContent, string rightContent)
         {
             var count = Width - (OuterMargin.Length * 2) - (InnerMargin.Length * 2) - 2 - leftContent.Length - rightContent.Length;
             var filler = new string(' ', count);
-            Console.WriteLine($"{OuterMargin}{BoxParts.VerticalLine}{InnerMargin}{leftContent}{filler}{rightContent}{InnerMargin}{BoxParts.VerticalLine}{OuterMargin}");
+
+            DisplayCustomLine
+            (
+                OuterMargin,
+                BoxParts.VerticalLine,
+                InnerMargin,
+                leftContent,
+                filler,
+                rightContent,
+                InnerMargin,
+                BoxParts.VerticalLine,
+                OuterMargin
+            );
         }
 
         protected virtual void TakeInput()
@@ -152,12 +205,5 @@ namespace Terminal.Screens
 
             return line;
         }
-
-        protected virtual void DisplayCustomLine(params string[] parts)
-        {
-            var line = string.Join("", parts);
-            Console.WriteLine(line);
-        }
-        
     }
 }
