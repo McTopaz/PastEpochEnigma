@@ -10,10 +10,10 @@ namespace Terminal.Screens
     internal class MainMenu : MenuBase
     {
         const ConsoleKey NewGameKey = ConsoleKey.N;
-        const ConsoleKey LoadGameKey = ConsoleKey.N;
-        const ConsoleKey OptionsKey = ConsoleKey.N;
-        const ConsoleKey IntroductionKey = ConsoleKey.N;
-        const ConsoleKey ExitKey = ConsoleKey.N;
+        const ConsoleKey LoadGameKey = ConsoleKey.L;
+        const ConsoleKey OptionsKey = ConsoleKey.O;
+        const ConsoleKey IntroductionKey = ConsoleKey.I;
+        const ConsoleKey ExitKey = ConsoleKey.X;
 
         public override void Run()
         {
@@ -54,6 +54,7 @@ namespace Terminal.Screens
             // Options
             else if (input.Key == OptionsKey || input.Key == ConsoleKey.D3)
             {
+                new Options().Run();
             }
             // Introduction
             else if (input.Key == IntroductionKey || input.Key == ConsoleKey.D4)
