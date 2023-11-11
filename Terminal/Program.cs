@@ -10,7 +10,9 @@ namespace Terminal
     {
         public static void Main(string[] args)
         {
+            Console.OutputEncoding = Encoding.Unicode;
             new Screens.Splash().Run();
+            new Screens.MainMenu().Run();
         }
     }
 }
