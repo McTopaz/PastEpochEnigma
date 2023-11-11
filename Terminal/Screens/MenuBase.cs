@@ -25,7 +25,7 @@ namespace Terminal.Screens
             Height = Console.WindowHeight;
         }
 
-        public abstract void Run();
+        public abstract void Show();
         protected abstract void ExecuteCommand(ConsoleKeyInfo input);
 
         protected virtual void DisplayHeader()

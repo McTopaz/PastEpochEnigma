@@ -15,7 +15,7 @@ namespace Terminal.Screens
         const ConsoleKey IntroductionKey = ConsoleKey.I;
         const ConsoleKey ExitKey = ConsoleKey.X;
 
-        public override void Run()
+        public override void Show()
         {
             Console.Clear();
             base.DisplayHeader();
@@ -52,7 +52,7 @@ namespace Terminal.Screens
             }
             else if (input.Key == OptionsKey || input.Key == ConsoleKey.D3 || input.Key == ConsoleKey.NumPad3)
             {
-                new Options().Run();
+                new Options().Show();
             }
             else if (input.Key == IntroductionKey || input.Key == ConsoleKey.D4 || input.Key == ConsoleKey.NumPad4)
             {

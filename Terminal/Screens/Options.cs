@@ -12,7 +12,7 @@ namespace Terminal.Screens
         const ConsoleKey GameModeKey = ConsoleKey.G;
         const ConsoleKey ExitKey = ConsoleKey.X;
 
-        public override void Run()
+        public override void Show()
         {
             base.DisplayHeader();
             base.DisplayLogo(Resources.OptionsLogo);
