@@ -10,7 +10,7 @@ namespace Terminal.Screens
 {
     internal class Splash
     {
-        public void Run()
+        public void Show()
         {
             var random = new Random().Next(2);
             if (random == 0) SplashHorizontal();
