@@ -38,7 +38,6 @@ namespace Terminal.Screens
             base.DisplayEmptyLine();
             base.DisplayEmptyLine();
             base.DisplayEmptyLine();
-            base.DisplayAuthorAndVersion();
             base.DisplayFooter();
             Console.WriteLine();
             base.TakeInput();

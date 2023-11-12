@@ -31,7 +31,6 @@ namespace Terminal.Screens
             var rows = Sections.ElementAt(CurrentSection).Split(Environment.NewLine);
             base.DisplayBodyText(rows);
             base.DisplayEmptyLine();
-            base.DisplayAuthorAndVersion();
             base.DisplayFooter();
 
             base.ScrollInput(CurrentSection + 1, Sections.Count());
