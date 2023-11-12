@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Engine.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,8 +10,15 @@ namespace Terminal.Screens
     internal class Options : MenuBase
     {
         const ConsoleKey DifficultLevelKey = ConsoleKey.D;
-        const ConsoleKey GameModeKey = ConsoleKey.G;
+        const ConsoleKey GameModeKey = ConsoleKey.M;
         const ConsoleKey ExitKey = ConsoleKey.X;
+
+        readonly GameSettings _gameSettings;
+
+        public Options(GameSettings gameSettings)
+        {
+            _gameSettings = gameSettings;
+        }
 
         public override void Show()
         {
@@ -21,13 +29,9 @@ namespace Terminal.Screens
             base.DisplayEmptyLine();
             base.DisplayLeftAlignedContent("Select option:");
             base.DisplayEmptyLine();
-
-            Engine.Models.DifficultLevel dl = Engine.Models.DifficultLevel.Easy;
-            Engine.Models.GameMode gm = Engine.Models.GameMode.Speedrun;
-
-            base.DisplayEnum("Difficult level", dl, DifficultLevelKey);
+            base.DisplayEnum("Difficult level", _gameSettings.DifficultLevel, DifficultLevelKey);
             base.DisplayEmptyLine();
-            base.DisplayEnum("Game mode", gm, GameModeKey);
+            base.DisplayEnum("Game mode", _gameSettings.GameMode, GameModeKey);
             base.DisplayEmptyLine();
             base.DisplayEmptyLine();
             base.DisplayAlignedContentAtSides("Back", $"({ExitKey})");
@@ -42,15 +46,28 @@ namespace Terminal.Screens
 
         protected override void ExecuteCommand(ConsoleKeyInfo input)
         {
+            if (input.Key == ExitKey || input.Key == ConsoleKey.Escape)
+            {
+                return;
+            }
+
             if (input.Key == DifficultLevelKey)
             {
+                ToggleDifficultLevel();
             }
             else if (input.Key == GameModeKey)
             {
+                _gameSettings.GameMode = _gameSettings.GameMode == GameMode.Normal ? GameMode.Speedrun : GameMode.Normal;
             }
-            else if (input.Key == ExitKey || input.Key == ConsoleKey.Escape)
-            {
-            }
+
+            Show();
+        }
+
+        private void ToggleDifficultLevel()
+        {
+            if (_gameSettings.DifficultLevel == DifficultLevel.Easy) _gameSettings.DifficultLevel = DifficultLevel.Medium;
+            else if (_gameSettings.DifficultLevel == DifficultLevel.Medium) _gameSettings.DifficultLevel = DifficultLevel.Hard;
+            else if (_gameSettings.DifficultLevel == DifficultLevel.Hard) _gameSettings.DifficultLevel = DifficultLevel.Easy;
         }
     }
 }
