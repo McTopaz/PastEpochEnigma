@@ -44,6 +44,8 @@ namespace Terminal
             Container.Register<MissionHandler>(Lifestyle.Singleton);
 
             // Screens.
+            Container.Register<Splash>();
+            Container.Register<MainMenu>();
             Container.Register<Options>();
             Container.Register<Introduction>();
 
@@ -52,13 +54,13 @@ namespace Terminal
 
         private static void ShowSplash()
         {
-            var splash = new Splash();
+            var splash = Container.GetInstance<Splash>();
             splash.Show();
         }
 
         private static void Run()
         {
-            var mainMenu = new MainMenu();
+            var mainMenu = Container.GetInstance<MainMenu>();
 
             while(true)
             {
