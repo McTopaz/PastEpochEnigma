@@ -57,7 +57,7 @@ namespace Terminal.Screens
             }
             else if (input.Key == GameModeKey)
             {
-                _gameSettings.GameMode = _gameSettings.GameMode == GameMode.Normal ? GameMode.Speedrun : GameMode.Normal;
+                ToggleGameMode();
             }
 
             Show();
@@ -68,6 +68,11 @@ namespace Terminal.Screens
             if (_gameSettings.DifficultLevel == DifficultLevel.Easy) _gameSettings.DifficultLevel = DifficultLevel.Medium;
             else if (_gameSettings.DifficultLevel == DifficultLevel.Medium) _gameSettings.DifficultLevel = DifficultLevel.Hard;
             else if (_gameSettings.DifficultLevel == DifficultLevel.Hard) _gameSettings.DifficultLevel = DifficultLevel.Easy;
+        }
+
+        private void ToggleGameMode()
+        {
+            _gameSettings.GameMode = _gameSettings.GameMode == GameMode.Normal ? GameMode.Speedrun : GameMode.Normal;
         }
     }
 }
