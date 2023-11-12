@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\Introduction.txt" />
     <None Remove="Assets\IntroductionLogo.txt" />
     <None Remove="Assets\MenuLogo.txt" />
     <None Remove="Assets\OptionsLogo.txt" />
@@ -20,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\Introduction.txt" />
     <Resource Include="Assets\IntroductionLogo.txt" />
     <Resource Include="Assets\MenuLogo.txt" />
     <Resource Include="Assets\OptionsLogo.txt" />
