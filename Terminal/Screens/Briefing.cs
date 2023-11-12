@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using Terminal.Icons;
 
 namespace Terminal.Screens
 {
@@ -31,7 +32,7 @@ namespace Terminal.Screens
             base.DisplayBodyText(lines);
 
             base.DisplayFooter();
-            base.ScrollInput(CurrentPage + 1, Pages.Count);
+            base.ScrollInput(CurrentPage + 1, Pages.Count, $"Press {ButtonIcons.Enter} to start.");
         }
 
         public void Show(Mission mission)
@@ -40,6 +41,11 @@ namespace Terminal.Screens
             NewObjectivesPage(mission.Objectives);
             NewNotesPage(mission.Notes);
             Show();
+        }
+
+        protected override void OnEnterPressed()
+        {
+            
         }
     }
 }

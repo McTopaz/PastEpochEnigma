@@ -232,7 +232,7 @@ namespace Terminal.Screens
             }
         }
 
-        protected virtual void ScrollInput(int pageIndex, int sumOfPages)
+        protected virtual void ScrollInput(int pageIndex, int sumOfPages, string actionCommand)
         {
             DisplayCustomLine
             (
@@ -240,7 +240,7 @@ namespace Terminal.Screens
                 OuterMargin,
                 $"Page { pageIndex } of { sumOfPages }.\t\t",
                 $"Press the {ArrowsIcons.Up} or the {ArrowsIcons.Down} arrow keys to scroll.\t\t",
-                $"Press the {ButtonIcons.ESC} to exit."
+                actionCommand
             );
 
             var input = Console.ReadKey();

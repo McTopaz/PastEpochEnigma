@@ -15,6 +15,7 @@ namespace Terminal.Screens
     {
         const ConsoleKey UpArrowKey = ConsoleKey.UpArrow;
         const ConsoleKey DownArrowKey = ConsoleKey.DownArrow;
+        const ConsoleKey EnterKey = ConsoleKey.Enter;
         const ConsoleKey EscapeKey = ConsoleKey.Escape;
 
         protected Dictionary<int, string[]> Pages { get; set; } = new Dictionary<int, string[]>();
@@ -68,6 +69,10 @@ namespace Terminal.Screens
             {
                 NextPage();
             }
+            else if (input.Key == EnterKey)
+            {
+                OnEnterPressed();
+            }
 
             Show();
         }
@@ -81,5 +86,7 @@ namespace Terminal.Screens
         {
             CurrentPage = CurrentPage > 0 ? CurrentPage -= 1 : CurrentPage;
         }
+
+        protected abstract void OnEnterPressed();
     }
 }

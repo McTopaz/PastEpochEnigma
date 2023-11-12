@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terminal.Icons;
 
 namespace Terminal.Screens
 {
@@ -33,7 +34,7 @@ namespace Terminal.Screens
             base.DisplayEmptyLine();
             base.DisplayFooter();
 
-            base.ScrollInput(CurrentSection + 1, Sections.Count());
+            base.ScrollInput(CurrentSection + 1, Sections.Count(), $"Press {ButtonIcons.ESC} to exit.");
         }
 
         protected override void ExecuteCommand(ConsoleKeyInfo input)
