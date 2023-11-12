@@ -35,6 +35,23 @@ namespace Terminal.Screens
             Console.WriteLine(line);
         }
 
+        protected virtual void DisplayContent(string content)
+        {
+            var count = Width - LengthOfMargins() - content.Length;
+            var filler = new string(' ', count);
+            DisplayCustomLine
+            (
+                OuterMargin,
+                BoxIcons.VerticalLine,
+                InnerMargin,
+                content,
+                filler,
+                InnerMargin,
+                BoxIcons.VerticalLine,
+                OuterMargin
+            );
+        }
+
         protected virtual void DisplayHeader()
         {
             var count = Width - (OuterMargin.Length * 2) - 2;
@@ -205,6 +222,22 @@ namespace Terminal.Screens
             }
 
             return line;
+        }
+
+        protected virtual void DisplayBodyText(IEnumerable<string> lines)
+        {
+            foreach (var line in lines)
+            {
+                var text = line.Replace("*", GeneralPunctuationIcons.Bullet);
+                DisplayContent(text);
+            }
+        }
+
+        protected virtual void ScrollInput()
+        {
+            Console.Write($"{OuterMargin}{OuterMargin}Press the { ArrowsIcons.Up } or the { ArrowsIcons.Down } arrow keys to scroll. Press the { ButtonIcons.ESC } to exit.");
+            var input = Console.ReadKey();
+            ExecuteCommand(input);
         }
     }
 }
