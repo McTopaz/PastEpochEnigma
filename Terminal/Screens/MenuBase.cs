@@ -73,7 +73,6 @@ namespace Terminal.Screens
             var count = Width - (OuterMargin.Length * 2) - 2;
             var filler = string.Concat(Enumerable.Repeat(BoxIcons.HorizontalLine, count));
 
-            DisplayEmptyLine();
             DisplayCustomLine
             (
                 OuterMargin,
