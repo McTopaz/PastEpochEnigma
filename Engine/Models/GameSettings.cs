@@ -8,7 +8,7 @@ namespace Engine.Models
 {
     public class GameSettings
     {
-        public DifficultLevel DifficultLevel { get; set; }
-        public GameMode GameMode { get; set; }
+        public DifficultLevel DifficultLevel { get; set; } = DifficultLevel.Easy;
+        public GameMode GameMode { get; set; } = GameMode.Normal;
     }
 }
