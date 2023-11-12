@@ -34,7 +34,7 @@ namespace Terminal.Screens
             base.DisplayAuthorAndVersion();
             base.DisplayFooter();
 
-            base.ScrollInput();
+            base.ScrollInput(CurrentSection + 1, Sections.Count());
         }
 
         protected override void ExecuteCommand(ConsoleKeyInfo input)
