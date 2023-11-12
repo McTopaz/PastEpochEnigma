@@ -56,7 +56,7 @@ namespace Terminal.Screens
             }
             else if (input.Key == IntroductionKey || input.Key == ConsoleKey.D4 || input.Key == ConsoleKey.NumPad4)
             {
-                new Introduction().Show();
+                Program.Container.GetInstance<Introduction>().Show();
             }
             else if (input.Key == ExitKey || input.Key == ConsoleKey.Escape || input.Key == ConsoleKey.D5 || input.Key == ConsoleKey.NumPad5)
             {
