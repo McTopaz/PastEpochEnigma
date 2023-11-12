@@ -70,9 +70,14 @@ namespace Terminal {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to In the future, man has invented a time machine to travel back in time. An organization called &quot;The epoch council&quot; has been formed to rule over time travels. At the council&apos;s headquarters, the machine is kept and guarded 24 hours a day by the council&apos;s guards. The Council has created a time travel directive called &quot;The epoch directive&quot; or the &quot;directive&quot;. This directive determines how time travels should take place.
+        ///   Looks up a localized string similar to In the future, man has invented a time machine to travel back in time.
+        ///An organization called &quot;The epoch council&quot; has been formed to rule over time travels.
+        ///At the council&apos;s headquarters, the machine is kept and guarded 24 hours a day by the council&apos;s guards.
+        ///The Council has created a time travel directive called &quot;The epoch directive&quot; or the &quot;directive&quot;.
+        ///This directive determines how time travels should take place.
         ///
-        ///Changing events in the past can have huge consequences in the future and should be done wi [rest of string was truncated]&quot;;.
+        ///Changing events in the past can have huge consequences in the future 
+        ///and should be d [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Introduction {
             get {
@@ -99,6 +104,17 @@ namespace Terminal {
         internal static string MenuLogo {
             get {
                 return ResourceManager.GetString("MenuLogo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _  _ _ ____ ____ _ ____ _  _   ___
+        ///|\/| | |__  |__  | |  | |\ |    |
+        ///|  | | ___| ___| | |__| | \|   _|_.
+        /// </summary>
+        internal static string Mission1Logo {
+            get {
+                return ResourceManager.GetString("Mission1Logo", resourceCulture);
             }
         }
         
