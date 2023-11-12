@@ -52,7 +52,7 @@ namespace Terminal.Screens
             }
             else if (input.Key == OptionsKey || input.Key == ConsoleKey.D3 || input.Key == ConsoleKey.NumPad3)
             {
-                new Options().Show();
+                Program.Container.GetInstance<Options>().Show();
             }
             else if (input.Key == IntroductionKey || input.Key == ConsoleKey.D4 || input.Key == ConsoleKey.NumPad4)
             {
