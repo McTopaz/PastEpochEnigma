@@ -82,10 +82,13 @@ namespace Terminal
         public static void NewGame()
         {
             var game = Container.GetInstance<Game>();
-            game.Init();
-            game.Start();
+            var screen = Container.GetInstance<Briefing>();
+            screen.Show(game.Missions.First());
 
-            Container.GetInstance<Briefing>().Show(game.Missions.First());
+            if (screen.StartGame)
+            {
+
+            }
         }
     }
 }

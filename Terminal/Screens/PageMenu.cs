@@ -23,6 +23,8 @@ namespace Terminal.Screens
         private int _pageCounter  = 0;
         private int _index = 0;
 
+        protected bool CloseScreen = false;
+
         protected void NewBodyText(string[] lines)
         {
             Pages.Add(_pageCounter, lines);
@@ -99,6 +101,11 @@ namespace Terminal.Screens
             else if (input.Key == EnterKey)
             {
                 OnEnterPressed();
+            }
+
+            if (CloseScreen)
+            {
+                return;
             }
 
             Show();

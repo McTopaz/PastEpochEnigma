@@ -13,6 +13,7 @@ namespace Terminal.Screens
     internal class Briefing : PageMenu
     {
         private Mission _mission;
+        public bool StartGame { get; set; } = false;
 
         public override void Show()
         {
@@ -45,7 +46,8 @@ namespace Terminal.Screens
 
         protected override void OnEnterPressed()
         {
-            
+            StartGame = true;
+            CloseScreen = true;
         }
     }
 }
