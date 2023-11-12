@@ -22,7 +22,7 @@ namespace Terminal.Screens
             base.DisplayHeader();
             base.DisplayLogo(Resources.BriefingLogo);
             base.DisplayEmptyLine();
-            base.DisplayContent(_mission.Title);
+            base.DisplayContent($"Mission: {_mission.Title}");
             base.DisplayEmptyLine();
             base.DisplayBodyText(descriptions);
             base.DisplayEmptyLine();
