@@ -1,10 +1,8 @@
 ﻿{
-  "Mission": {
-    "Title": "Mission 1",
-    "SubTitle": "Infiltration of the headquarters",
-    "Description": "You have been selected as the council's spy and are deployed at an unguarded air intake to the headquarters. There are guards within the complex which you have to avoid or neutralize. Perform your tasks objectives unnoticed and return to the air intake.",
-    "Objectives": {
-      "Objective": [
+    "Title":"Mission 1",
+    "SubTitle":"Infiltration of the headquarters",
+    "Description":"You have been selected as the council's spy and are deployed at an unguarded air intake to the headquarters. There are guards within the complex which you have to avoid or neutralize. Perform your tasks objectives unnoticed and return to the air intake.",
+    "Objectives":[
         {
           "Name": "Infiltration to get access",
           "Description": "Infiltrate the headquarters and get key card access to all rooms.",
@@ -25,10 +23,8 @@
           "Description": "Upon completion on all other objectives, active the elination system. Hurry back to the air-intake.",
           "IsFinished": false
         }
-      ]
-    },
-    "notes": {
-      "note": [
+    ],
+    "Notes":[
         "The council doesn't allow violence or that any human get harmed or killed.",
         "You are allowed to use the tools you been given by the council or what you find by yourself.",
         "Use the stun gun to stun guards and sneak by.",
@@ -36,7 +32,5 @@
         "The virtual map in the tech-device show useful information.",
         "Door locks are presumed to be looked and you have to find access for them.",
         "The elimination system will cause all people to faint for a couple of hours. You have just a short time before the elimination system will cause everybody to faint."
-      ]
-    }
-  }
+    ],
 }
