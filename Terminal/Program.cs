@@ -34,6 +34,7 @@ namespace Terminal
             Console.OutputEncoding = Encoding.Unicode;
 
             InitContainer();
+            InitMissions();
         }
 
         private static void InitContainer()
@@ -41,7 +42,7 @@ namespace Terminal
             // Engine
             Container.Register<Game>(Lifestyle.Singleton);
             Container.Register<GameSettings>(Lifestyle.Singleton);
-            Container.Register<MissionHandler>(Lifestyle.Singleton);
+            Container.Register<MissionLoader>(Lifestyle.Singleton);
 
             // Screens.
             Container.Register<Splash>();
@@ -50,7 +51,16 @@ namespace Terminal
             Container.Register<Introduction>();
             Container.Register<Briefing>();
 
-            //Container.Verify();
+            Container.Verify();
+        }
+
+        private static void InitMissions()
+        {
+            var loader = Container.GetInstance<MissionLoader>();
+            var game = Container.GetInstance<Game>();
+
+            loader.LoadMissionsFromAssets();
+            game.Missions = loader.RandomizedMissions();
         }
 
         private static void ShowSplash()
@@ -75,7 +85,7 @@ namespace Terminal
             game.Init();
             game.Start();
 
-            Container.GetInstance<Briefing>().Show();
+            Container.GetInstance<Briefing>().Show(game.Missions.First());
         }
     }
 }

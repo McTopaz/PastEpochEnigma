@@ -62,19 +62,17 @@ namespace Engine {
         
         /// <summary>
         ///   Looks up a localized string similar to {
-        ///  &quot;Mission&quot;: {
-        ///    &quot;Title&quot;: &quot;Mission 1&quot;,
-        ///    &quot;SubTitle&quot;: &quot;Infiltration of the headquarters&quot;,
-        ///    &quot;Description&quot;: &quot;You have been selected as the council&apos;s spy and are deployed at an unguarded air intake to the headquarters. There are guards within the complex which you have to avoid or neutralize. Perform your tasks objectives unnoticed and return to the air intake.&quot;,
-        ///    &quot;Objectives&quot;: {
-        ///      &quot;Objective&quot;: [
+        ///    &quot;Title&quot;:&quot;Infiltration of the headquarters&quot;,
+        ///    &quot;Description&quot;:&quot;You are the council&apos;s spy and are deployed at an unguarded air intake to the headquarters. There are guards within the complex which you have to avoid or neutralize. Perform your objectives unnoticed and return to the air intake.&quot;,
+        ///    &quot;Objectives&quot;:[
         ///        {
-        ///          &quot;Name&quot;: &quot;Infiltration to get access&quot;,
-        ///          &quot;Description&quot;: &quot;Infiltrate the h [rest of string was truncated]&quot;;.
+        ///          &quot;Name&quot;: &quot;Find the locking system&apos;s control room&quot;,
+        ///          &quot;Description&quot;: &quot;In the control room reprogram a key-card to get full access of the building.&quot;,
+        ///          &quot;IsFini [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string Mission1 {
+        internal static string InfiltrationHeadquarters {
             get {
-                return ResourceManager.GetString("Mission1", resourceCulture);
+                return ResourceManager.GetString("InfiltrationHeadquarters", resourceCulture);
             }
         }
     }

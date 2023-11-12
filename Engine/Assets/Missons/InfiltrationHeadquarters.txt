@@ -1,6 +1,5 @@
 ﻿{
-    "Title":"Mission 1",
-    "SubTitle":"Infiltration of the headquarters",
+    "Title":"Infiltration of the headquarters",
     "Description":"You are the council's spy and are deployed at an unguarded air intake to the headquarters. There are guards within the complex which you have to avoid or neutralize. Perform your objectives unnoticed and return to the air intake.",
     "Objectives":[
         {

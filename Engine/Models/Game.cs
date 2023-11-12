@@ -9,14 +9,14 @@ namespace Engine.Models
     public class Game
     {
         public GameSettings GameSettings { get; set; }
-        public MissionHandler MissionHandler { get; set; }
+        public MissionLoader MissionHandler { get; set; }
 
         public Awarness Awarness { get; set; } = new Awarness();
         public List<Mission> Missions { get; set; } = new List<Mission>();
         public int CurrentMission { get; set; } = 0;
 
 
-        public Game(GameSettings gameSettings, MissionHandler missionHandler)
+        public Game(GameSettings gameSettings, MissionLoader missionHandler)
         {
             GameSettings = gameSettings;
             MissionHandler = missionHandler;
@@ -24,8 +24,6 @@ namespace Engine.Models
 
         public void Init()
         {
-            var mission = MissionHandler.LoadMission1FromAsset();
-            Missions.Add(mission);
         }
 
         public void Start()

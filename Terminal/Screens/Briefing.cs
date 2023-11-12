@@ -11,20 +11,7 @@ namespace Terminal.Screens
 {
     internal class Briefing : PageMenu
     {
-        private Game _game;
         private Mission _mission;
-
-        public Briefing(Game game)
-        {
-            _game = game;
-
-            if (_game.Missions.Count == 0) return;      // Load missions earlier and remove this.
-
-            _mission = _game.Missions[_game.CurrentMission];
-
-            NewObjectivesPage(_mission.Objectives);
-            NewNotesPage(_mission.Notes);
-        }
 
         public override void Show()
         {
@@ -35,7 +22,7 @@ namespace Terminal.Screens
             base.DisplayHeader();
             base.DisplayLogo(Resources.BriefingLogo);
             base.DisplayEmptyLine();
-            base.DisplayContent($"{_mission.Title} - {_mission.SubTitle}");
+            base.DisplayContent(_mission.Title);
             base.DisplayEmptyLine();
             base.DisplayBodyText(descriptions);
             base.DisplayEmptyLine();
@@ -45,6 +32,14 @@ namespace Terminal.Screens
 
             base.DisplayFooter();
             base.ScrollInput(CurrentPage + 1, Pages.Count);
+        }
+
+        public void Show(Mission mission)
+        {
+            _mission = mission;
+            NewObjectivesPage(mission.Objectives);
+            NewNotesPage(mission.Notes);
+            Show();
         }
     }
 }

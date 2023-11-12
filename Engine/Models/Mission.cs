@@ -9,11 +9,9 @@ namespace Engine.Models
     public class Mission
     {
         public string Title { get; set; }
-        public string SubTitle { get; set; }
         public string Description { get; set; }
         public List<Objective> Objectives { get; set; } = new List<Objective>();
         public List<string> Notes { get; set; } = new List<string>();
         public Awarness Awarness { get; set; } = new Awarness();
-
     }
 }
