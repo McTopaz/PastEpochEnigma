@@ -35,7 +35,10 @@ namespace Terminal
         private static void InitContainer()
         {
             Container.Register<GameSettings>(Lifestyle.Singleton);
+
+            // Screens.
             Container.Register<Options>();
+            Container.Register<Introduction>();
         }
 
         private static void ShowSplash()
