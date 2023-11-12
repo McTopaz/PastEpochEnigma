@@ -48,8 +48,9 @@ namespace Terminal
             Container.Register<MainMenu>();
             Container.Register<Options>();
             Container.Register<Introduction>();
+            Container.Register<Briefing>();
 
-            Container.Verify();
+            //Container.Verify();
         }
 
         private static void ShowSplash()
@@ -73,6 +74,8 @@ namespace Terminal
             var game = Container.GetInstance<Game>();
             game.Init();
             game.Start();
+
+            Container.GetInstance<Briefing>().Show();
         }
     }
 }

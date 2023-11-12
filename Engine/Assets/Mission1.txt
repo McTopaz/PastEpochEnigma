@@ -1,11 +1,11 @@
 ﻿{
     "Title":"Mission 1",
     "SubTitle":"Infiltration of the headquarters",
-    "Description":"You have been selected as the council's spy and are deployed at an unguarded air intake to the headquarters. There are guards within the complex which you have to avoid or neutralize. Perform your tasks objectives unnoticed and return to the air intake.",
+    "Description":"You are the council's spy and are deployed at an unguarded air intake to the headquarters. There are guards within the complex which you have to avoid or neutralize. Perform your objectives unnoticed and return to the air intake.",
     "Objectives":[
         {
-          "Name": "Infiltration to get access",
-          "Description": "Infiltrate the headquarters and get key card access to all rooms.",
+          "Name": "Find the locking system's control room",
+          "Description": "In the control room reprogram a key-card to get full access of the building.",
           "IsFinished": false
         },
         {
@@ -31,6 +31,6 @@
         "Use the tech-device to examine and report.",
         "The virtual map in the tech-device show useful information.",
         "Door locks are presumed to be looked and you have to find access for them.",
-        "The elimination system will cause all people to faint for a couple of hours. You have just a short time before the elimination system will cause everybody to faint."
+        "The elimination system will cause all people to faint in the building for a couple of hours."
     ],
 }

@@ -121,6 +121,9 @@
     <value>Mc_Topaz</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="BriefingLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Assets\BriefingLogo.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="Introduction" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Assets\Introduction.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
@@ -129,9 +132,6 @@
   </data>
   <data name="MenuLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Assets\MenuLogo.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="Mission1Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Assets\Mission1Logo.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="OptionsLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Assets\OptionsLogo.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>

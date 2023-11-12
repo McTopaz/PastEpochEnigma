@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Engine.Models;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -65,7 +66,6 @@ namespace Terminal.Screens
                 BoxIcons.RightUpperCorner,
                 OuterMargin
             );
-            DisplayEmptyLine();
         }
 
         protected virtual void DisplayFooter()
@@ -245,6 +245,14 @@ namespace Terminal.Screens
 
             var input = Console.ReadKey();
             ExecuteCommand(input);
+        }
+
+        protected virtual void DisplayBulletList(IEnumerable<string> lines)
+        {
+            foreach (var line in lines)
+            {
+                DisplayContent($"{GeneralPunctuationIcons.Bullet} {line}");
+            }
         }
     }
 }

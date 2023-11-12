@@ -70,6 +70,17 @@ namespace Terminal {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to  __   ___ _  ___  ___ _ _  _  ___
+        ///|__] |__/ | |___ |___ | |\ | | __
+        ///|__] |  \ | |___ |    | | \| |__|.
+        /// </summary>
+        internal static string BriefingLogo {
+            get {
+                return ResourceManager.GetString("BriefingLogo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to In the future, man has invented a time machine to travel back in time.
         ///An organization called &quot;The epoch council&quot; has been formed to rule over time travels.
         ///At the council&apos;s headquarters, the machine is kept and guarded 24 hours a day by the council&apos;s guards.
@@ -104,17 +115,6 @@ namespace Terminal {
         internal static string MenuLogo {
             get {
                 return ResourceManager.GetString("MenuLogo", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to _  _ _ ____ ____ _ ____ _  _   ___
-        ///|\/| | |__  |__  | |  | |\ |    |
-        ///|  | | ___| ___| | |__| | \|   _|_.
-        /// </summary>
-        internal static string Mission1Logo {
-            get {
-                return ResourceManager.GetString("Mission1Logo", resourceCulture);
             }
         }
         
