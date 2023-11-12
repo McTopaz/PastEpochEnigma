@@ -11,6 +11,9 @@ namespace Engine.Models
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
         public TimeSpan Duration { get; set; }
+        public bool IsOver { get; set; } = false;
+        public bool IsFinished { get; set; } = false;
+
 
         public void CalculateDuration()
         {
