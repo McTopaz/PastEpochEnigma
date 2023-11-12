@@ -28,11 +28,11 @@ namespace Terminal.Screens
             base.DisplayBodyText(descriptions);
             base.DisplayEmptyLine();
 
-            var lines = Pages[CurrentPage];
+            var lines = CurrentPage();
             base.DisplayBodyText(lines);
 
             base.DisplayFooter();
-            base.ScrollInput(CurrentPage + 1, Pages.Count, $"Press {ButtonIcons.Enter} to start.");
+            base.ScrollInput($"Press {ButtonIcons.Enter} to start.");
         }
 
         public void Show(Mission mission)

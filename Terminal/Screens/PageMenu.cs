@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,8 +20,14 @@ namespace Terminal.Screens
         const ConsoleKey EscapeKey = ConsoleKey.Escape;
 
         protected Dictionary<int, string[]> Pages { get; set; } = new Dictionary<int, string[]>();
-        private int Index { get; set; } = 0;
-        protected int CurrentPage { get; private set; } = 0;
+        private int _pageCounter  = 0;
+        private int _index = 0;
+
+        protected void NewBodyText(string[] lines)
+        {
+            Pages.Add(_pageCounter, lines);
+            _pageCounter += 1;
+        }
 
         protected void NewObjectivesPage(List<Objective> objectives)
         {
@@ -37,8 +44,8 @@ namespace Terminal.Screens
                 lines.Add(string.Empty);
             }
 
-            Pages.Add(Index, lines.ToArray());
-            Index += 1;
+            Pages.Add(_pageCounter, lines.ToArray());
+            _pageCounter += 1;
         }
 
         protected void NewNotesPage(List<string> notes)
@@ -50,8 +57,28 @@ namespace Terminal.Screens
             lines.AddRange(notes.Select(n => $"{ GeneralPunctuationIcons.Bullet } {n}"));
             lines.Add(string.Empty);
 
-            Pages.Add(Index, lines.ToArray());
-            Index += 1;
+            Pages.Add(_pageCounter, lines.ToArray());
+            _pageCounter += 1;
+        }
+
+        protected string[] CurrentPage()
+        {
+            return Pages[_index];
+        }
+
+        protected void ScrollInput(string actionCommand)
+        {
+            DisplayCustomLine
+            (
+                OuterMargin,
+                OuterMargin,
+                $"Page {_index + 1} of {Pages.Count}.\t\t",
+                $"Press the {ArrowsIcons.Up} or the {ArrowsIcons.Down} arrow keys to scroll.\t\t",
+                actionCommand
+            );
+
+            var input = Console.ReadKey();
+            ExecuteCommand(input);
         }
 
         protected override void ExecuteCommand(ConsoleKeyInfo input)
@@ -79,14 +106,16 @@ namespace Terminal.Screens
 
         protected void NextPage()
         {
-            CurrentPage = CurrentPage < Pages.Count() - 1 ? CurrentPage += 1 : CurrentPage;
+            _index = _index < Pages.Count() - 1 ? _index += 1 : _index;
         }
 
         protected void PreviousPage()
         {
-            CurrentPage = CurrentPage > 0 ? CurrentPage -= 1 : CurrentPage;
+            _index = _index > 0 ? _index -= 1 : _index;
         }
 
-        protected abstract void OnEnterPressed();
+        protected virtual void OnEnterPressed()
+        {
+        }
     }
 }

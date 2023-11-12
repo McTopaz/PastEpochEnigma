@@ -232,21 +232,6 @@ namespace Terminal.Screens
             }
         }
 
-        protected virtual void ScrollInput(int pageIndex, int sumOfPages, string actionCommand)
-        {
-            DisplayCustomLine
-            (
-                OuterMargin,
-                OuterMargin,
-                $"Page { pageIndex } of { sumOfPages }.\t\t",
-                $"Press the {ArrowsIcons.Up} or the {ArrowsIcons.Down} arrow keys to scroll.\t\t",
-                actionCommand
-            );
-
-            var input = Console.ReadKey();
-            ExecuteCommand(input);
-        }
-
         protected virtual void DisplayBulletList(IEnumerable<string> lines)
         {
             foreach (var line in lines)
