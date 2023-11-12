@@ -47,6 +47,7 @@ namespace Terminal.Screens
                 "Notes:"
             };
             lines.AddRange(notes.Select(n => $"{ GeneralPunctuationIcons.Bullet } {n}"));
+            lines.Add(string.Empty);
 
             Pages.Add(Index, lines.ToArray());
             Index += 1;
