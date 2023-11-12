@@ -161,5 +161,23 @@ namespace Terminal {
                 return ResourceManager.GetString("SplashLogoVertical", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Preventing a new world war.
+        /// </summary>
+        internal static string SubTitle {
+            get {
+                return ResourceManager.GetString("SubTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Past epoch enigma.
+        /// </summary>
+        internal static string Title {
+            get {
+                return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
     }
 }

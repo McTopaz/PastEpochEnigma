@@ -32,6 +32,7 @@ namespace Terminal
         private static void Init()
         {
             Console.OutputEncoding = Encoding.Unicode;
+            Console.Title = $"{ Resources.Title } - { Resources.SubTitle }";
 
             InitContainer();
             InitMissions();
