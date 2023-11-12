@@ -35,6 +35,7 @@ namespace Terminal
         private static void InitContainer()
         {
             Container.Register<GameSettings>(Lifestyle.Singleton);
+            Container.Register<Options>();
         }
 
         private static void ShowSplash()
@@ -52,6 +53,5 @@ namespace Terminal
                 mainMenu.Show();
             }
         }
-
     }
 }
