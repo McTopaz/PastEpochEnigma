@@ -46,6 +46,7 @@ namespace Terminal.Screens
         {
             if (input.Key == NewGameKey || input.Key == ConsoleKey.D1 || input.Key == ConsoleKey.NumPad1)
             {
+                Program.NewGame();
             }
             else if (input.Key == LoadGameKey || input.Key == ConsoleKey.D2 || input.Key == ConsoleKey.NumPad2)
             {
