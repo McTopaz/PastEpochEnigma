@@ -3,13 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Engine.Models;
+using SimpleInjector;
 using Terminal.Screens;
 
 namespace Terminal
 {
     public class Program
     {
+        public static readonly Container Container;
+
+        static Program()
+        {
+            Container = new Container();
+        }
+
         public static void Main(string[] args)
         {
             Init();
@@ -20,6 +28,13 @@ namespace Terminal
         private static void Init()
         {
             Console.OutputEncoding = Encoding.Unicode;
+
+            InitContainer();
+        }
+
+        private static void InitContainer()
+        {
+            Container.Register<GameSettings>(Lifestyle.Singleton);
         }
 
         private static void ShowSplash()
