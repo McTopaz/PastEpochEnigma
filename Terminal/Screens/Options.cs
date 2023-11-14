@@ -10,7 +10,7 @@ namespace Terminal.Screens
     internal class Options : MenuBase
     {
         const ConsoleKey DifficultLevelKey = ConsoleKey.D;
-        const ConsoleKey GameModeKey = ConsoleKey.M;
+        const ConsoleKey ModeKey = ConsoleKey.M;
         const ConsoleKey ExitKey = ConsoleKey.X;
 
         readonly Settings _gameSettings;
@@ -31,7 +31,7 @@ namespace Terminal.Screens
             base.DisplayEmptyLine();
             base.DisplayEnum("Difficult level", _gameSettings.DifficultLevel, DifficultLevelKey);
             base.DisplayEmptyLine();
-            base.DisplayEnum("Game mode", _gameSettings.GameMode, GameModeKey);
+            base.DisplayEnum("Game mode", _gameSettings.Mode, ModeKey);
             base.DisplayEmptyLine();
             base.DisplayEmptyLine();
             base.DisplayAlignedContentAtSides("Back", $"({ExitKey})");
@@ -54,9 +54,9 @@ namespace Terminal.Screens
             {
                 ToggleDifficultLevel();
             }
-            else if (input.Key == GameModeKey)
+            else if (input.Key == ModeKey)
             {
-                ToggleGameMode();
+                ToggleMode();
             }
 
             Show();
@@ -69,9 +69,9 @@ namespace Terminal.Screens
             else if (_gameSettings.DifficultLevel == DifficultLevel.Hard) _gameSettings.DifficultLevel = DifficultLevel.Easy;
         }
 
-        private void ToggleGameMode()
+        private void ToggleMode()
         {
-            _gameSettings.GameMode = _gameSettings.GameMode == GameMode.Normal ? GameMode.Speedrun : GameMode.Normal;
+            _gameSettings.Mode = _gameSettings.Mode == Mode.Normal ? Mode.Speedrun : Mode.Normal;
         }
     }
 }

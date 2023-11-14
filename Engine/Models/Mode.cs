@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Engine.Models
 {
-    public enum GameMode
+    public enum Mode
     {
         Normal,
         Speedrun
