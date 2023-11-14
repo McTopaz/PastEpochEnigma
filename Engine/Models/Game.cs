@@ -22,7 +22,7 @@ namespace Engine.Models
             MissionHandler = missionHandler;
         }
 
-        public Mission CurrentMission()
+        public Mission GetCurrentMission()
         {
             return Missions[_index];
         }

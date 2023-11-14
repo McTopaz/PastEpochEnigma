@@ -14,5 +14,6 @@ namespace Engine.Models
         public List<Objective> Objectives { get; set; }
         public List<string> Notes { get; set; } = new List<string>();
         public List<Floor> Floors { get; set; }
+        public Floor CurrentFLoor { get; set; }
     }
 }

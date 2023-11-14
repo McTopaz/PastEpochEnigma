@@ -44,6 +44,7 @@ namespace Terminal
             Container.Register<Game>(Lifestyle.Singleton);
             Container.Register<GameSettings>(Lifestyle.Singleton);
             Container.Register<MissionLoader>(Lifestyle.Singleton);
+            Container.Register<FloorFactory>(Lifestyle.Singleton);
 
             // Screens.
             Container.Register<Splash>();
@@ -87,6 +88,20 @@ namespace Terminal
             screen.Show(game.Missions.First());
 
             if (screen.StartGame)
+            {
+                MainGameLoop(game);
+            }
+        }
+
+        private static void MainGameLoop(Game game)
+        {
+            var mission = game.GetCurrentMission();
+            var floorFactory = Container.GetInstance<FloorFactory>();
+
+            floorFactory.InitFloors(mission, game.GameSettings.DifficultLevel);
+            //floorFactory.CreateFloor()
+
+            while(true)
             {
 
             }
