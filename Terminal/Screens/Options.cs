@@ -13,11 +13,11 @@ namespace Terminal.Screens
         const ConsoleKey ModeKey = ConsoleKey.M;
         const ConsoleKey ExitKey = ConsoleKey.X;
 
-        readonly Settings _gameSettings;
+        readonly Settings _settings;
 
-        public Options(Settings gameSettings)
+        public Options(Settings settings)
         {
-            _gameSettings = gameSettings;
+            _settings = settings;
         }
 
         public override void Show()
@@ -29,9 +29,9 @@ namespace Terminal.Screens
             base.DisplayEmptyLine();
             base.DisplayLeftAlignedContent("Select option:");
             base.DisplayEmptyLine();
-            base.DisplayEnum("Difficult level", _gameSettings.DifficultLevel, DifficultLevelKey);
+            base.DisplayEnum("Difficult level", _settings.DifficultLevel, DifficultLevelKey);
             base.DisplayEmptyLine();
-            base.DisplayEnum("Game mode", _gameSettings.Mode, ModeKey);
+            base.DisplayEnum("Game mode", _settings.Mode, ModeKey);
             base.DisplayEmptyLine();
             base.DisplayEmptyLine();
             base.DisplayAlignedContentAtSides("Back", $"({ExitKey})");
@@ -64,14 +64,14 @@ namespace Terminal.Screens
 
         private void ToggleDifficultLevel()
         {
-            if (_gameSettings.DifficultLevel == DifficultLevel.Easy) _gameSettings.DifficultLevel = DifficultLevel.Medium;
-            else if (_gameSettings.DifficultLevel == DifficultLevel.Medium) _gameSettings.DifficultLevel = DifficultLevel.Hard;
-            else if (_gameSettings.DifficultLevel == DifficultLevel.Hard) _gameSettings.DifficultLevel = DifficultLevel.Easy;
+            if (_settings.DifficultLevel == DifficultLevel.Easy) _settings.DifficultLevel = DifficultLevel.Medium;
+            else if (_settings.DifficultLevel == DifficultLevel.Medium) _settings.DifficultLevel = DifficultLevel.Hard;
+            else if (_settings.DifficultLevel == DifficultLevel.Hard) _settings.DifficultLevel = DifficultLevel.Easy;
         }
 
         private void ToggleMode()
         {
-            _gameSettings.Mode = _gameSettings.Mode == Mode.Normal ? Mode.Speedrun : Mode.Normal;
+            _settings.Mode = _settings.Mode == Mode.Normal ? Mode.Speedrun : Mode.Normal;
         }
     }
 }
