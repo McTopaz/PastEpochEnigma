@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Engine.Enums;
 using Engine.Models;
 
 namespace Engine
@@ -24,11 +25,6 @@ namespace Engine
             else if (floorDifficultLevel == DifficultLevel.Medium && (gameDifficultLevel == DifficultLevel.Medium || gameDifficultLevel == DifficultLevel.Hard)) return true;
             else if (floorDifficultLevel == DifficultLevel.Hard && gameDifficultLevel == DifficultLevel.Hard) return true;
             else return false;
-        }
-
-        public void InitRooms()
-        {
-
         }
     }
 }
