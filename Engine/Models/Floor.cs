@@ -18,6 +18,12 @@ namespace Engine.Models
         public Floor? Above { get; set; }
         public Floor? Below { get; set; }
 
-        public override string ToString() =>  IsOptional ? $"{ Name } - Optional: { DifficultLevel }" : Name;
+        public override string ToString()
+        {
+            var above = Above?.Name ?? "None";
+            var below = Below?.Name ?? "None";
+            var optional = IsOptional ? $"Optional: { DifficultLevel }" : string.Empty;
+            return $"{ Name }, Above: { above }, Below: { below }, { optional }";
+        }
     }
 }
