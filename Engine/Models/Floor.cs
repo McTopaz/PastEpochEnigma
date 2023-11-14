@@ -19,6 +19,7 @@ namespace Engine.Models
         public DifficultLevel DifficultLevel { get; set; } = DifficultLevel.Easy;
         public Floor? Above { get; set; }
         public Floor? Below { get; set; }
+        public List<RoomConfiguration> RoomConfigurations { get; set; }
 
         public override string ToString()
         {
