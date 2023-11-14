@@ -42,7 +42,7 @@ namespace Terminal
         {
             // Engine
             Container.Register<Game>(Lifestyle.Singleton);
-            Container.Register<GameSettings>(Lifestyle.Singleton);
+            Container.Register<Settings>(Lifestyle.Singleton);
             Container.Register<MissionLoader>(Lifestyle.Singleton);
             Container.Register<FloorFactory>(Lifestyle.Singleton);
 

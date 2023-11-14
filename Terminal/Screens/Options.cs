@@ -13,9 +13,9 @@ namespace Terminal.Screens
         const ConsoleKey GameModeKey = ConsoleKey.M;
         const ConsoleKey ExitKey = ConsoleKey.X;
 
-        readonly GameSettings _gameSettings;
+        readonly Settings _gameSettings;
 
-        public Options(GameSettings gameSettings)
+        public Options(Settings gameSettings)
         {
             _gameSettings = gameSettings;
         }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Engine.Models
 {
-    public class GameSettings
+    public class Settings
     {
         public DifficultLevel DifficultLevel { get; set; } = DifficultLevel.Easy;
         public GameMode GameMode { get; set; } = GameMode.Normal;

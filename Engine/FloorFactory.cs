@@ -25,5 +25,10 @@ namespace Engine
             else if (floorDifficultLevel == DifficultLevel.Hard && gameDifficultLevel == DifficultLevel.Hard) return true;
             else return false;
         }
+
+        public void InitRooms()
+        {
+
+        }
     }
 }

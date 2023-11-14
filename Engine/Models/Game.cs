@@ -8,7 +8,7 @@ namespace Engine.Models
 {
     public class Game
     {
-        public GameSettings GameSettings { get; set; }
+        public Settings GameSettings { get; set; }
         public MissionLoader MissionHandler { get; set; }
 
         public Awarness Awarness { get; set; } = new Awarness();
@@ -16,7 +16,7 @@ namespace Engine.Models
 
         private int _index = 0;
 
-        public Game(GameSettings gameSettings, MissionLoader missionHandler)
+        public Game(Settings gameSettings, MissionLoader missionHandler)
         {
             GameSettings = gameSettings;
             MissionHandler = missionHandler;
