@@ -98,7 +98,7 @@ namespace Terminal
             var mission = game.GetCurrentMission();
             var floorFactory = Container.GetInstance<FloorFactory>();
 
-            floorFactory.InitFloors(mission, game.GameSettings.DifficultLevel);
+            floorFactory.InitFloors(mission, game.Settings.DifficultLevel);
             //floorFactory.CreateFloor()
 
             while(true)
