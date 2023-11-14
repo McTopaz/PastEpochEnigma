@@ -13,8 +13,8 @@ namespace Engine.Models
 
         public Awarness Awarness { get; set; } = new Awarness();
         public List<Mission> Missions { get; set; } = new List<Mission>();
-        public int CurrentMission { get; set; } = 0;
 
+        private int _index = 0;
 
         public Game(GameSettings gameSettings, MissionLoader missionHandler)
         {
@@ -22,13 +22,9 @@ namespace Engine.Models
             MissionHandler = missionHandler;
         }
 
-        public void Init()
+        public Mission CurrentMission()
         {
-        }
-
-        public void Start()
-        {
-
+            return Missions[_index];
         }
     }
 }
