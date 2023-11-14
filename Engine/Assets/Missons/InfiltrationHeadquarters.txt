@@ -3,33 +3,60 @@
     "Description":"You are the council's spy and are deployed at an unguarded air intake to the headquarters. There are guards within the complex which you have to avoid or neutralize. Perform your objectives unnoticed and return to the air intake.",
     "Objectives":[
         {
-          "Name": "Find the locking system's control room",
-          "Description": "In the control room reprogram a key-card to get full access of the building.",
-          "IsFinished": false
+          "Name": "Get full access to the entire building.",
+          "Description": "On the entrace level there is a control room for the building's locking systems."
         },
         {
           "Name": "Find list of missing energy cells",
-          "Description": "There should be a list of all missing energy cells. Find the list so further missions can be planed.",
-          "IsFinished": false
+          "Description": "Check the upper levels for any safe to break open."
         },
         {
           "Name": "Find whereabouts of _evil_",
-          "Description": "_evil_ has vanish from the site. There should be some clue about his whereabouts.",
-          "IsFinished": false
+          "Description": "On the top floor are offices for top managers. Investigate for clues."
         },
         {
           "Name": "Activate the elimination system",
-          "Description": "Upon completion on all other objectives, active the elination system. Hurry back to the air-intake.",
-          "IsFinished": false
+          "Description": "Upon completion on all other objectives, active the elination system and hurry back to the air intake."
         }
     ],
     "Notes":[
-        "The council doesn't allow violence or that any human get harmed or killed.",
+        "The council doesn't allow violence or any human get harmed or killed.",
         "You are allowed to use the tools you been given by the council or what you find by yourself.",
         "Use the stun gun to stun guards and sneak by.",
-        "Use the tech-device to examine and report.",
-        "The virtual map in the tech-device show useful information.",
+        "Use the _tech-device_ to examine and report.",
+        "The virtual map in the _tech-device_ can show useful information.",
         "Door locks are presumed to be looked and you have to find access for them.",
         "The elimination system will cause all people to faint in the building for a couple of hours."
     ],
+    "Floors":[
+        {
+            "Name":"Office"
+        },
+        {
+            "Name": "Guard captain",
+            "IsOptional":"true",
+            "DifficultLevel":"Hard"
+        },
+        {
+            "Name": "Conference"
+        },
+        {
+            "Name": "Entrance",
+        },
+        {
+            "Name": "Time machine",
+        },
+        {
+            "Name": "Upgrade the key-card",
+            "IsOptional":"true",
+            "DifficultLevel":"MEdium"
+        },
+        {
+            "Name": "Elimination system",
+        },
+        {
+            "Name": "Air intake",
+            "IsStart":"true"
+        }
+    ]
 }
