@@ -49,14 +49,26 @@
         {
             "Name": "Upgrade the key-card",
             "IsOptional":"true",
-            "DifficultLevel":"MEdium"
+            "DifficultLevel":"Medium"
         },
         {
             "Name": "Elimination system",
         },
         {
             "Name": "Air intake",
-            "IsStart":"true"
+            "IsStart":"true",
+            "RoomConfigurations":[
+                {
+                    "IsDark":"true"
+                },
+                {
+                    "HasLockedDoor":"true",
+                    "DoorKey":"KeyCardOperator"
+                },
+                {
+                    "Item":"KeyCardOperator"
+                }
+            ]
         }
     ]
 }
