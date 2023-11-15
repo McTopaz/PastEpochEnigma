@@ -12,6 +12,7 @@ namespace Engine.Models
         private Item? _item;
         private Item? _doorKey;
 
+        public string Name { get; set; } = string.Empty;
         public bool IsStart { get; set; } = false;
         public bool IsEnd { get; set; } = false;
         public bool IsDark { get; set; } = false;
