@@ -57,6 +57,7 @@
         {
             "Name": "Air intake",
             "IsStart":"true",
+            "HasKeyForLocks":"true",
             "PredeterminedRooms":[
                 {
                     "IsDark":"true"
