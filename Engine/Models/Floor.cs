@@ -14,6 +14,7 @@ namespace Engine.Models
         public bool IsStart { get; set; } = false;
         public bool IsOptional { get; set; } = false;
         public bool HasKeyForLockedDoors { get; set; } = false;
+        public bool HasBranchingRooms { get; set; } = false;
         public Awarness Awarness { get; set; } = new Awarness();
         public List<Room> Rooms { get; set; } = new List<Room>();
         public (int X, int Y) Position { get; set; }
