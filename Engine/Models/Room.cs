@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Engine.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,10 +9,38 @@ namespace Engine.Models
 {
     public class Room
     {
-        public bool IsStart { get; set; }
-        public bool IsEnd { get; set; }
-        public bool IsDark { get; set; }
-        public bool HasLockedDoor { get; set; }
-        public bool HasItem { get; set; }
+        private Item? _item;
+        private Item? _doorKey;
+
+        public bool IsStart { get; set; } = false;
+        public bool IsEnd { get; set; } = false;
+        public bool IsDark { get; set; } = false;
+        public bool IsTerminal { get; set; } = false;
+        public bool IsIntermediate { get; set; } = false;
+        public bool HasLockedDoor { get; set; } = false;
+        public bool HasItem { get; set; } = false;
+        public bool HasDoorKey { get; set; } = false;
+        public Room? Previous { get; set; }
+        public Room? Next { get; set; }
+
+
+        public Item? Item
+        {
+            get => _item;
+            set
+            {
+                _item = value;
+                HasItem = _item != null;
+            }
+        }
+        public Item? DoorKey
+        {
+            get => _doorKey;
+            set
+            {
+                _doorKey = value;
+                HasDoorKey = _doorKey != null;
+            }
+        }
     }
 }

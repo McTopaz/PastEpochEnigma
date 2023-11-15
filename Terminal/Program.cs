@@ -99,12 +99,12 @@ namespace Terminal
             var floorFactory = Container.GetInstance<FloorFactory>();
 
             floorFactory.InitFloors(mission, game.Settings.DifficultLevel);
-            //floorFactory.CreateFloor()
+            floorFactory.CreateRoomsForMissionFloors(mission, game.Settings.DifficultLevel);
 
-            while(true)
-            {
+            //while(true)
+            //{
 
-            }
+            //}
         }
     }
 }
