@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using SimpleInjector;
 
-using Engine;
 using Engine.Models;
+using Engine.Utilities;
 
 using Terminal.Screens;
 using SimpleInjector.Lifestyles;
@@ -45,6 +45,8 @@ namespace Terminal
             Container.Register<Settings>(Lifestyle.Singleton);
             Container.Register<MissionLoader>(Lifestyle.Singleton);
             Container.Register<FloorFactory>(Lifestyle.Singleton);
+            Container.Register<RoomGenerator>(Lifestyle.Singleton);
+            Container.Register<RoomSorter>(Lifestyle.Singleton);
 
             // Screens.
             Container.Register<Splash>();
@@ -97,9 +99,10 @@ namespace Terminal
         {
             var mission = game.GetCurrentMission();
             var floorFactory = Container.GetInstance<FloorFactory>();
+            var roomGenerator = Container.GetInstance<RoomGenerator>();
 
             floorFactory.InitFloors(mission, game.Settings.DifficultLevel);
-            floorFactory.CreateRoomsForMissionFloors(mission, game.Settings.DifficultLevel);
+            roomGenerator.CreateRoomsForMissionFloors(mission, game.Settings.DifficultLevel);
 
             //while(true)
             //{
