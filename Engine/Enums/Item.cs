@@ -9,8 +9,8 @@ namespace Engine.Enums
     public enum Item
     {
         Flashlight,
-        KeyCardOperator,
-        KeyCardManager,
-        KeyCardAdministrator
+        KeycardOperator,
+        KeycardManager,
+        KeycardAdministrator
     }
 }
