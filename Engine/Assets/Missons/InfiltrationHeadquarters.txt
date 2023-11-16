@@ -60,13 +60,16 @@
             "HasKeyForLockedDoors":"true",
             "PredeterminedRooms":[
                 {
+                    "Name":"Dark room",
                     "IsDark":"true"
                 },
                 {
+                    "Name":"Room with locked door",
                     "HasLockedDoor":"true",
                     "DoorKey":"KeyCardOperator"
                 },
                 {
+                    "Name":"Room key",
                     "Item":"KeyCardOperator"
                 }
             ]
