@@ -43,5 +43,7 @@ namespace Engine.Models
                 HasDoorKey = _doorKey != null;
             }
         }
+
+        public override string ToString() => Name;
     }
 }
