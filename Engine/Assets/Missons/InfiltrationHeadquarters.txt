@@ -66,11 +66,11 @@
                 {
                     "Name":"Room with locked door",
                     "HasLockedDoor":"true",
-                    "DoorKey":"KeyCardOperator"
+                    "DoorKey":"KeycardOperator"
                 },
                 {
                     "Name":"Room key",
-                    "Item":"KeyCardOperator"
+                    "Item":"KeycardOperator"
                 }
             ]
         }
