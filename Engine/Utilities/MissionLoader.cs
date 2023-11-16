@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 
-namespace Engine
+namespace Engine.Utilities
 {
     public class MissionLoader
     {
