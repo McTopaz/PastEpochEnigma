@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,36 +11,66 @@ namespace Engine.Utilities
 {
     public class RoomSorter
     {
-        internal void SortRoomsOnFloorWithNoNewKeys(Floor floor)
+        public void SortRoomsOnFloorWithNoNewKeys(Floor floor)
         {
             var rnd = new Random();
             floor.PredeterminedRooms = floor.PredeterminedRooms
                 .OrderBy(r => rnd.Next())
                 .ToList();
-
-            //floor.PredeterminedRooms = floor.PredeterminedRooms
-            //    .OrderBy(c => c.HasLockedDoor)
-            //    .ToList();
         }
 
-        internal void SortRoomsOnFloorWithNewKey(Floor floor)
+        public void SortRoomsOnFloorWithNewKey(Floor floor, bool shuffle)
         {
-            var roomsWithNewKeys = floor.PredeterminedRooms.Where(r => r.HasDoorKey).ToList();
-            
-            var roomsWithKeys = floor.PredeterminedRooms.Where(c => c.HasItem);
-            var roomsWithLockedDoor = floor.PredeterminedRooms.Where(r => r.HasLockedDoor);
-            var otherRooms = floor.PredeterminedRooms.Except(roomsWithKeys).Except(roomsWithLockedDoor);
+            var roomsWithKeys = floor.PredeterminedRooms.Where(c => c.HasItem).ToList();
+            var roomsWithLockedDoor = floor.PredeterminedRooms.Where(r => r.HasLockedDoor).ToList();
+            var shuffling = new Random().Next(0, 2) == 1;
 
-            var sections = roomsWithKeys
-                .SelectMany(k => roomsWithLockedDoor, (k, l) => (k, l))
-                .Where(pair => pair.k.Item.Value == pair.l.DoorKey.Value);
+            if (shuffle)
+            {
+                var shuffledRooms = ShuffleRoomsWithKeysAndLocks(roomsWithKeys, roomsWithLockedDoor);
+                floor.PredeterminedRooms = shuffledRooms;
+            }
+            else
+            {
+                floor.PredeterminedRooms = roomsWithKeys
+                    .Concat(roomsWithLockedDoor)
+                    .ToList();
+            }
+        }
 
-            // Keys -> Locks
+        public List<Room> ShuffleRoomsWithKeysAndLocks(List<Room> keys, List<Room> locks)
+        {
+            if (locks.Count == 0)
+            {
+                return RandomHelper.ShuffleList(keys);
+            }
 
-            // Key -> lock -> Key -> lock
+            // This will group Keys with Locks.
+            // {"K1":[L1,L3]},{"K2":[L2,L4,L5]}
+            var sections = keys
+                .SelectMany(k => locks, (k, l) => (Key: k, Lock: l))
+                .Where(pair => pair.Key.Item == pair.Lock.DoorKey)
+                .GroupBy(pair => pair.Key, pair => pair.Lock)
+                .ToDictionary(group => group.Key, group => group.ToList());
 
-            // KeyA, KeyB, LockA, KeyC, LockB, LockC
+            sections = RandomHelper.ShuffleDictionary(sections);
 
+            // This will make sure locks are placed after the key. Locks position are also randomize.
+            // {"K1":[L3,L1]},{"K2":[L5,L2,L4]}
+            var rooms = new List<Room>(sections.Keys.ToList());
+            foreach (var section in sections)
+            {
+                var index = rooms.IndexOf(section.Key) + 1;
+
+                foreach (var l in section.Value)
+                {
+                    var max = rooms.Count() + 1;
+                    var pos = new Random().Next(index, max);
+                    rooms.Insert(pos, l);
+                }
+            }
+
+            return rooms;
         }
     }
 }
