@@ -29,48 +29,27 @@ namespace Engine.Utilities
         private void CreateRoomsForFLoor(Floor floor, DifficultLevel difficultLevel)
         {
             floor.Rooms.Add(new Room { IsStart = true });
-            SortPresetRooms(floor);
+            SortPredeterminedRooms(floor);
             AddIntermediateRoomsToPredeterminedRooms(floor);
             floor.Rooms.Add(new Room { IsEnd = true });
             LinkRoomsTogether(floor);
         }
 
-        private void SortPresetRooms(Floor floor)
+        private void SortPredeterminedRooms(Floor floor)
         {
             if (floor.HasKeyForLockedDoors)
             {
-                //SortAccordingToKeyOnFloor(floor);
-                _sorter.SortRoomsOnFloorWithNewKey(floor);
+                var shuffle = new Random().Next(0, 2) == 1;
+                _sorter.SortRoomsOnFloorWithNewKey(floor, shuffle);
             }
             else
             {
-                _sorter.SortRoomsOnFloorWithNoNewKeys(floor);
+                floor.PredeterminedRooms = RandomHelper.ShuffleList(floor.PredeterminedRooms);
             }
-        }
-
-        private void SortAccordingToKeyOnFloor(Floor floor)
-        {
-            var roomsWithKeys = floor.PredeterminedRooms.Where(c => c.HasItem);
-            var roomsWithLockedDoor = floor.PredeterminedRooms.Where(r => r.HasLockedDoor);
-            var sections = roomsWithKeys
-                .SelectMany(k => roomsWithLockedDoor, (k, l) => (k, l))
-                .Where(pair => pair.k.Item.Value == pair.l.DoorKey.Value);
-
-            if (sections.Count() > 0)
-            {
-
-            }
-            else
-            {
-
-            }
-
-            var otherRooms = floor.PredeterminedRooms.Except(roomsWithKeys).Except(roomsWithLockedDoor);
         }
 
         private void AddIntermediateRoomsToPredeterminedRooms(Floor floor)
         {
-            var list = new List<Room>();
             List<Room>? intermediateRooms;
 
             foreach (var room in floor.PredeterminedRooms)
