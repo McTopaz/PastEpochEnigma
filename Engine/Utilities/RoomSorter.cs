@@ -11,14 +11,6 @@ namespace Engine.Utilities
 {
     public class RoomSorter
     {
-        public void SortRoomsOnFloorWithNoNewKeys(Floor floor)
-        {
-            var rnd = new Random();
-            floor.PredeterminedRooms = floor.PredeterminedRooms
-                .OrderBy(r => rnd.Next())
-                .ToList();
-        }
-
         public void SortRoomsOnFloorWithNewKey(Floor floor, bool shuffle)
         {
             var roomsWithKeys = floor.PredeterminedRooms.Where(c => c.HasItem).ToList();
