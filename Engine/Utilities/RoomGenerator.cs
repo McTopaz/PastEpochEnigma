@@ -28,10 +28,10 @@ namespace Engine.Utilities
 
         private void CreateRoomsForFloor(Floor floor, DifficultLevel difficultLevel)
         {
-            floor.Rooms.Add(new Room { IsStart = true, Name = "Start" });
+            floor.Rooms.Add(new Room { IsStart = true, Name = "Start", IsTerminal = true }) ;
             SortPredeterminedRooms(floor);
             AddIntermediateRoomsToPredeterminedRooms(floor);
-            floor.Rooms.Add(new Room { IsEnd = true, Name = "End" });
+            floor.Rooms.Add(new Room { IsEnd = true, Name = "End", IsTerminal = true });
             LinkRoomsTogether(floor);
         }
 
