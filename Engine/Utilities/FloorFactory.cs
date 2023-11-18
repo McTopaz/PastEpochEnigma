@@ -39,6 +39,7 @@ namespace Engine.Utilities
         private void CreateFloorPlan(Floor floor)
         {
             SetStartRoomPosition(floor);
+            GenerateMainPathway(floor);
         }
 
         private void SetStartRoomPosition(Floor floor)
@@ -57,7 +58,7 @@ namespace Engine.Utilities
             else if (side == Side.Right)
             {
                 var y = rnd.Next(floor.Size.Height + 1);
-                room.Location = (floor.Size.Width, y);
+                room.Location = (floor.Size.Width - 1, y);
                 room.Directions.Add(Side.Left);
                 room.MainDirection = Side.Left;
             }
@@ -71,10 +72,89 @@ namespace Engine.Utilities
             else if (side == Side.Bottom)
             {
                 var x = rnd.Next(floor.Size.Width + 1);
-                room.Location = (x, floor.Size.Height);
+                room.Location = (x, floor.Size.Height - 1);
                 room.Directions.Add(Side.Top);
                 room.MainDirection = Side.Top;
             }
+        }
+
+        private void GenerateMainPathway(Floor floor)
+        {
+            var rooms = floor.MainRooms.Skip(1);
+
+            foreach (var room in rooms)
+            {
+                if (room.IsEnd || room.IsTerminal)
+                {
+                    TerminalRoomPathway(room);
+                }
+                else
+                {
+                    MainRoomPathway(room);
+                }
+            }
+
+            foreach (var room in floor.MainRooms)
+            {
+                Console.WriteLine(room);
+            }
+
+            Console.ReadLine();
+        }
+
+        private void TerminalRoomPathway(Room room)
+        {
+            var previous = room.Previous;
+            NextRoomLocation(room);
+            room.MainDirection = GetOppositeDirection(previous.MainDirection);
+        }
+
+        private void MainRoomPathway(Room room)
+        {
+            NextRoomLocation(room);
+            NextDirection(room);
+        }
+
+        private void NextRoomLocation(Room room)
+        {
+            var previous = room.Previous;
+
+            if (previous.MainDirection == Side.Left)
+            {
+                room.Location = (previous.Location.X - 1, previous.Location.Y);
+            }
+            else if (previous.MainDirection == Side.Right)
+            {
+                room.Location = (previous.Location.X + 1, previous.Location.Y);
+            }
+            else if (previous.MainDirection == Side.Top)
+            {
+                room.Location = (previous.Location.X, previous.Location.Y - 1);
+            }
+            else
+            {
+                room.Location = (previous.Location.X, previous.Location.Y + 1);
+            }
+        }
+
+        private Side GetOppositeDirection(Side direction)
+        {
+            if (direction == Side.Left) return Side.Right;
+            else if (direction == Side.Right) return Side.Left;
+            else if (direction == Side.Top) return Side.Bottom;
+            else return Side.Top;
+        }
+
+        private void NextDirection(Room room)
+        {
+            var forbidden = new List<Side>
+            {
+                GetOppositeDirection(room.Previous.MainDirection)
+            };
+            var direction = RandomHelper.GetRandomDirection(forbidden);
+
+            room.Directions.Add(direction);
+            room.MainDirection = direction;
         }
     }
 }
