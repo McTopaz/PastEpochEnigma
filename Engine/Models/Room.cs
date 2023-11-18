@@ -23,6 +23,7 @@ namespace Engine.Models
         public bool HasDoorKey { get; set; } = false;
         public Room? Previous { get; set; }
         public Room? Next { get; set; }
+        public (int X, int Y) Location { get; set; } = (0, 0);
 
 
         public Item? Item
