@@ -23,10 +23,10 @@ namespace Engine.Utilities
         public void CreateRoomsForMissionFloors(Mission mission, DifficultLevel difficultLevel)
         {
             var floor = mission.Floors.First(f => f.IsStart);
-            CreateRoomsForFLoor(floor, difficultLevel);
+            CreateRoomsForFloor(floor, difficultLevel);
         }
 
-        private void CreateRoomsForFLoor(Floor floor, DifficultLevel difficultLevel)
+        private void CreateRoomsForFloor(Floor floor, DifficultLevel difficultLevel)
         {
             floor.Rooms.Add(new Room { IsStart = true });
             SortPredeterminedRooms(floor);
@@ -50,8 +50,6 @@ namespace Engine.Utilities
 
         private void AddIntermediateRoomsToPredeterminedRooms(Floor floor)
         {
-            List<Room>? intermediateRooms;
-
             foreach (var room in floor.PredeterminedRooms)
             {
                 floor.Rooms.AddRange(GenerateIntermediateRooms());
