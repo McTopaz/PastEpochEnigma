@@ -46,6 +46,6 @@ namespace Engine.Models
             }
         }
 
-        public override string ToString() => Name;
+        public override string ToString() => $"{Name} [{Location.X}:{Location.Y}]";
     }
 }
