@@ -23,5 +23,16 @@ namespace Engine.Utilities
             var shuffled = shuffledKeys.ToDictionary(t1 => t1, t2 => dict[t2]);
             return shuffled;
         }
+
+        internal static void InsertListInList<T>(List<T> source, List<T> destination)
+        {
+            var rnd = new Random();
+            foreach (var item in source)
+            {
+                var max = destination.Count() + 1;
+                var index = rnd.Next(max);
+                destination.Insert(index, item);
+            }
+        }
     }
 }
