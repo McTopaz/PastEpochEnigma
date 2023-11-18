@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Engine.Enums;
+
 namespace Engine.Utilities
 {
     internal class RandomHelper
@@ -42,6 +44,16 @@ namespace Engine.Utilities
             var index = new Random().Next(values.Length);
             var value = values.GetValue(index);
             return (T)value;
+        }
+
+        internal static Side GetRandomDirection(List<Side> forbiddenDirections) 
+        {
+            var values = Enum.GetValues(typeof(Side))
+                .Cast<Side>()
+                .Except(forbiddenDirections)
+                .ToList();
+            var index = new Random().Next(values.Count());
+            return values[index];
         }
     }
 }
