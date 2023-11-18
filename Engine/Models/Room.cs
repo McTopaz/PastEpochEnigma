@@ -25,6 +25,7 @@ namespace Engine.Models
         public Room? Next { get; set; }
         public (int X, int Y) Location { get; set; } = (0, 0);
         public List<Side> Directions { get; set; } = new List<Side>();
+        public Side MainDirection { get; set; }
 
         public Item? Item
         {
