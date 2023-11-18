@@ -9,7 +9,7 @@ namespace Engine.Enums
     public enum Side
     {
         Left = 0,
-        Up = 1,
+        Top = 1,
         Right = 2,
         Bottom = 3
     }
