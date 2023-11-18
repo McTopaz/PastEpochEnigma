@@ -103,6 +103,7 @@ namespace Terminal
 
             floorFactory.InitFloors(mission, game.Settings.DifficultLevel);
             roomGenerator.CreateRoomsForMissionFloors(mission, game.Settings.DifficultLevel);
+            floorFactory.CreateFloorPlans(mission);
 
             //while(true)
             //{
