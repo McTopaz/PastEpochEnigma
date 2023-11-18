@@ -28,10 +28,10 @@ namespace Engine.Utilities
 
         private void CreateRoomsForFloor(Floor floor, DifficultLevel difficultLevel)
         {
-            floor.Rooms.Add(new Room { IsStart = true, Name = "Start", IsTerminal = true }) ;
+            floor.MainRooms.Add(new Room { IsStart = true, Name = "Start", IsTerminal = true }) ;
             SortPredeterminedRooms(floor);
             AddIntermediateRoomsToPredeterminedRooms(floor);
-            floor.Rooms.Add(new Room { IsEnd = true, Name = "End", IsTerminal = true });
+            floor.MainRooms.Add(new Room { IsEnd = true, Name = "End", IsTerminal = true });
             LinkRoomsTogether(floor);
         }
 
@@ -52,11 +52,11 @@ namespace Engine.Utilities
         {
             foreach (var room in floor.PredeterminedRooms)
             {
-                floor.Rooms.AddRange(GenerateIntermediateRooms());
-                floor.Rooms.Add(room);
+                floor.MainRooms.AddRange(GenerateIntermediateRooms());
+                floor.MainRooms.Add(room);
             }
 
-            floor.Rooms.AddRange(GenerateIntermediateRooms());
+            floor.MainRooms.AddRange(GenerateIntermediateRooms());
         }
 
         private List<Room> GenerateIntermediateRooms()
@@ -69,8 +69,8 @@ namespace Engine.Utilities
 
         private void LinkRoomsTogether(Floor floor)
         {
-            floor.Rooms.Reverse<Room>().Aggregate((r1, r2) => r1.Previous = r2);
-            floor.Rooms.Aggregate((r1, r2) => r1.Next = r2);
+            floor.MainRooms.Reverse<Room>().Aggregate((r1, r2) => r1.Previous = r2);
+            floor.MainRooms.Aggregate((r1, r2) => r1.Next = r2);
         }
 
         private void PrintRooms(List<Room> rooms)

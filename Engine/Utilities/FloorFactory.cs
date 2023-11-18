@@ -43,7 +43,7 @@ namespace Engine.Utilities
 
         private void SetStartRoomPosition(Floor floor)
         {
-            var room = floor.Rooms.First();
+            var room = floor.MainRooms.First();
             var side = RandomHelper.GetEnum<Side>();
             var rnd = new Random();
 
