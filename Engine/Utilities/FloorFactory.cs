@@ -52,24 +52,28 @@ namespace Engine.Utilities
                 var y = rnd.Next(floor.Size.Height + 1);
                 room.Location = (0, y);
                 room.Directions.Add(Side.Right);
+                room.MainDirection = Side.Right;
             }
             else if (side == Side.Right)
             {
                 var y = rnd.Next(floor.Size.Height + 1);
                 room.Location = (floor.Size.Width, y);
                 room.Directions.Add(Side.Left);
+                room.MainDirection = Side.Left;
             }
             else if (side == Side.Top)
             {
                 var x = rnd.Next(floor.Size.Width + 1);
                 room.Location= (x, 0);
                 room.Directions.Add(Side.Bottom);
+                room.MainDirection = Side.Bottom;
             }
             else if (side == Side.Bottom)
             {
                 var x = rnd.Next(floor.Size.Width + 1);
                 room.Location = (x, floor.Size.Height);
                 room.Directions.Add(Side.Top);
+                room.MainDirection = Side.Top;
             }
         }
     }
