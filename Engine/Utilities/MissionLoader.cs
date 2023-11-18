@@ -33,8 +33,7 @@ namespace Engine.Utilities
                 _missions.First()
             };
 
-            var rnd = new Random();
-            var shuffled = _missions.Skip(1).OrderBy(m => rnd.Next());
+            var shuffled = RandomHelper.ShuffleList(_missions.Skip(1).ToList());
             list.AddRange(shuffled);
             return list;
         }
