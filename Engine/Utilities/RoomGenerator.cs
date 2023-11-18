@@ -63,7 +63,7 @@ namespace Engine.Utilities
         {
             var rnd = new Random();
             var count = rnd.Next(0, MaxNumberOfIntermediateRooms);
-            var list = Enumerable.Repeat(new Room { IsIntermediate = true }, count).ToList();
+            var list = Enumerable.Repeat(new Room { IsIntermediate = true, Name = "Intermediate" }, count).ToList();
             return list;
         }
 
