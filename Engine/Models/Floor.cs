@@ -11,6 +11,7 @@ namespace Engine.Models
     public class Floor
     {
         public string Name { get; set; }
+        public (int Width, int Height) Size { get; set; } = (16, 5);
         public bool IsStart { get; set; } = false;
         public bool IsOptional { get; set; } = false;
         public bool HasKeyForLockedDoors { get; set; } = false;
