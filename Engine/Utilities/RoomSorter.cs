@@ -15,6 +15,7 @@ namespace Engine.Utilities
         {
             var roomsWithKeys = floor.PredeterminedRooms.Where(c => c.HasItem).ToList();
             var roomsWithLockedDoor = floor.PredeterminedRooms.Where(r => r.HasLockedDoor).ToList();
+            var otherRooms = floor.PredeterminedRooms.Except(roomsWithKeys).Except(roomsWithLockedDoor).ToList();
             var shuffling = new Random().Next(0, 2) == 1;
 
             if (shuffle)
@@ -28,6 +29,8 @@ namespace Engine.Utilities
                     .Concat(roomsWithLockedDoor)
                     .ToList();
             }
+
+            RandomHelper.InsertListInList(otherRooms, floor.PredeterminedRooms);
         }
 
         public List<Room> ShuffleRoomsWithKeysAndLocks(List<Room> keys, List<Room> locks)
