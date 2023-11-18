@@ -34,5 +34,14 @@ namespace Engine.Utilities
                 destination.Insert(index, item);
             }
         }
+
+        internal static T GetEnum<T>()
+        {
+            var type = typeof(T);
+            var values = Enum.GetValues(type);
+            var index = new Random().Next(values.Length);
+            var value = values.GetValue(index);
+            return (T)value;
+        }
     }
 }
