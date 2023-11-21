@@ -47,6 +47,8 @@ namespace Terminal
             Container.Register<FloorFactory>(Lifestyle.Singleton);
             Container.Register<RoomGenerator>(Lifestyle.Singleton);
             Container.Register<RoomSorter>(Lifestyle.Singleton);
+            Container.Register<FloorPlanFactory>(Lifestyle.Singleton);
+            Container.Register<RandomPathGenerator>(Lifestyle.Singleton);
 
             // Screens.
             Container.Register<Splash>();
@@ -100,10 +102,12 @@ namespace Terminal
             var mission = game.GetCurrentMission();
             var floorFactory = Container.GetInstance<FloorFactory>();
             var roomGenerator = Container.GetInstance<RoomGenerator>();
+            var floorPlanFactory = Container.GetInstance<FloorPlanFactory>();
 
             floorFactory.InitFloors(mission, game.Settings.DifficultLevel);
             roomGenerator.CreateRoomsForMissionFloors(mission, game.Settings.DifficultLevel);
-            floorFactory.CreateFloorPlans(mission);
+            floorPlanFactory.CreateFloorPlans(mission);
+
 
             //while(true)
             //{
