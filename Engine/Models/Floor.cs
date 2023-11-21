@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace Engine.Models
     public class Floor
     {
         public string Name { get; set; }
-        public (int Width, int Height) Size { get; set; } = (16, 5);
+        public Size Size { get; set; } = new Size(16, 5);
         public bool IsStart { get; set; } = false;
         public bool IsOptional { get; set; } = false;
         public bool HasKeyForLockedDoors { get; set; } = false;
@@ -23,6 +24,8 @@ namespace Engine.Models
         public Floor? Above { get; set; }
         public Floor? Below { get; set; }
         public List<Room> PredeterminedRooms { get; set; }
+        public Direction ForbiddenDirection { get; set; } = Direction.None;
+        public List<(Direction Direction, Point Position)> Path = new List<(Direction direction, Point Position)>();
 
         public override string ToString()
         {
