@@ -1,9 +1,11 @@
-﻿using Engine.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using Engine.Enums;
 
 namespace Engine.Models
 {
@@ -23,9 +25,8 @@ namespace Engine.Models
         public bool HasDoorKey { get; set; } = false;
         public Room? Previous { get; set; }
         public Room? Next { get; set; }
-        public (int X, int Y) Location { get; set; } = (0, 0);
-        public List<Side> Directions { get; set; } = new List<Side>();
-        public Side MainDirection { get; set; }
+        public Point Position { get; set; } = new Point();
+        public Direction Direction { get; set; } = Direction.None;
 
         public Item? Item
         {
@@ -46,6 +47,6 @@ namespace Engine.Models
             }
         }
 
-        public override string ToString() => $"{Name} [{Location.X}:{Location.Y}]";
+        public override string ToString() => $"{Name} [{Position.X}:{Position.Y}] {Direction}";
     }
 }
