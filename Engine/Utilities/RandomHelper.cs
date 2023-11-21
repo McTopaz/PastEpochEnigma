@@ -46,6 +46,13 @@ namespace Engine.Utilities
             return (T)value;
         }
 
+        internal static T GetRandomInList<T>(List<T> list)
+        {
+            var rnd = new Random();
+            var index = rnd.Next(list.Count);
+            return list[index];
+        }
+
         internal static Side GetRandomDirection(List<Side> forbiddenDirections) 
         {
             var values = Enum.GetValues(typeof(Side))
