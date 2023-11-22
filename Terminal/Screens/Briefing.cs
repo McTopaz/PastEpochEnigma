@@ -10,7 +10,7 @@ using Terminal.Icons;
 
 namespace Terminal.Screens
 {
-    internal class Briefing : PageMenu
+    internal class Briefing : MenuBase
     {
         private Mission _mission;
         public bool StartGame { get; set; } = false;

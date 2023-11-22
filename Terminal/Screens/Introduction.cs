@@ -7,7 +7,7 @@ using Terminal.Icons;
 
 namespace Terminal.Screens
 {
-    internal class Introduction : PageMenu
+    internal class Introduction : MenuBase
     {
         const string LineBreak = "<br>";
 
