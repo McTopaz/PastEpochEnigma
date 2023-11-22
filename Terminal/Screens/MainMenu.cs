@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Terminal.Screens
 {
-    internal class MainMenu : MenuBase
+    internal class MainMenu : ScreenBase
     {
         const ConsoleKey NewGameKey = ConsoleKey.N;
         const ConsoleKey LoadGameKey = ConsoleKey.L;

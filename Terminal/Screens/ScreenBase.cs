@@ -14,14 +14,14 @@ using Terminal.Models;
 
 namespace Terminal.Screens
 {
-    internal abstract class MenuBase
+    internal abstract class ScreenBase
     {
         protected const string OuterMargin = " ";
         protected const string InnerMargin = "    ";
         protected int Width;
         protected int Height;
 
-        public MenuBase()
+        public ScreenBase()
         {
             Width = Console.WindowWidth;
             Height = Console.WindowHeight;

@@ -12,7 +12,7 @@ using static System.Collections.Specialized.BitVector32;
 
 namespace Terminal.Screens
 {
-    internal abstract class PageMenu : MenuBase
+    internal abstract class PageMenu : ScreenBase
     {
         const ConsoleKey UpArrowKey = ConsoleKey.UpArrow;
         const ConsoleKey DownArrowKey = ConsoleKey.DownArrow;

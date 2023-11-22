@@ -9,7 +9,7 @@ using Engine.Models;
 
 namespace Terminal.Screens
 {
-    internal class Options : MenuBase
+    internal class Options : ScreenBase
     {
         const ConsoleKey DifficultLevelKey = ConsoleKey.D;
         const ConsoleKey ModeKey = ConsoleKey.M;
