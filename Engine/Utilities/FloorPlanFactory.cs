@@ -28,7 +28,7 @@ namespace Engine.Utilities
         private void CreateFloorPlan(Floor floor)
         {
             RandomStartPosition(floor);
-            GenerateRandomPath(floor);
+            FloorPlanGeneration(floor);
             FixStartRoomDirection(floor);
             MergeRoomsWithPath(floor);
         }
@@ -65,6 +65,20 @@ namespace Engine.Utilities
             }
         }
 
+        private void FloorPlanGeneration(Floor floor)
+        {
+            do
+            {
+                GenerateRandomPath(floor);
+
+                if (floor.Path.Count < floor.MainRooms.Count)
+                {
+                    RemoveAnyIntermediateRoom(floor);
+                }
+            }
+            while (floor.Path.Count < floor.MainRooms.Count);
+        }
+
         private void GenerateRandomPath(Floor floor)
         {
             var size = floor.Size;
@@ -75,6 +89,27 @@ namespace Engine.Utilities
 
             floor.Path.Add(new(firstRoom.Direction, firstRoom.Position));
             floor.Path.AddRange(path);
+        }
+
+        private void RemoveAnyIntermediateRoom(Floor floor)
+        {
+            var count = floor.MainRooms.Count - floor.Path.Count;
+
+            if (floor.MainRooms.Where(r => r.IsIntermediate).Count() < count)
+            {
+                var msg = "Failed to remove enough intermediate rooms to fix path. There are too few Intermediate rooms";
+                Console.WriteLine(msg);
+                throw new Exception(msg);
+            }
+
+            for (int i = 0; i < count; i++)
+            {
+                var room = floor.MainRooms.First(r => r.IsIntermediate);
+                var index = floor.MainRooms.IndexOf(room);
+                room.Previous.Next = room.Next;
+                room.Next.Previous = room.Previous;
+                floor.MainRooms.RemoveAt(index);
+            }
         }
 
         private void FixStartRoomDirection(Floor floor)
