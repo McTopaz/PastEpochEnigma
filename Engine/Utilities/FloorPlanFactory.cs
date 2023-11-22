@@ -35,7 +35,7 @@ namespace Engine.Utilities
 
         private void RandomStartPosition(Floor floor)
         {
-            var room = floor.MainRooms.First();
+            var room = floor.Rooms.First();
             var side = RandomHelper.GetEnum<Side>();
             var rnd = new Random();
 
@@ -71,20 +71,20 @@ namespace Engine.Utilities
             {
                 GenerateRandomPath(floor);
 
-                if (floor.Path.Count < floor.MainRooms.Count)
+                if (floor.Path.Count < floor.Rooms.Count)
                 {
                     RemoveAnyIntermediateRoom(floor);
                 }
             }
-            while (floor.Path.Count < floor.MainRooms.Count);
+            while (floor.Path.Count < floor.Rooms.Count);
         }
 
         private void GenerateRandomPath(Floor floor)
         {
             var size = floor.Size;
-            var firstRoom = floor.MainRooms.First();
+            var firstRoom = floor.Rooms.First();
             var start = firstRoom.Position;
-            var steps = floor.MainRooms.Count - 1;
+            var steps = floor.Rooms.Count - 1;
             var path = _randomPathGenerator.Generate(size, start, steps, floor.ForbiddenDirection);
 
             floor.Path.Add(new(firstRoom.Direction, firstRoom.Position));
@@ -93,9 +93,9 @@ namespace Engine.Utilities
 
         private void RemoveAnyIntermediateRoom(Floor floor)
         {
-            var count = floor.MainRooms.Count - floor.Path.Count;
+            var count = floor.Rooms.Count - floor.Path.Count;
 
-            if (floor.MainRooms.Where(r => r.IsIntermediate).Count() < count)
+            if (floor.Rooms.Where(r => r.IsIntermediate).Count() < count)
             {
                 var msg = "Failed to remove enough intermediate rooms to fix path. There are too few Intermediate rooms";
                 Console.WriteLine(msg);
@@ -104,17 +104,17 @@ namespace Engine.Utilities
 
             for (int i = 0; i < count; i++)
             {
-                var room = floor.MainRooms.First(r => r.IsIntermediate);
-                var index = floor.MainRooms.IndexOf(room);
+                var room = floor.Rooms.First(r => r.IsIntermediate);
+                var index = floor.Rooms.IndexOf(room);
                 room.Previous.Next = room.Next;
                 room.Next.Previous = room.Previous;
-                floor.MainRooms.RemoveAt(index);
+                floor.Rooms.RemoveAt(index);
             }
         }
 
         private void FixStartRoomDirection(Floor floor)
         {
-            var room = floor.MainRooms.First();
+            var room = floor.Rooms.First();
             var path = floor.Path[1];
             var diffX = path.Position.X - room.Position.X;
             var diffY = path.Position.Y - room.Position.Y;
@@ -127,9 +127,9 @@ namespace Engine.Utilities
 
         private void MergeRoomsWithPath(Floor floor)
         {
-            for (int i = 1; i < floor.MainRooms.Count; i++)
+            for (int i = 1; i < floor.Rooms.Count; i++)
             {
-                var room = floor.MainRooms[i];
+                var room = floor.Rooms[i];
                 var path = floor.Path[i];
 
                 room.Direction = path.Direction;
