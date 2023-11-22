@@ -11,9 +11,12 @@ namespace Engine.Utilities
 {
     public class RandomPathGenerator
     {
+        private const int MaxFailureTimes = 3;
+
         private Size Size { get; set; } = new Size();
         private Point Current { get; set; } = new Point();
         private readonly List<Direction> Allowed;
+        private int FailureCounter { get; set; } = 0;
 
         public RandomPathGenerator()
         {
@@ -34,12 +37,22 @@ namespace Engine.Utilities
                 var notAllowed = NotAllowedDirections(previous);
                 var directions = Allowed.Except(notAllowed).ToList();
 
-                if (previous == forbidden)
+                if (FailureCounter == MaxFailureTimes)
+                {
+                    steps--;
+                    i = -1;
+                    path.Clear();
+                    previous = Direction.None;
+                    FailureCounter = 0;
+                    continue;
+                }
+                else if (previous == forbidden)
                 {
                     i = -1;
                     Current = start;
                     path.Clear();
                     previous = Direction.None;
+                    FailureCounter++;
                     continue;
                 }
                 else if (directions.Count == 0)
