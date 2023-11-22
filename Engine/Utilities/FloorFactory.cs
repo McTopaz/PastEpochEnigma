@@ -16,7 +16,7 @@ namespace Engine.Utilities
     {
         public void InitFloors(Mission mission, DifficultLevel gameDifficultLevel)
         {
-            mission.CurrentFLoor = mission.Floors.First(f => f.IsStart);
+            mission.CurrentFloor = mission.Floors.First(f => f.IsStart);
             mission.Floors = mission.Floors.Where(f => IncludeFloorsForGameDifficultLevel(f.DifficultLevel, gameDifficultLevel)).ToList();
             mission.Floors.Reverse<Floor>().Aggregate((f1, f2) => f1.Above = f2);
             mission.Floors.Aggregate((f1, f2) => f1.Below = f2);
