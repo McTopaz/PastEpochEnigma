@@ -206,17 +206,40 @@ namespace Terminal.Screens
             var list = new List<string>();
             for (int i = 0; i < 16; i++)
             {
-                var item = roomsOnLine.FirstOrDefault(r => r.Position.X == i, new Room()).Item;
-                var icon = GetIconForItem(item);
+                var room = roomsOnLine.FirstOrDefault(r => r.Position.X == i, new Room());
+                var icon = "  ";
+
+                if (room.IsStart || room.IsEnd)
+                {
+                    icon = GetIconForFlaggedRoom(room);
+                }
+                else if (room.HasItem)
+                {
+                    icon = GetIconForItem(room.Item);
+                }
+
                 list.Add(icon);
             }
             return list;
         }
 
+        private string GetIconForFlaggedRoom(Room room)
+        {
+            var icon = string.Empty;
+            if (room.IsStart) icon = "\U0001F6AA";
+            else icon = ArrowsIcons.AngledUpRight;
+
+            icon = icon.Length == 2 ? icon : icon.PadRight(2);
+            return icon;
+        }
+
         private string GetIconForItem(Item item)
         {
+            var icon = string.Empty;
             if (item == Item.KeycardOperator) return "\U0001F511";
-            else return "  ";
+
+            icon = icon.Length == 2 ? icon : icon.PadRight(1);
+            return icon;
         }
     }
 }
