@@ -72,18 +72,5 @@ namespace Engine.Utilities
             floor.Rooms.Reverse<Room>().Aggregate((r1, r2) => r1.Previous = r2);
             floor.Rooms.Aggregate((r1, r2) => r1.Next = r2);
         }
-
-        private void PrintRooms(List<Room> rooms)
-        {
-            foreach (var room in rooms)
-            {
-                if (room.IsStart) Console.WriteLine("Start");
-                if (room.IsIntermediate) Console.WriteLine("\tIntermediate");
-                if (room.IsDark) Console.WriteLine("Dark");
-                if (room.HasItem) Console.WriteLine(room.Item?.ToString());
-                if (room.HasLockedDoor) Console.WriteLine("Locked door");
-                if (room.IsEnd) Console.WriteLine("End");
-            }
-        }
     }
 }
