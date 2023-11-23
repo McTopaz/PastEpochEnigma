@@ -8,6 +8,7 @@ namespace Engine.Enums
 {
     public enum Item
     {
+        None,
         Flashlight,
         KeycardOperator,
         KeycardManager,
