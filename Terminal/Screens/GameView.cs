@@ -226,7 +226,7 @@ namespace Terminal.Screens
         private string GetIconForFlaggedRoom(Room room)
         {
             var icon = string.Empty;
-            if (room.IsStart) icon = "\U0001F6AA";
+            if (room.IsStart) icon = RoomIcons.GoalFlag;
             else icon = ArrowsIcons.AngledUpRight;
 
             icon = icon.Length == 2 ? icon : icon.PadRight(2);
