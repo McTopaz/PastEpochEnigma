@@ -56,6 +56,7 @@ namespace Terminal
             Container.Register<Options>();
             Container.Register<Introduction>();
             Container.Register<Briefing>();
+            Container.Register<GameView>();
 
             Container.Verify();
         }
@@ -93,11 +94,12 @@ namespace Terminal
 
             if (screen.StartGame)
             {
+                SetupGame(game);
                 MainGameLoop(game);
             }
         }
 
-        private static void MainGameLoop(Game game)
+        private static void SetupGame(Game game)
         {
             var mission = game.GetCurrentMission();
             var floorFactory = Container.GetInstance<FloorFactory>();
@@ -107,12 +109,20 @@ namespace Terminal
             floorFactory.InitFloors(mission, game.Settings.DifficultLevel);
             roomGenerator.CreateRoomsForMissionFloors(mission, game.Settings.DifficultLevel);
             floorPlanFactory.CreateFloorPlans(mission);
+        }
 
+        private static void MainGameLoop(Game game)
+        {
+            var gameView = Container.GetInstance<GameView>();
 
-            //while(true)
-            //{
+            while (true)
+            {
+                var mission = game.GetCurrentMission();
+                var floor = mission.CurrentFloor;
+                var rooms = floor.Rooms;
 
-            //}
+                gameView.Show(rooms);
+            }
         }
     }
 }
