@@ -21,7 +21,7 @@ namespace Engine.Models
         public bool IsIntermediate { get; set; } = false;
         public bool HasLockedDoor { get; set; } = false;
         public bool HasItem => Item != Item.None;
-        public bool HasDoorKey => DoorKey != Item.None;
+        public bool HasDoorKey => Item == Item.KeycardOperator || Item == Item.KeycardManager || Item == Item.KeycardAdministrator;
         public Room? Previous { get; set; }
         public Room? Next { get; set; }
         public Point Position { get; set; } = new Point();
