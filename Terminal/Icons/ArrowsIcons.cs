@@ -10,5 +10,7 @@ namespace Terminal.Icons
     {
         public const string Up = "\u2191";
         public const string Down = "\u2193";
+        public const string AngledUpRight = "\u2197";
+        public const string AngledDownLeft = "\u2197";
     }
 }
