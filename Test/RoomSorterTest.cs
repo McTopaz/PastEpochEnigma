@@ -19,7 +19,7 @@ namespace Test
             {
                 PredeterminedRooms = new List<Room>
                 {
-                    new Room { HasDoorKey = true, Item = Key1, Name = "K" },
+                    new Room { Item = Key1, Name = "K" },
                     new Room { HasLockedDoor = true, DoorKey = Key1, Name = "L" }
                 }
             };
@@ -40,7 +40,7 @@ namespace Test
                 PredeterminedRooms = new List<Room>
                 {
                     new Room { HasLockedDoor = true, DoorKey = Key1, Name = "L" },
-                    new Room { HasDoorKey = true, Item = Key1, Name = "K" }
+                    new Room { Item = Key1, Name = "K" }
                 }
             };
 
@@ -55,7 +55,7 @@ namespace Test
         [TestMethod]
         public void Shuffle_Key_Lock_returns_KeyBeforeLock()
         {
-            var k = new Room { HasDoorKey = true, Item = Key1, Name = "K" };
+            var k = new Room { Item = Key1, Name = "K" };
             var l = new Room { HasLockedDoor = true, DoorKey = Key1, Name = "L" };
 
             var keys = new List<Room> { k };
@@ -71,8 +71,8 @@ namespace Test
         [TestMethod]
         public void Shuffle_K1_K2_L1_L2_L3_L4_L5_returns_KeyBeforeLocks()
         {
-            var k1 = new Room { HasDoorKey = true, Item = Key1, Name = "K1" };
-            var k2 = new Room { HasDoorKey = true, Item = Key2, Name = "K2" };
+            var k1 = new Room { Item = Key1, Name = "K1" };
+            var k2 = new Room { Item = Key2, Name = "K2" };
             var l1 = new Room { HasLockedDoor = true, DoorKey = Key1, Name = "L1" };
             var l2 = new Room { HasLockedDoor = true, DoorKey = Key1, Name = "L2" };
             var l3 = new Room { HasLockedDoor = true, DoorKey = Key2, Name = "L3" };
@@ -105,9 +105,9 @@ namespace Test
         [TestMethod]
         public void Shuffle_K1_K2_K3_L1_L2_L3_L4_L5_L6_L7_returns_KeysBeforeLocks()
         {
-            var k1 = new Room { HasDoorKey = true, Item = Key1, Name = "K1" };
-            var k2 = new Room { HasDoorKey = true, Item = Key2, Name = "K2" };
-            var k3 = new Room { HasDoorKey = true, Item = Key3, Name = "K3" };
+            var k1 = new Room { Item = Key1, Name = "K1" };
+            var k2 = new Room { Item = Key2, Name = "K2" };
+            var k3 = new Room { Item = Key3, Name = "K3" };
             var l1 = new Room { HasLockedDoor = true, DoorKey = Key3, Name = "L1" };
             var l2 = new Room { HasLockedDoor = true, DoorKey = Key1, Name = "L2" };
             var l3 = new Room { HasLockedDoor = true, DoorKey = Key2, Name = "L3" };
@@ -147,7 +147,7 @@ namespace Test
         [TestMethod]
         public void Shuffle_Key_NoLock_return()
         {
-            var k = new Room { HasDoorKey = true, Item = Key1, Name = "K" };
+            var k = new Room { Item = Key1, Name = "K" };
 
             var keys = new List<Room> { k };
             var locks = new List<Room>();
