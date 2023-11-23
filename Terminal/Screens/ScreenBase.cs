@@ -99,7 +99,7 @@ namespace Terminal.Screens
             var version = $"V{ApplicationVersion()}";
             DisplayAlignedContentAtSides(author, version);
         }
-        private string ApplicationVersion()
+        protected string ApplicationVersion()
         {
             var assembly = Assembly.GetExecutingAssembly();
             var info = FileVersionInfo.GetVersionInfo(assembly.Location);
