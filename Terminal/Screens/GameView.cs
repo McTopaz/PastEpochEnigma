@@ -14,27 +14,91 @@ namespace Terminal.Screens
 {
     internal class GameView : ScreenBase
     {
-        private List<Room> _rooms = new List<Room>();
+        private const int RoomWidth = 5;
+        private const int RoomHeight = 3;
+
+        private Floor _floor;
+        private Dictionary<Point, Room> _rooms = new Dictionary<Point, Room>();
+        private Point Start = new Point();
+        private Point End = new Point();
+        private Size Size = new Size();
+        private string LeftMargin;
+        private (Point position, bool presence)[][] Grid;
 
         public override void Show()
         {
             Console.Clear();
 
             DisplayGameHeader();
-            DisplayRooms(_rooms);
+            //DisplayRooms(_rooms);
+            DisplayRoomGrid();
             Console.WriteLine();
             TakeInput();
         }
 
-        public void Show(List<Room> rooms)
+        public void Show(Floor floor, List<Room> rooms)
         {
-            _rooms = rooms;
+            _floor = floor;
+            _rooms = rooms.ToDictionary(k => k.Position, v => v);
+            CalculateActualFloorSize();
             Show();
         }
 
         protected override void ExecuteCommand(ConsoleKeyInfo input)
         {
             
+        }
+
+        private void CalculateActualFloorSize()
+        {
+            var minX = _rooms.Values.Min(r => r.Position.X);
+            var minY = _rooms.Values.Min(r => r.Position.Y);
+            var maxX = _rooms.Values.Max(r => r.Position.X);
+            var maxY = _rooms.Values.Max(r => r.Position.Y);
+
+            Start = new Point(minX, minY);
+            End = new Point(maxX, maxY);
+            Size = new Size((maxX - minX) + 1, (maxY - minY) + 1);
+
+            CalculateLeftMargin();
+            CalculateGrid();
+            AddRoomPresenceToGrid();
+        }
+
+        private void CalculateLeftMargin()
+        {
+            var numberOfRooms = Size.Width;
+            var totalRoomsWidth = numberOfRooms * RoomWidth;
+            var numberOfRoomDividers = numberOfRooms - 1;
+            var ends = 2;
+            var count = (Width - totalRoomsWidth - numberOfRoomDividers - ends) / 2;
+            LeftMargin = new string('*', count);
+        }
+
+        private void CalculateGrid()
+        {
+            Grid = new (Point, bool)[Size.Height][];
+
+            for (int y = 0; y < Size.Height; y++)
+            {
+                Grid[y] = new (Point, bool)[Size.Width];
+
+                for (int x = 0; x < Size.Width; x++)
+                {
+                    Grid[y][x].position = new Point(x, y);
+                    Grid[y][x].presence = false;
+                }
+            }
+        }
+
+        private void AddRoomPresenceToGrid()
+        {
+            foreach (var room in _rooms.Values)
+            {
+                var x = room.Position.X - Start.X;
+                var y = room.Position.Y - Start.Y;
+                Grid[y][x].presence = true;
+            }
         }
 
         private void DisplayGameHeader()
@@ -116,6 +180,170 @@ namespace Terminal.Screens
                 BoxIcons.RightLowerCorner,
                 OuterMargin
             );
+        }
+
+        private void DisplayRoomGrid()
+        {
+            DrawTopLine();
+
+            for (int y = 0; y < Size.Height; y++)
+            {
+                DrawRoomsForRow(y);
+            }
+
+            DrawBottomLine();
+        }
+
+        private void DrawTopLine()
+        {
+            Console.Write(LeftMargin);
+
+            for(int x = 0; x < Size.Width; x++)
+            {
+                var cell = Grid[0][x];
+
+                if (cell.presence)
+                {
+                    DrawCellTop(x);
+                }
+                else
+                {
+                    DrawNoCellTop(x);
+                }
+            }
+
+            DrawTopEnd();
+        }
+
+        private bool HasNeighbourCell(int y, int x)
+        {
+            return x >= 0 && x < Grid[y].Length && Grid[y][x].presence;
+        }
+
+
+        private void DrawCellTop(int x)
+        {
+            var hasLeftNeighbour = HasNeighbourCell(0, x - 1);
+            var left = hasLeftNeighbour ? BoxIcons.TopTCrossing : BoxIcons.LeftUpperCorner;
+            var line = string.Concat(Enumerable.Repeat(BoxIcons.HorizontalLine, RoomWidth));
+            Console.Write(left + line);
+        }
+
+        private void DrawNoCellTop(int x)
+        {
+            var hasLeftNeighbour = HasNeighbourCell(0, x - 1);
+            var left = hasLeftNeighbour ? BoxIcons.RightUpperCorner: " ";
+            var line = new string(' ', RoomWidth);
+            Console.Write(left + line);
+        }
+
+        private void DrawTopEnd()
+        {
+            var end = Grid[0][Size.Width - 1].presence ? BoxIcons.RightUpperCorner : " ";
+            Console.WriteLine(end);
+        }
+
+        private void DrawRoomsForRow(int y)
+        {
+            DrawRoomEmptyLine(y);
+            DrawRoomItemLine(y);
+            DrawRoomEmptyLine(y);
+
+            // Divier.
+            if (y >= 0 && y < Size.Height - 1)
+            {
+                DrawDividerLine(y);
+            }
+        }
+
+        private void DrawRoomEmptyLine(int y)
+        {
+            Console.Write(LeftMargin);
+
+            for (int x = 0; x < Size.Width; x++)
+            {
+                var hasLeftNeighbour = HasNeighbourCell(y, x - 1);
+                var isPresent = Grid[y][x].presence;
+                var left = !isPresent && !hasLeftNeighbour ? " " : BoxIcons.VerticalLine;
+                var line = new string(' ', RoomWidth);
+                Console.Write(left + line);
+            }
+
+            var end = Grid[y][Size.Width - 1].presence ? BoxIcons.VerticalLine : " ";
+            Console.WriteLine(end);
+        }
+
+        private void DrawRoomItemLine(int y)
+        {
+            Console.Write(LeftMargin);
+
+            for (int x = 0; x < Size.Width; x++)
+            {
+                var hasLeftNeighbour = HasNeighbourCell(y, x - 1);
+                var isPresent = Grid[y][x].presence;
+                var left = !isPresent && !hasLeftNeighbour ? " " : BoxIcons.VerticalLine;
+                var item = isPresent ? "r" : "n";
+                var count = (RoomWidth - item.Length) / 2;
+                var margin = new string(' ', count);
+                var line = $"{margin}{item}{margin}";
+                line.PadRight(RoomWidth);
+                Console.Write(left + line);
+            }
+
+            var end = Grid[y][Size.Width - 1].presence ? BoxIcons.VerticalLine : " ";
+            Console.WriteLine(end);
+        }
+
+        private void DrawDividerLine(int y)
+        {
+            Console.WriteLine(LeftMargin + "Divider");
+        }
+
+        private void DrawBottomLine()
+        {
+            Console.Write(LeftMargin);
+
+            var y = Size.Height - 1;
+            for (int x = 0; x < Size.Width; x++)
+            {
+                var cell = Grid[y][x];
+
+                if (cell.presence)
+                {
+                    DrawCellBottom(x);
+                }
+                else
+                {
+                    DrawNoCellBottom(x);
+                }
+            }
+
+            DrawBottomEnd();
+        }
+
+        private void DrawCellBottom(int x)
+        {
+            var y = Size.Height - 1;
+            var hasLeftNeighbour = HasNeighbourCell(y, x - 1);
+            var left = hasLeftNeighbour ? BoxIcons.BottomTCrossing : BoxIcons.LeftLowerCorner;
+            var line = string.Concat(Enumerable.Repeat(BoxIcons.HorizontalLine, RoomWidth));
+            Console.Write(left + line);
+        }
+
+        private void DrawNoCellBottom(int x)
+        {
+            var y = Size.Height - 1;
+            var hasLeftNeighbour = HasNeighbourCell(y, x - 1);
+            var left = hasLeftNeighbour ? BoxIcons.RightLowerCorner : " ";
+            var line = new string(' ', RoomWidth);
+            Console.Write(left + line);
+        }
+
+        private void DrawBottomEnd()
+        {
+            var y = Size.Height - 1;
+            var end = Grid[y][Size.Width - 1].presence ? BoxIcons.RightLowerCorner : " ";
+            Console.WriteLine(end);
         }
 
         private void DisplayRooms(List<Room> rooms)
