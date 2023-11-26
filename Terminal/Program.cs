@@ -121,7 +121,7 @@ namespace Terminal
                 var floor = mission.CurrentFloor;
                 var rooms = floor.Rooms;
 
-                gameView.Show(rooms);
+                gameView.Show(floor, rooms);
             }
         }
     }
