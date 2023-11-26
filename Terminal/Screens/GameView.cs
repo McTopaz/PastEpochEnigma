@@ -316,6 +316,7 @@ namespace Terminal.Screens
             }
             else if (room.IsStart) content = RoomIcons.Start;
             else if (room.IsEnd) content = RoomIcons.Up;
+            else if (room.IsDark) content = RoomIcons.QuestionMark;
             else content = "";
 
             return content;
