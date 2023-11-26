@@ -13,5 +13,8 @@ namespace Terminal.Icons
         public const string Spy = "\U0001F574";
         public const string Guard = "\U0001F482";
         public const string Document = "\U0001F5C9";
+        public const string Start = "START";
+        public const string Up = "UP";
+        public const string Down = "DOWN";
     }
 }
