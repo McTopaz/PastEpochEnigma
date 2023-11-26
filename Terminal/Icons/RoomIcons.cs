@@ -16,5 +16,6 @@ namespace Terminal.Icons
         public const string Start = "START";
         public const string Up = "UP";
         public const string Down = "DOWN";
+        public const string QuestionMark = "\u003F";
     }
 }
