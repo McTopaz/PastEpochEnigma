@@ -6,8 +6,10 @@ using System.Linq;
 using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
+
 using Engine.Enums;
 using Engine.Models;
+
 using Terminal.Icons;
 
 namespace Terminal.Screens
@@ -72,7 +74,7 @@ namespace Terminal.Screens
             var numberOfRoomDividers = numberOfRooms - 1;
             var ends = 2;
             var count = (Width - totalRoomsWidth - numberOfRoomDividers - ends) / 2;
-            LeftMargin = new string('*', count);
+            LeftMargin = new string(' ', count);
         }
 
         private void CalculateGrid()
@@ -296,7 +298,60 @@ namespace Terminal.Screens
 
         private void DrawDividerLine(int y)
         {
-            Console.WriteLine(LeftMargin + "Divider");
+            Console.Write(LeftMargin);
+            var dashes = string.Concat(Enumerable.Repeat(BoxIcons.HorizontalLine, RoomWidth));
+            var empty = new string(' ', RoomWidth);
+
+            for (int x = 0; x < Size.Width; x++)
+            {
+                var hasLeftNeighbourAbove = HasNeighbourCell(y, x - 1);
+                var hasLeftNeighbourBelow = HasNeighbourCell(y + 1, x - 1);
+                var above = Grid[y][x].presence;
+                var below = Grid[y + 1][x].presence;
+                var left = "";
+                var line = "";
+
+                if (hasLeftNeighbourAbove && hasLeftNeighbourBelow)
+                {
+                    if (!above && !below) left = BoxIcons.RightTCrossing;
+                    else left = BoxIcons.Cross;
+                    line = !above && !below ? empty : dashes;
+                }
+                else if (hasLeftNeighbourAbove && !hasLeftNeighbourBelow)
+                {
+                    if (!above && !below) left = BoxIcons.RightLowerCorner;
+                    else if (above && !below) left = BoxIcons.BottomTCrossing;
+                    else left = BoxIcons.Cross;
+                    line = !above && !below ? empty : dashes;
+                }
+                else if (!hasLeftNeighbourAbove && hasLeftNeighbourBelow)
+                {
+                    if (!above && !below) left = BoxIcons.RightUpperCorner;
+                    else if (!above && below) left = BoxIcons.TopTCrossing;
+                    else left = BoxIcons.Cross;
+                    line = !above && !below ? empty : dashes;
+                }
+                else
+                {
+                    if (!above && !below) left = " ";
+                    else if (!above && below) left = BoxIcons.LeftUpperCorner;
+                    else if (above && !below) left = BoxIcons.LeftLowerCorner;
+                    else if (above && below) left = BoxIcons.LeftTCrossing;
+                    line = above || below ? dashes : empty;
+                }
+
+                Console.Write(left + line);
+            }
+
+            var end = "";
+            var endAbove = Grid[y][Size.Width - 1].presence;
+            var endBelow = Grid[y + 1][Size.Width - 1].presence;
+
+            if (!endAbove && endBelow) end = BoxIcons.RightUpperCorner;
+            else if (endAbove && !endBelow) end = BoxIcons.RightLowerCorner;
+            else if (endAbove && endBelow) end = BoxIcons.RightTCrossing;
+
+            Console.WriteLine(end);
         }
 
         private void DrawBottomLine()
