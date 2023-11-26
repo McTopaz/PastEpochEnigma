@@ -32,7 +32,6 @@ namespace Terminal.Screens
             Console.Clear();
 
             DisplayGameHeader();
-            //DisplayRooms(_rooms);
             DisplayRoomGrid();
             Console.WriteLine();
             TakeInput();
@@ -399,88 +398,6 @@ namespace Terminal.Screens
             var y = Size.Height - 1;
             var end = Grid[y][Size.Width - 1].presence ? BoxIcons.RightLowerCorner : " ";
             Console.WriteLine(end);
-        }
-
-        private void DisplayRooms(List<Room> rooms)
-        {
-            var cellLine = string.Concat(Enumerable.Repeat(BoxIcons.HorizontalLine, 5));
-            var topLine = string.Join(BoxIcons.TopTCrossing, Enumerable.Repeat(cellLine, 16));
-            var bottomLine = string.Join(BoxIcons.BottomTCrossing, Enumerable.Repeat(cellLine, 16));
-
-            // Top line.
-            DisplayCustomLine
-            (
-                OuterMargin,
-                BoxIcons.LeftUpperCorner,
-                topLine,
-                BoxIcons.RightUpperCorner,
-                OuterMargin
-            );
-
-            var cellSpace = cellLine.Replace(BoxIcons.HorizontalLine, " ");
-            var emptyCellsLine = string.Join(BoxIcons.VerticalLine, Enumerable.Repeat(cellSpace, 16));
-            var itemCellsLine = string.Join("#", Enumerable.Repeat(cellSpace, 16));
-            var lineDivider = topLine.Replace(BoxIcons.TopTCrossing, BoxIcons.Cross);
-
-            for (int i = 0; i < 5; i++)
-            {
-                // Empty top line.
-                DisplayCustomLine
-                (
-                    OuterMargin,
-                    BoxIcons.VerticalLine,
-                    emptyCellsLine,
-                    BoxIcons.VerticalLine,
-                    OuterMargin
-                );
-
-                var items = GetItemsForLineNumber(i, rooms);
-                var cellItems = items.Select(s => $"  {s} ");
-                var itemLine = string.Join(BoxIcons.VerticalLine, cellItems);
-
-                // Item line.
-                DisplayCustomLine
-                (
-                    OuterMargin,
-                    BoxIcons.VerticalLine,
-                    itemLine,
-                    BoxIcons.VerticalLine,
-                    OuterMargin
-                );
-
-                // Empty bottom line.
-                DisplayCustomLine
-                (
-                    OuterMargin,
-                    BoxIcons.VerticalLine,
-                    emptyCellsLine,
-                    BoxIcons.VerticalLine,
-                    OuterMargin
-                );
-
-                if (i < 4)
-                {
-                    // Lower cell line
-                    DisplayCustomLine
-                    (
-                        OuterMargin,
-                        BoxIcons.LeftTCrossing,
-                        lineDivider,
-                        BoxIcons.RightTCrossing,
-                        OuterMargin
-                    );
-                }
-            }
-
-            // Bottom line.
-            DisplayCustomLine
-            (
-                OuterMargin,
-                BoxIcons.LeftLowerCorner,
-                bottomLine,
-                BoxIcons.RightLowerCorner,
-                OuterMargin
-            );
         }
 
         private List<string> GetItemsForLineNumber(int lineNumber, List<Room> rooms)
