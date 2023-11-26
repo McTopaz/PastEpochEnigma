@@ -284,15 +284,27 @@ namespace Terminal.Screens
                 var hasLeftNeighbour = HasNeighbourCell(y, x - 1);
                 var isPresent = cell.presence;
                 var left = !isPresent && !hasLeftNeighbour ? " " : BoxIcons.VerticalLine;
-                var content = isPresent ? GetRoomContent(cell.Room) : " ";
-                var line = $"  {content}";
-                line = line.PadRight(RoomWidth);
-                line.PadRight(RoomWidth);
+                var line = GetContentLine(cell.Room);
                 Console.Write(left + line);
             }
 
             var end = Grid[y][Size.Width - 1].presence ? BoxIcons.VerticalLine : " ";
             Console.WriteLine(end);
+        }
+
+
+
+        private string GetContentLine(Room? room)
+        {
+            if (room == null) return new string(' ', RoomWidth);
+
+            var content = GetRoomContent(room);
+            if (content.Length == 1) return $"  {content}  ";
+            if (content.Length == 2) return $"  {content} ";
+            if (content.Length == 3) return $" {content} ";
+            if (content.Length == 4) return $" {content}";
+            if (content.Length == 5) return $"{content}";
+            else return new string(' ', RoomWidth);
         }
 
         private string GetRoomContent(Room room)
@@ -302,11 +314,11 @@ namespace Terminal.Screens
             {
                 if (room.Item == Item.KeycardOperator) content = "\U0001F511";
             }
-            else if (room.IsStart) content = RoomIcons.GoalFlag;
-            else if (room.IsEnd) content = ArrowsIcons.AngledUpRight;
+            else if (room.IsStart) content = RoomIcons.Start;
+            else if (room.IsEnd) content = RoomIcons.Up;
             else content = "";
 
-            return content.PadRight(2);
+            return content;
         }
 
         private void DrawDividerLine(int y)
