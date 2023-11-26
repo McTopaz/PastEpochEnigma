@@ -283,7 +283,12 @@ namespace Terminal.Screens
                 var cell = Grid[y][x];
                 var hasLeftNeighbour = HasNeighbourCell(y, x - 1);
                 var isPresent = cell.presence;
-                var left = !isPresent && !hasLeftNeighbour ? " " : BoxIcons.VerticalLine;
+                var left = "";
+                
+                if (!isPresent && !hasLeftNeighbour) left = " ";
+                else if (isPresent && hasLeftNeighbour && cell.Room.Direction == Direction.Right) left = " ";
+                else left = BoxIcons.VerticalLine;
+
                 var line = GetContentLine(cell.Room);
                 Console.Write(left + line);
             }
