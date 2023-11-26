@@ -288,7 +288,6 @@ namespace Terminal.Screens
                 if (!isPresent && !hasLeftNeighbour) left = " ";
                 else if (isPresent && hasLeftNeighbour && cell.Room.Direction == Direction.Right) left = " ";
                 else left = BoxIcons.VerticalLine;
-
                 var line = GetContentLine(cell.Room);
                 Console.Write(left + line);
             }
@@ -296,8 +295,6 @@ namespace Terminal.Screens
             var end = Grid[y][Size.Width - 1].presence ? BoxIcons.VerticalLine : " ";
             Console.WriteLine(end);
         }
-
-
 
         private string GetContentLine(Room? room)
         {
@@ -369,6 +366,16 @@ namespace Terminal.Screens
                     else if (above && !below) left = BoxIcons.LeftLowerCorner;
                     else if (above && below) left = BoxIcons.LeftTCrossing;
                     line = above || below ? dashes : empty;
+                }
+
+                var cell = Grid[y][x];
+
+                if (cell.Room?.Direction == Direction.Up)
+                {
+                    var index = dashes.Length / 2;
+                    var sb = new StringBuilder(line);
+                    sb[index] = ' ';
+                    line = sb.ToString();
                 }
 
                 Console.Write(left + line);
