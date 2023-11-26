@@ -25,7 +25,7 @@ namespace Terminal.Screens
         private Point End = new Point();
         private Size Size = new Size();
         private string LeftMargin;
-        private (Point position, bool presence)[][] Grid;
+        private (Room Room, bool presence)[][] Grid;
 
         public override void Show()
         {
@@ -78,15 +78,14 @@ namespace Terminal.Screens
 
         private void CalculateGrid()
         {
-            Grid = new (Point, bool)[Size.Height][];
+            Grid = new (Room, bool)[Size.Height][];
 
             for (int y = 0; y < Size.Height; y++)
             {
-                Grid[y] = new (Point, bool)[Size.Width];
+                Grid[y] = new (Room, bool)[Size.Width];
 
                 for (int x = 0; x < Size.Width; x++)
                 {
-                    Grid[y][x].position = new Point(x, y);
                     Grid[y][x].presence = false;
                 }
             }
@@ -99,6 +98,7 @@ namespace Terminal.Screens
                 var x = room.Position.X - Start.X;
                 var y = room.Position.Y - Start.Y;
                 Grid[y][x].presence = true;
+                Grid[y][x].Room = room;
             }
         }
 
@@ -280,19 +280,33 @@ namespace Terminal.Screens
 
             for (int x = 0; x < Size.Width; x++)
             {
+                var cell = Grid[y][x];
                 var hasLeftNeighbour = HasNeighbourCell(y, x - 1);
-                var isPresent = Grid[y][x].presence;
+                var isPresent = cell.presence;
                 var left = !isPresent && !hasLeftNeighbour ? " " : BoxIcons.VerticalLine;
-                var item = isPresent ? "r" : "n";
-                var count = (RoomWidth - item.Length) / 2;
-                var margin = new string(' ', count);
-                var line = $"{margin}{item}{margin}";
+                var content = isPresent ? GetRoomContent(cell.Room) : " ";
+                var line = $"  {content}";
+                line = line.PadRight(RoomWidth);
                 line.PadRight(RoomWidth);
                 Console.Write(left + line);
             }
 
             var end = Grid[y][Size.Width - 1].presence ? BoxIcons.VerticalLine : " ";
             Console.WriteLine(end);
+        }
+
+        private string GetRoomContent(Room room)
+        {
+            var content = "";
+            if (room.HasItem)
+            {
+                if (room.Item == Item.KeycardOperator) content = "\U0001F511";
+            }
+            else if (room.IsStart) content = RoomIcons.GoalFlag;
+            else if (room.IsEnd) content = ArrowsIcons.AngledUpRight;
+            else content = "";
+
+            return content.PadRight(2);
         }
 
         private void DrawDividerLine(int y)
@@ -398,48 +412,6 @@ namespace Terminal.Screens
             var y = Size.Height - 1;
             var end = Grid[y][Size.Width - 1].presence ? BoxIcons.RightLowerCorner : " ";
             Console.WriteLine(end);
-        }
-
-        private List<string> GetItemsForLineNumber(int lineNumber, List<Room> rooms)
-        {
-            var roomsOnLine = rooms.Where(r => r.Position.Y == lineNumber);
-            var list = new List<string>();
-            for (int i = 0; i < 16; i++)
-            {
-                var room = roomsOnLine.FirstOrDefault(r => r.Position.X == i, new Room());
-                var icon = "  ";
-
-                if (room.IsStart || room.IsEnd)
-                {
-                    icon = GetIconForFlaggedRoom(room);
-                }
-                else if (room.HasItem)
-                {
-                    icon = GetIconForItem(room.Item);
-                }
-
-                list.Add(icon);
-            }
-            return list;
-        }
-
-        private string GetIconForFlaggedRoom(Room room)
-        {
-            var icon = string.Empty;
-            if (room.IsStart) icon = RoomIcons.GoalFlag;
-            else icon = ArrowsIcons.AngledUpRight;
-
-            icon = icon.Length == 2 ? icon : icon.PadRight(2);
-            return icon;
-        }
-
-        private string GetIconForItem(Item item)
-        {
-            var icon = string.Empty;
-            if (item == Item.KeycardOperator) return "\U0001F511";
-
-            icon = icon.Length == 2 ? icon : icon.PadRight(1);
-            return icon;
         }
     }
 }
