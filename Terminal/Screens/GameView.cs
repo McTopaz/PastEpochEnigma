@@ -374,7 +374,9 @@ namespace Terminal.Screens
                 {
                     var index = dashes.Length / 2;
                     var sb = new StringBuilder(line);
+                    sb[index - 1] = ' ';
                     sb[index] = ' ';
+                    sb[index + 1] = ' ';
                     line = sb.ToString();
                 }
 
