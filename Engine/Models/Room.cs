@@ -25,11 +25,11 @@ namespace Engine.Models
         public Room? Previous { get; set; }
         public Room? Next { get; set; }
         public Point Position { get; set; } = new Point();
-        public Direction Direction { get; set; } = Direction.None;
+        public Direction Into { get; set; } = Direction.None;
 
         public Item Item { get; set; } = Item.None;
         public Item DoorKey { get; set; } = Item.None;
 
-        public override string ToString() => $"{Name} [{Position.X}:{Position.Y}] {Direction}";
+        public override string ToString() => $"{Name} [{Position.X}:{Position.Y}] Into: {Into}";
     }
 }

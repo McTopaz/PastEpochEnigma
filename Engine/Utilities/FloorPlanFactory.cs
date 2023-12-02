@@ -87,7 +87,7 @@ namespace Engine.Utilities
             var steps = floor.Rooms.Count - 1;
             var path = _randomPathGenerator.Generate(size, start, steps, floor.ForbiddenDirection);
 
-            floor.Path.Add(new(firstRoom.Direction, firstRoom.Position));
+            floor.Path.Add(new(firstRoom.Into, firstRoom.Position));
             floor.Path.AddRange(path);
         }
 
@@ -119,10 +119,10 @@ namespace Engine.Utilities
             var diffX = path.Position.X - room.Position.X;
             var diffY = path.Position.Y - room.Position.Y;
 
-            if (diffX < 0 && diffY == 0) room.Direction = Direction.Left;
-            else if (diffX > 0 && diffX == 0) room.Direction = Direction.Right;
-            else if (diffY < 0 && diffX == 0) room.Direction = Direction.Up;
-            else if (diffY > 0 && diffX == 0) room.Direction = Direction.Down;
+            if (diffX < 0 && diffY == 0) room.Into = Direction.Left;
+            else if (diffX > 0 && diffX == 0) room.Into = Direction.Right;
+            else if (diffY < 0 && diffX == 0) room.Into = Direction.Up;
+            else if (diffY > 0 && diffX == 0) room.Into = Direction.Down;
         }
 
         private void MergeRoomsWithPath(Floor floor)
@@ -132,7 +132,7 @@ namespace Engine.Utilities
                 var room = floor.Rooms[i];
                 var path = floor.Path[i];
 
-                room.Direction = path.Direction;
+                room.Into = path.Direction;
                 room.Position = path.Position;
             }
         }

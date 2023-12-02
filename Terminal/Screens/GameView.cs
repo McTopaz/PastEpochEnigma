@@ -286,7 +286,7 @@ namespace Terminal.Screens
                 var left = "";
                 
                 if (!isPresent && !hasLeftNeighbour) left = " ";
-                else if (isPresent && hasLeftNeighbour && cell.Room.Direction == Direction.Right) left = " ";
+                else if (isPresent && hasLeftNeighbour && cell.Room.Into == Direction.Right) left = " ";
                 else left = BoxIcons.VerticalLine;
                 var line = GetContentLine(cell.Room);
                 Console.Write(left + line);
@@ -370,7 +370,7 @@ namespace Terminal.Screens
 
                 var cell = Grid[y][x];
 
-                if (cell.Room?.Direction == Direction.Up)
+                if (cell.Room?.Into == Direction.Up)
                 {
                     var index = dashes.Length / 2;
                     var sb = new StringBuilder(line);
