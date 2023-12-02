@@ -133,8 +133,17 @@ namespace Engine.Utilities
                 var path = floor.Path[i];
 
                 room.Into = path.Direction;
+                floor.Rooms[i - 1].OutOf = OppositeDirection(path.Direction);
                 room.Position = path.Position;
             }
+        }
+
+        private Direction OppositeDirection(Direction direction)
+        {
+            if (direction == Direction.Left) return Direction.Right;
+            else if (direction == Direction.Up) return Direction.Down;
+            else if (direction == Direction.Right) return Direction.Left;
+            else return Direction.Up;
         }
     }
 }
