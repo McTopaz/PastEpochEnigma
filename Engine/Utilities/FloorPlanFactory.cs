@@ -29,7 +29,6 @@ namespace Engine.Utilities
         {
             RandomStartPosition(floor);
             FloorPlanGeneration(floor);
-            FixStartRoomDirection(floor);
             MergeRoomsWithPath(floor);
         }
 
@@ -110,19 +109,6 @@ namespace Engine.Utilities
                 room.Next.Previous = room.Previous;
                 floor.Rooms.RemoveAt(index);
             }
-        }
-
-        private void FixStartRoomDirection(Floor floor)
-        {
-            var room = floor.Rooms.First();
-            var path = floor.Path[1];
-            var diffX = path.Position.X - room.Position.X;
-            var diffY = path.Position.Y - room.Position.Y;
-
-            if (diffX < 0 && diffY == 0) room.OutOf = Direction.Left;
-            else if (diffX > 0 && diffX == 0) room.OutOf = Direction.Right;
-            else if (diffY < 0 && diffX == 0) room.OutOf = Direction.Up;
-            else if (diffY > 0 && diffX == 0) room.OutOf = Direction.Down;
         }
 
         private void MergeRoomsWithPath(Floor floor)
