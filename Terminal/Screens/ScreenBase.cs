@@ -161,7 +161,7 @@ namespace Terminal.Screens
         protected virtual void TakeInput()
         {
             Console.Write($"{OuterMargin}{OuterMargin}Enter input: ");
-            var input = Console.ReadKey();
+            var input = Console.ReadKey(intercept: true);
             ExecuteCommand(input);
         }
 
