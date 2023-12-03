@@ -16,7 +16,6 @@ namespace Terminal.Screens
 {
     internal class GameView : ScreenBase
     {
-        private const int MaxRoomRows = 5;
         private const int RoomWidth = 5;
         private const int RoomHeight = 3;
         private const string Doorway = " ";
@@ -200,7 +199,7 @@ namespace Terminal.Screens
 
         private void DisplayVerticalMargin()
         {
-            var iterations = 1 + ((MaxRoomRows - Size.Height) * 2);
+            var iterations = 1 + ((_floor.Size.Height - Size.Height) * 2);
             for (int i = 0; i < iterations; i++)
             {
                 Console.WriteLine();
