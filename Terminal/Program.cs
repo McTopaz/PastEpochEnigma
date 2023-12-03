@@ -44,7 +44,7 @@ namespace Terminal
             Container.Register<Game>(Lifestyle.Singleton);
             Container.Register<Settings>(Lifestyle.Singleton);
             Container.Register<MissionLoader>(Lifestyle.Singleton);
-            Container.Register<FloorFactory>(Lifestyle.Singleton);
+            Container.Register<MissionFactory>(Lifestyle.Singleton);
             Container.Register<RoomGenerator>(Lifestyle.Singleton);
             Container.Register<RoomSorter>(Lifestyle.Singleton);
             Container.Register<FloorPlanFactory>(Lifestyle.Singleton);
@@ -102,11 +102,11 @@ namespace Terminal
         private static void SetupGame(Game game)
         {
             var mission = game.GetCurrentMission();
-            var floorFactory = Container.GetInstance<FloorFactory>();
+            var missionFactory = Container.GetInstance<MissionFactory>();
             var roomGenerator = Container.GetInstance<RoomGenerator>();
             var floorPlanFactory = Container.GetInstance<FloorPlanFactory>();
 
-            floorFactory.InitFloors(mission, game.Settings.DifficultLevel);
+            missionFactory.InitFloors(mission, game.Settings.DifficultLevel);
             roomGenerator.CreateRoomsForMissionFloors(mission, game.Settings.DifficultLevel);
             floorPlanFactory.CreateFloorPlans(mission);
         }

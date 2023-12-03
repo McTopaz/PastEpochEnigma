@@ -12,7 +12,7 @@ using Engine.Models;
 
 namespace Engine.Utilities
 {
-    public class FloorFactory
+    public class MissionFactory
     {
         public void InitFloors(Mission mission, DifficultLevel gameDifficultLevel)
         {
