@@ -19,7 +19,7 @@ namespace Engine.Models
         public bool HasBranchingRooms { get; set; } = false;
         public Awarness Awarness { get; set; } = new Awarness();
         public List<Room> Rooms { get; set; } = new List<Room>();
-        public (int X, int Y) Position { get; set; }
+        public Point Position { get; set; }
         public DifficultLevel DifficultLevel { get; set; } = DifficultLevel.Easy;
         public Floor? Above { get; set; }
         public Floor? Below { get; set; }
