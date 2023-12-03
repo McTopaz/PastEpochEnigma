@@ -27,7 +27,7 @@ namespace Terminal.Screens
         private Point End = new Point();
         private Size Size = new Size();
         private string LeftMargin;
-        private (Room Room, bool presence)[][] Grid;
+        private (Room Room, bool IsPresent)[][] Grid;
 
         public override void Show()
         {
@@ -90,7 +90,7 @@ namespace Terminal.Screens
 
                 for (int x = 0; x < Size.Width; x++)
                 {
-                    Grid[y][x].presence = false;
+                    Grid[y][x].IsPresent = false;
                 }
             }
         }
@@ -101,7 +101,7 @@ namespace Terminal.Screens
             {
                 var x = room.Position.X - Start.X;
                 var y = room.Position.Y - Start.Y;
-                Grid[y][x].presence = true;
+                Grid[y][x].IsPresent = true;
                 Grid[y][x].Room = room;
             }
         }
@@ -227,7 +227,7 @@ namespace Terminal.Screens
             {
                 var cell = Grid[0][x];
 
-                if (cell.presence)
+                if (cell.IsPresent)
                 {
                     DrawCellTop(x);
                 }
@@ -242,7 +242,7 @@ namespace Terminal.Screens
 
         private bool HasNeighbourCell(int y, int x)
         {
-            return x >= 0 && x < Grid[y].Length && Grid[y][x].presence;
+            return x >= 0 && x < Grid[y].Length && Grid[y][x].IsPresent;
         }
 
 
@@ -264,7 +264,7 @@ namespace Terminal.Screens
 
         private void DrawTopEnd()
         {
-            var end = Grid[0][Size.Width - 1].presence ? BoxIcons.RightUpperCorner : " ";
+            var end = Grid[0][Size.Width - 1].IsPresent ? BoxIcons.RightUpperCorner : " ";
             Console.WriteLine(end);
         }
 
@@ -288,13 +288,13 @@ namespace Terminal.Screens
             for (int x = 0; x < Size.Width; x++)
             {
                 var hasLeftNeighbour = HasNeighbourCell(y, x - 1);
-                var isPresent = Grid[y][x].presence;
+                var isPresent = Grid[y][x].IsPresent;
                 var left = !isPresent && !hasLeftNeighbour ? " " : BoxIcons.VerticalLine;
                 var line = new string(' ', RoomWidth);
                 Console.Write(left + line);
             }
 
-            var end = Grid[y][Size.Width - 1].presence ? BoxIcons.VerticalLine : " ";
+            var end = Grid[y][Size.Width - 1].IsPresent ? BoxIcons.VerticalLine : " ";
             Console.WriteLine(end);
         }
 
@@ -306,7 +306,7 @@ namespace Terminal.Screens
             {
                 var cell = Grid[y][x];
                 var hasLeftNeighbour = HasNeighbourCell(y, x - 1);
-                var isPresent = cell.presence;
+                var isPresent = cell.IsPresent;
                 var left = BoxIcons.VerticalLine;
 
                 if (!isPresent && !hasLeftNeighbour) left = Doorway;
@@ -319,7 +319,7 @@ namespace Terminal.Screens
                 Console.Write(left + line);
             }
 
-            var end = Grid[y][Size.Width - 1].presence ? BoxIcons.VerticalLine : " ";
+            var end = Grid[y][Size.Width - 1].IsPresent ? BoxIcons.VerticalLine : " ";
             Console.WriteLine(end);
         }
 
@@ -361,8 +361,8 @@ namespace Terminal.Screens
             {
                 var hasLeftNeighbourAbove = HasNeighbourCell(y, x - 1);
                 var hasLeftNeighbourBelow = HasNeighbourCell(y + 1, x - 1);
-                var above = Grid[y][x].presence;
-                var below = Grid[y + 1][x].presence;
+                var above = Grid[y][x].IsPresent;
+                var below = Grid[y + 1][x].IsPresent;
                 var left = "";
                 var line = "";
 
@@ -411,8 +411,8 @@ namespace Terminal.Screens
             }
 
             var end = "";
-            var endAbove = Grid[y][Size.Width - 1].presence;
-            var endBelow = Grid[y + 1][Size.Width - 1].presence;
+            var endAbove = Grid[y][Size.Width - 1].IsPresent;
+            var endBelow = Grid[y + 1][Size.Width - 1].IsPresent;
 
             if (!endAbove && endBelow) end = BoxIcons.RightUpperCorner;
             else if (endAbove && !endBelow) end = BoxIcons.RightLowerCorner;
@@ -430,7 +430,7 @@ namespace Terminal.Screens
             {
                 var cell = Grid[y][x];
 
-                if (cell.presence)
+                if (cell.IsPresent)
                 {
                     DrawCellBottom(x);
                 }
@@ -464,7 +464,7 @@ namespace Terminal.Screens
         private void DrawBottomEnd()
         {
             var y = Size.Height - 1;
-            var end = Grid[y][Size.Width - 1].presence ? BoxIcons.RightLowerCorner : " ";
+            var end = Grid[y][Size.Width - 1].IsPresent ? BoxIcons.RightLowerCorner : " ";
             Console.WriteLine(end);
         }
     }
