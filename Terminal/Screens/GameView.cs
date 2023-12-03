@@ -16,6 +16,7 @@ namespace Terminal.Screens
 {
     internal class GameView : ScreenBase
     {
+        private const int MaxRoomRows = 5;
         private const int RoomWidth = 5;
         private const int RoomHeight = 3;
         private const string Doorway = " ";
@@ -34,8 +35,9 @@ namespace Terminal.Screens
 
             DisplayGameHeader();
             DisplayFloorName();
+            DisplayVerticalMargin();
             DisplayRoomGrid();
-            Console.WriteLine();
+            DisplayVerticalMargin();
             TakeInput();
         }
 
@@ -102,17 +104,6 @@ namespace Terminal.Screens
                 Grid[y][x].presence = true;
                 Grid[y][x].Room = room;
             }
-        }
-
-        private void DisplayFloorName()
-        {
-            DisplayCustomLine
-            (
-                OuterMargin,
-                OuterMargin,
-                "Floor: ",
-                _floor.Name
-            );
         }
 
         private void DisplayGameHeader()
@@ -194,6 +185,26 @@ namespace Terminal.Screens
                 BoxIcons.RightLowerCorner,
                 OuterMargin
             );
+        }
+
+        private void DisplayFloorName()
+        {
+            DisplayCustomLine
+            (
+                OuterMargin,
+                OuterMargin,
+                "Floor: ",
+                _floor.Name
+            );
+        }
+
+        private void DisplayVerticalMargin()
+        {
+            var iterations = 1 + ((MaxRoomRows - Size.Height) * 2);
+            for (int i = 0; i < iterations; i++)
+            {
+                Console.WriteLine();
+            }
         }
 
         private void DisplayRoomGrid()
