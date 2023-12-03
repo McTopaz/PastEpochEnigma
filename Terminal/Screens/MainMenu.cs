@@ -21,6 +21,9 @@ namespace Terminal.Screens
             base.DisplayHeader();
             base.DisplayLogo(Resources.MenuLogo);
             base.DisplayEmptyLine();
+            base.DisplayContent(Engine.Resources.SubTitle);
+            base.DisplayEmptyLine();
+            base.DisplayEmptyLine();
             base.DisplayEmptyLine();
             base.DisplayLeftAlignedContent("Select option:");
             base.DisplayEmptyLine();
