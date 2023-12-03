@@ -33,6 +33,7 @@ namespace Terminal.Screens
             Console.Clear();
 
             DisplayGameHeader();
+            DisplayFloorName();
             DisplayRoomGrid();
             Console.WriteLine();
             TakeInput();
@@ -101,6 +102,17 @@ namespace Terminal.Screens
                 Grid[y][x].presence = true;
                 Grid[y][x].Room = room;
             }
+        }
+
+        private void DisplayFloorName()
+        {
+            DisplayCustomLine
+            (
+                OuterMargin,
+                OuterMargin,
+                "Floor: ",
+                _floor.Name
+            );
         }
 
         private void DisplayGameHeader()
