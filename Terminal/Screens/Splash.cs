@@ -80,7 +80,7 @@ namespace Terminal.Screens
 
         private void DisplayFooterRow(int width)
         {
-            var author = $" Created by: {Resources.Author} ";
+            var author = $" Created by: {Engine.Resources.Author} ";
             var version = $" V{ApplicationVersion()} ";
             var margin = new string('*', 4);
             var fillerCount = width - author.Length - version.Length - (margin.Length * 2);

@@ -109,7 +109,7 @@ namespace Terminal.Screens
         private void DisplayGameHeader()
         {
             var column1Margin = "   ";
-            var title = $"{column1Margin}Past Epoch Enigma{column1Margin}";
+            var title = $"{column1Margin}{Engine.Resources.Title}{column1Margin}";
             var version = ApplicationVersion();
 
             var column1Count = title.Length;

@@ -95,7 +95,7 @@ namespace Terminal.Screens
 
         protected virtual void DisplayAuthorAndVersion()
         {
-            var author = $"Created by: {Resources.Author}";
+            var author = $"Created by: {Engine.Resources.Author}";
             var version = $"V{ApplicationVersion()}";
             DisplayAlignedContentAtSides(author, version);
         }

@@ -61,15 +61,6 @@ namespace Terminal {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mc_Topaz.
-        /// </summary>
-        internal static string Author {
-            get {
-                return ResourceManager.GetString("Author", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to  __   ___ _  ___  ___ _ _  _  ___
         ///|__] |__/ | |___ |___ | |\ | | __
         ///|__] |  \ | |___ |    | | \| |__|.
@@ -159,24 +150,6 @@ namespace Terminal {
         internal static string SplashLogoVertical {
             get {
                 return ResourceManager.GetString("SplashLogoVertical", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Preventing a new world war.
-        /// </summary>
-        internal static string SubTitle {
-            get {
-                return ResourceManager.GetString("SubTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Past epoch enigma.
-        /// </summary>
-        internal static string Title {
-            get {
-                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
     }
