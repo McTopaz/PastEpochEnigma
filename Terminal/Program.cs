@@ -31,11 +31,16 @@ namespace Terminal
 
         private static void Init()
         {
-            Console.OutputEncoding = Encoding.Unicode;
-            Console.Title = $"{Engine.Resources.Title } - {Engine.Resources.SubTitle }";
-
+            InitConsole();
             InitContainer();
             InitMissions();
+        }
+
+        private static void InitConsole()
+        {
+            Console.OutputEncoding = Encoding.Unicode;
+            Console.Title = $"{Engine.Resources.Title} - {Engine.Resources.SubTitle}";
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         private static void InitContainer()
