@@ -21,7 +21,7 @@ namespace Terminal.Screens
         private const string Doorway = " ";
 
         private Floor _floor;
-        private Dictionary<Point, Room> _rooms = new Dictionary<Point, Room>();
+        private List<Room> _rooms = new List<Room>();
         private Point Start = new Point();
         private Point End = new Point();
         private Size Size = new Size();
@@ -43,7 +43,7 @@ namespace Terminal.Screens
         public void Show(Floor floor, List<Room> rooms)
         {
             _floor = floor;
-            _rooms = rooms.ToDictionary(k => k.Position, v => v);
+            _rooms = rooms;
             CalculateActualFloorSize();
             Show();
         }
@@ -55,10 +55,10 @@ namespace Terminal.Screens
 
         private void CalculateActualFloorSize()
         {
-            var minX = _rooms.Values.Min(r => r.Position.X);
-            var minY = _rooms.Values.Min(r => r.Position.Y);
-            var maxX = _rooms.Values.Max(r => r.Position.X);
-            var maxY = _rooms.Values.Max(r => r.Position.Y);
+            var minX = _rooms.Min(r => r.Position.X);
+            var minY = _rooms.Min(r => r.Position.Y);
+            var maxX = _rooms.Max(r => r.Position.X);
+            var maxY = _rooms.Max(r => r.Position.Y);
 
             Start = new Point(minX, minY);
             End = new Point(maxX, maxY);
@@ -96,7 +96,7 @@ namespace Terminal.Screens
 
         private void AddRoomPresenceToGrid()
         {
-            foreach (var room in _rooms.Values)
+            foreach (var room in _rooms)
             {
                 var x = room.Position.X - Start.X;
                 var y = room.Position.Y - Start.Y;
