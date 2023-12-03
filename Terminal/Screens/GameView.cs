@@ -18,6 +18,7 @@ namespace Terminal.Screens
     {
         private const int RoomWidth = 5;
         private const int RoomHeight = 3;
+        private const string Doorway = " ";
 
         private Floor _floor;
         private Dictionary<Point, Room> _rooms = new Dictionary<Point, Room>();
@@ -283,11 +284,14 @@ namespace Terminal.Screens
                 var cell = Grid[y][x];
                 var hasLeftNeighbour = HasNeighbourCell(y, x - 1);
                 var isPresent = cell.presence;
-                var left = "";
-                
-                if (!isPresent && !hasLeftNeighbour) left = " ";
-                else if (isPresent && hasLeftNeighbour && cell.Room.Into == Direction.Right) left = " ";
-                else left = BoxIcons.VerticalLine;
+                var left = BoxIcons.VerticalLine;
+
+                if (!isPresent && !hasLeftNeighbour) left = Doorway;
+                else if (isPresent && hasLeftNeighbour)
+                {
+                    if (cell.Room.OutOf == Direction.Left) left = Doorway;
+                    else if (cell.Room.Into == Direction.Left) left = Doorway;
+                }
                 var line = GetContentLine(cell.Room);
                 Console.Write(left + line);
             }
