@@ -61,18 +61,45 @@ namespace Engine {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mc_Topaz.
+        /// </summary>
+        internal static string Author {
+            get {
+                return ResourceManager.GetString("Author", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {
         ///    &quot;Title&quot;:&quot;Infiltration of the headquarters&quot;,
         ///    &quot;Description&quot;:&quot;You are the council&apos;s spy and are deployed at an unguarded air intake to the headquarters. There are guards within the complex which you have to avoid or neutralize. Perform your objectives unnoticed and return to the air intake.&quot;,
         ///    &quot;Objectives&quot;:[
         ///        {
-        ///          &quot;Name&quot;: &quot;Find the locking system&apos;s control room&quot;,
-        ///          &quot;Description&quot;: &quot;In the control room reprogram a key-card to get full access of the building.&quot;,
-        ///          &quot;IsFini [rest of string was truncated]&quot;;.
+        ///          &quot;Name&quot;: &quot;Get full access to the entire building.&quot;,
+        ///          &quot;Description&quot;: &quot;On the entrace level there is a control room for the building&apos;s locking systems.&quot;
+        ///       [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string InfiltrationHeadquarters {
             get {
                 return ResourceManager.GetString("InfiltrationHeadquarters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Preventing a new world war.
+        /// </summary>
+        internal static string SubTitle {
+            get {
+                return ResourceManager.GetString("SubTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Past epoch enigma.
+        /// </summary>
+        internal static string Title {
+            get {
+                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
     }
