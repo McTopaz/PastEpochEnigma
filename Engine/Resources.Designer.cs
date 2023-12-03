@@ -22,7 +22,7 @@ namespace Engine {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Engine {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Engine.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace Engine {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace Engine {
         /// <summary>
         ///   Looks up a localized string similar to Mc_Topaz.
         /// </summary>
-        internal static string Author {
+        public static string Author {
             get {
                 return ResourceManager.GetString("Author", resourceCulture);
             }
@@ -79,7 +79,7 @@ namespace Engine {
         ///          &quot;Description&quot;: &quot;On the entrace level there is a control room for the building&apos;s locking systems.&quot;
         ///       [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string InfiltrationHeadquarters {
+        public static string InfiltrationHeadquarters {
             get {
                 return ResourceManager.GetString("InfiltrationHeadquarters", resourceCulture);
             }
@@ -88,16 +88,16 @@ namespace Engine {
         /// <summary>
         ///   Looks up a localized string similar to Preventing a new world war.
         /// </summary>
-        internal static string SubTitle {
+        public static string SubTitle {
             get {
                 return ResourceManager.GetString("SubTitle", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Past epoch enigma.
+        ///   Looks up a localized string similar to Past Epoch Enigma.
         /// </summary>
-        internal static string Title {
+        public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
             }
