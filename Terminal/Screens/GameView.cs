@@ -26,7 +26,7 @@ namespace Terminal.Screens
         private Point Start = new Point();
         private Point End = new Point();
         private Size Size = new Size();
-        private string LeftMargin;
+        private string LeftMargin = string.Empty;
         private (Room Room, bool IsPresent)[][] Grid;
 
         public override void Show()
