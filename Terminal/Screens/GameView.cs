@@ -374,7 +374,7 @@ namespace Terminal.Screens
 
                 var cell = Grid[y][x];
 
-                if (cell.Room?.Into == Direction.Up)
+                if (cell.Room?.Into == Direction.Down || cell.Room?.OutOf == Direction.Down)
                 {
                     var index = dashes.Length / 2;
                     var sb = new StringBuilder(line);
