@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Engine.Enums;
 using Engine.Models;
+using Terminal.Icons;
 
 namespace Terminal.Screens
 {
@@ -13,7 +14,7 @@ namespace Terminal.Screens
     {
         const ConsoleKey DifficultLevelKey = ConsoleKey.D;
         const ConsoleKey ModeKey = ConsoleKey.M;
-        const ConsoleKey ExitKey = ConsoleKey.X;
+        const ConsoleKey ExitKey = ConsoleKey.Escape;
 
         readonly Settings _settings;
 
@@ -36,7 +37,7 @@ namespace Terminal.Screens
             base.DisplayEnum("Game mode", _settings.Mode, ModeKey);
             base.DisplayEmptyLine();
             base.DisplayEmptyLine();
-            base.DisplayAlignedContentAtSides("Back", $"({ExitKey})");
+            base.DisplayAlignedContentAtSides("Back", $"({ButtonIcons.ESC})");
             base.DisplayEmptyLine();
             base.DisplayEmptyLine();
             base.DisplayEmptyLine();

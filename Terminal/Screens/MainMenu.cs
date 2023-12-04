@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using Terminal.Icons;
 
 namespace Terminal.Screens
 {
@@ -13,7 +14,7 @@ namespace Terminal.Screens
         const ConsoleKey LoadGameKey = ConsoleKey.L;
         const ConsoleKey OptionsKey = ConsoleKey.O;
         const ConsoleKey IntroductionKey = ConsoleKey.I;
-        const ConsoleKey ExitKey = ConsoleKey.X;
+        const ConsoleKey ExitKey = ConsoleKey.Escape;
 
         public override void Show()
         {
@@ -35,7 +36,7 @@ namespace Terminal.Screens
             base.DisplayEmptyLine();
             base.DisplayAlignedContentAtSides("4) Introduction", $"({ IntroductionKey })");
             base.DisplayEmptyLine();
-            base.DisplayAlignedContentAtSides("5) Exit", $"({ ExitKey })");
+            base.DisplayAlignedContentAtSides("5) Exit", $"({ ButtonIcons.ESC })");
             base.DisplayEmptyLine();
             base.DisplayEmptyLine();
             base.DisplayEmptyLine();
