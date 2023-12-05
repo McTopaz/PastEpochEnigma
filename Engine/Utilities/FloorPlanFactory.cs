@@ -30,7 +30,7 @@ namespace Engine.Utilities
             RandomStartPosition(floor);
             FloorPlanGeneration(floor);
             MergeRoomsWithPath(floor);
-            floor.Position = floor.Rooms.First().Position;
+            floor.Position = floor.Rooms.First(f => f.IsStart).Position;
         }
 
         private void RandomStartPosition(Floor floor)
