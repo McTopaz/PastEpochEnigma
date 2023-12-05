@@ -19,6 +19,8 @@ namespace Terminal.Screens
         private const int RoomWidth = 5;
         private const int RoomHeight = 3;
         private const string Doorway = " ";
+        private ConsoleColor Selected = ConsoleColor.Blue;
+        private ConsoleColor Default = ConsoleColor.White;
 
         private Floor _floor;
         private List<Room> _rooms = new List<Room>();
@@ -206,6 +208,30 @@ namespace Terminal.Screens
             }
         }
 
+        private void DrawLineSelectedOrDefault(string line, bool drawSelected)
+        {
+            if (drawSelected)
+            {
+                Console.ForegroundColor = Selected;
+                Console.Write(line);
+                Console.ForegroundColor = Default;
+            }
+            else
+            {
+                Console.Write(line);
+            }
+        }
+
+        private bool HasNeighbourCell(int y, int x)
+        {
+            return x >= 0 && x < Grid[y].Length && Grid[y][x].IsPresent;
+        }
+
+        private bool IsPlayerAtPosition(int y, int x)
+        {
+            return (_floor.Position.Y - Start.Y) == y && (_floor.Position.X - Start.X) == x;
+        }
+
         private void DisplayRoomGrid()
         {
             DrawTopLine();
@@ -218,6 +244,8 @@ namespace Terminal.Screens
             DrawBottomLine();
         }
 
+        #region Top line
+
         private void DrawTopLine()
         {
             Console.Write(LeftMargin);
@@ -225,7 +253,6 @@ namespace Terminal.Screens
             for(int x = 0; x < Size.Width; x++)
             {
                 var cell = Grid[0][x];
-
                 if (cell.IsPresent)
                 {
                     DrawCellTop(x);
@@ -237,35 +264,37 @@ namespace Terminal.Screens
             }
 
             DrawTopEnd();
+            Console.WriteLine();
         }
-
-        private bool HasNeighbourCell(int y, int x)
-        {
-            return x >= 0 && x < Grid[y].Length && Grid[y][x].IsPresent;
-        }
-
 
         private void DrawCellTop(int x)
         {
             var hasLeftNeighbour = HasNeighbourCell(0, x - 1);
+            var isSelectedLeft = IsPlayerAtPosition(0, x) || IsPlayerAtPosition(0, x - 1);
+            var isSelectedLine = IsPlayerAtPosition(0, x);
             var left = hasLeftNeighbour ? BoxIcons.TopTCrossing : BoxIcons.LeftUpperCorner;
             var line = string.Concat(Enumerable.Repeat(BoxIcons.HorizontalLine, RoomWidth));
-            Console.Write(left + line);
+            DrawLineSelectedOrDefault(left, isSelectedLeft);
+            DrawLineSelectedOrDefault(line, isSelectedLine);
         }
 
         private void DrawNoCellTop(int x)
         {
             var hasLeftNeighbour = HasNeighbourCell(0, x - 1);
+            var isSelected = IsPlayerAtPosition(0, x - 1);
             var left = hasLeftNeighbour ? BoxIcons.RightUpperCorner: " ";
             var line = new string(' ', RoomWidth);
-            Console.Write(left + line);
+            DrawLineSelectedOrDefault(left + line, isSelected);
         }
 
         private void DrawTopEnd()
         {
             var end = Grid[0][Size.Width - 1].IsPresent ? BoxIcons.RightUpperCorner : " ";
-            Console.WriteLine(end);
+            var isSelected = IsPlayerAtPosition(0, Size.Width - 1);
+            DrawLineSelectedOrDefault(end, isSelected);
         }
+
+        #endregion
 
         private void DrawRoomsForRow(int y)
         {
@@ -420,6 +449,8 @@ namespace Terminal.Screens
             Console.WriteLine(end);
         }
 
+        #region Bottom line
+
         private void DrawBottomLine()
         {
             Console.Write(LeftMargin);
@@ -440,31 +471,39 @@ namespace Terminal.Screens
             }
 
             DrawBottomEnd();
+            Console.WriteLine();
         }
 
         private void DrawCellBottom(int x)
         {
             var y = Size.Height - 1;
             var hasLeftNeighbour = HasNeighbourCell(y, x - 1);
+            var isSelectedLeft = IsPlayerAtPosition(y, x) || IsPlayerAtPosition(y, x - 1);
+            var isSelectedLine = IsPlayerAtPosition(y, x);
             var left = hasLeftNeighbour ? BoxIcons.BottomTCrossing : BoxIcons.LeftLowerCorner;
             var line = string.Concat(Enumerable.Repeat(BoxIcons.HorizontalLine, RoomWidth));
-            Console.Write(left + line);
+            DrawLineSelectedOrDefault(left, isSelectedLeft);
+            DrawLineSelectedOrDefault(line, isSelectedLine);
         }
 
         private void DrawNoCellBottom(int x)
         {
             var y = Size.Height - 1;
             var hasLeftNeighbour = HasNeighbourCell(y, x - 1);
+            var isSelected = IsPlayerAtPosition(y, x - 1);
             var left = hasLeftNeighbour ? BoxIcons.RightLowerCorner : " ";
             var line = new string(' ', RoomWidth);
-            Console.Write(left + line);
+            DrawLineSelectedOrDefault(left + line, isSelected);
         }
 
         private void DrawBottomEnd()
         {
             var y = Size.Height - 1;
             var end = Grid[y][Size.Width - 1].IsPresent ? BoxIcons.RightLowerCorner : " ";
-            Console.WriteLine(end);
+            var isSelected = IsPlayerAtPosition(y, Size.Width - 1);
+            DrawLineSelectedOrDefault(end, isSelected);
         }
+
+        #endregion
     }
 }
