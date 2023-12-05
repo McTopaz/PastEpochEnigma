@@ -311,6 +311,7 @@ namespace Terminal.Screens
 
         private void DrawRoomEmptyLine(int y)
         {
+            var isSelected = false;
             Console.Write(LeftMargin);
 
             for (int x = 0; x < Size.Width; x++)
@@ -319,15 +320,19 @@ namespace Terminal.Screens
                 var isPresent = Grid[y][x].IsPresent;
                 var left = !isPresent && !hasLeftNeighbour ? " " : BoxIcons.VerticalLine;
                 var line = new string(' ', RoomWidth);
-                Console.Write(left + line);
+                isSelected = IsPlayerAtPosition(y, x) || IsPlayerAtPosition(y, x - 1);
+                DrawLineSelectedOrDefault(left + line, isSelected);
             }
 
             var end = Grid[y][Size.Width - 1].IsPresent ? BoxIcons.VerticalLine : " ";
-            Console.WriteLine(end);
+            isSelected = IsPlayerAtPosition(y, Size.Width - 1);
+            DrawLineSelectedOrDefault(end, isSelected);
+            Console.WriteLine();
         }
 
         private void DrawRoomItemLine(int y)
         {
+            var isSelected = false;
             Console.Write(LeftMargin);
 
             for (int x = 0; x < Size.Width; x++)
@@ -344,11 +349,16 @@ namespace Terminal.Screens
                     else if (cell.Room.Into == Direction.Left) left = Doorway;
                 }
                 var line = GetContentLine(cell.Room);
-                Console.Write(left + line);
+                isSelected = IsPlayerAtPosition(y, x) || IsPlayerAtPosition(y, x - 1);
+                DrawLineSelectedOrDefault(left + line, isSelected);
+                //Console.Write(left + line);
             }
 
             var end = Grid[y][Size.Width - 1].IsPresent ? BoxIcons.VerticalLine : " ";
-            Console.WriteLine(end);
+            isSelected = IsPlayerAtPosition(y, Size.Width - 1);
+            DrawLineSelectedOrDefault(end, isSelected);
+            DrawLineSelectedOrDefault(end, isSelected);
+            Console.WriteLine();
         }
 
         private string GetContentLine(Room? room)
