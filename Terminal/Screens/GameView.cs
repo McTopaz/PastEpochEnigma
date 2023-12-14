@@ -443,7 +443,11 @@ namespace Terminal.Screens
                     line = sb.ToString();
                 }
 
-                var isSelectedLeft = (IsPlayerAtPosition(y, x) || IsPlayerAtPosition(y + 1, x) || IsPlayerAtPosition(y, x - 1) || IsPlayerAtPosition(y + 1, x - 1)) && (above || below);
+                //var yx = IsPlayerAtPosition(y, x);
+                //var y1x = IsPlayerAtPosition(y + 1, x);
+                //var yx1 = IsPlayerAtPosition(y, x - 1);
+                //var y1x1 = IsPlayerAtPosition(y, x);
+                var isSelectedLeft = (IsPlayerAtPosition(y, x) || IsPlayerAtPosition(y + 1, x) || IsPlayerAtPosition(y, x - 1) || IsPlayerAtPosition(y + 1, x - 1));// && (above || below);
                 var isSelectedLine = (IsPlayerAtPosition(y, x) || IsPlayerAtPosition(y + 1, x)) && (above || below);
                 DrawLineSelectedOrDefault(left, isSelectedLeft);
                 DrawLineSelectedOrDefault(line, isSelectedLine);
