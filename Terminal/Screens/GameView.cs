@@ -351,12 +351,10 @@ namespace Terminal.Screens
                 var line = GetContentLine(cell.Room);
                 isSelected = IsPlayerAtPosition(y, x) || IsPlayerAtPosition(y, x - 1);
                 DrawLineSelectedOrDefault(left + line, isSelected);
-                //Console.Write(left + line);
             }
 
             var end = Grid[y][Size.Width - 1].IsPresent ? BoxIcons.VerticalLine : " ";
             isSelected = IsPlayerAtPosition(y, Size.Width - 1);
-            DrawLineSelectedOrDefault(end, isSelected);
             DrawLineSelectedOrDefault(end, isSelected);
             Console.WriteLine();
         }
@@ -426,7 +424,7 @@ namespace Terminal.Screens
                 }
                 else
                 {
-                    if (!above && !below) left = " ";
+                    if (!above && !below) left = Doorway;
                     else if (!above && below) left = BoxIcons.LeftUpperCorner;
                     else if (above && !below) left = BoxIcons.LeftLowerCorner;
                     else if (above && below) left = BoxIcons.LeftTCrossing;
@@ -445,7 +443,11 @@ namespace Terminal.Screens
                     line = sb.ToString();
                 }
 
-                Console.Write(left + line);
+                var isSelectedLeft = (IsPlayerAtPosition(y, x) || IsPlayerAtPosition(y + 1, x) || IsPlayerAtPosition(y, x - 1) || IsPlayerAtPosition(y + 1, x - 1)) && (above || below);
+                var isSelectedLine = (IsPlayerAtPosition(y, x) || IsPlayerAtPosition(y + 1, x)) && (above || below);
+                DrawLineSelectedOrDefault(left, isSelectedLeft);
+                DrawLineSelectedOrDefault(line, isSelectedLine);
+                //Console.Write(left + line);
             }
 
             var end = "";
@@ -456,7 +458,10 @@ namespace Terminal.Screens
             else if (endAbove && !endBelow) end = BoxIcons.RightLowerCorner;
             else if (endAbove && endBelow) end = BoxIcons.RightTCrossing;
 
-            Console.WriteLine(end);
+            var isSelected = (IsPlayerAtPosition(y, Size.Width - 1) || IsPlayerAtPosition(y + 1, Size.Width - 1)) && (endAbove || endBelow);
+            DrawLineSelectedOrDefault(end, isSelected);
+            Console.WriteLine();
+            //Console.WriteLine(end);
         }
 
         #region Bottom line
