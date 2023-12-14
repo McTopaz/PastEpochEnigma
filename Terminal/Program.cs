@@ -33,7 +33,7 @@ namespace Terminal
         {
             InitConsole();
             InitContainer();
-            InitMissions();
+            InitGame();
         }
 
         private static void InitConsole()
@@ -48,12 +48,6 @@ namespace Terminal
             // Engine
             Container.Register<Game>(Lifestyle.Singleton);
             Container.Register<Settings>(Lifestyle.Singleton);
-            Container.Register<MissionLoader>(Lifestyle.Singleton);
-            Container.Register<MissionFactory>(Lifestyle.Singleton);
-            Container.Register<RoomGenerator>(Lifestyle.Singleton);
-            Container.Register<RoomSorter>(Lifestyle.Singleton);
-            Container.Register<FloorPlanFactory>(Lifestyle.Singleton);
-            Container.Register<RandomPathGenerator>(Lifestyle.Singleton);
 
             // Screens.
             Container.Register<Splash>();
@@ -66,13 +60,11 @@ namespace Terminal
             Container.Verify();
         }
 
-        private static void InitMissions()
+        private static void InitGame()
         {
-            var loader = Container.GetInstance<MissionLoader>();
             var game = Container.GetInstance<Game>();
-
-            loader.LoadMissionsFromAssets();
-            game.Missions = loader.RandomizedMissions();
+            game.Settings = Container.GetInstance<Settings>();
+            game.Init();
         }
 
         private static void ShowSplash()
@@ -99,21 +91,9 @@ namespace Terminal
 
             if (screen.StartGame)
             {
-                SetupGame(game);
+                game.Setup();
                 MainGameLoop(game);
             }
-        }
-
-        private static void SetupGame(Game game)
-        {
-            var mission = game.GetCurrentMission();
-            var missionFactory = Container.GetInstance<MissionFactory>();
-            var roomGenerator = Container.GetInstance<RoomGenerator>();
-            var floorPlanFactory = Container.GetInstance<FloorPlanFactory>();
-
-            missionFactory.InitFloors(mission, game.Settings.DifficultLevel);
-            roomGenerator.CreateRoomsForMissionFloors(mission, game.Settings.DifficultLevel);
-            floorPlanFactory.CreateFloorPlans(mission);
         }
 
         private static void MainGameLoop(Game game)
@@ -123,10 +103,8 @@ namespace Terminal
             while (true)
             {
                 var mission = game.GetCurrentMission();
-                var floor = mission.CurrentFloor;
-                var rooms = floor.Rooms;
-
-                gameView.Show(floor, rooms);
+                var actionController = game.GetActionController();
+                gameView.Show(mission.CurrentFloor, actionController);
             }
         }
     }
