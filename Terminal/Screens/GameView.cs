@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 using Engine.Enums;
 using Engine.Models;
-
+using Engine.Utilities;
 using Terminal.Icons;
 
 namespace Terminal.Screens
@@ -23,6 +23,8 @@ namespace Terminal.Screens
         private ConsoleColor Default = ConsoleColor.White;
 
         private Floor _floor;
+        private ActionController _actionController;
+
         private List<Room> _rooms = new List<Room>();
         private Point Start = new Point();
         private Point End = new Point();
@@ -42,10 +44,12 @@ namespace Terminal.Screens
             TakeInput();
         }
 
-        public void Show(Floor floor, List<Room> rooms)
+        public void Show(Floor floor, ActionController actionController)
         {
             _floor = floor;
-            _rooms = rooms;
+            _actionController = actionController;
+            _rooms = floor.Rooms;
+
             CalculateActualFloorSize();
             Show();
         }
