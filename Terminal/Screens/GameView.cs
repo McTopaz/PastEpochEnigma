@@ -447,7 +447,6 @@ namespace Terminal.Screens
                 var isSelectedLine = (IsPlayerAtPosition(y, x) || IsPlayerAtPosition(y + 1, x)) && (above || below);
                 DrawLineSelectedOrDefault(left, isSelectedLeft);
                 DrawLineSelectedOrDefault(line, isSelectedLine);
-                //Console.Write(left + line);
             }
 
             var end = "";
@@ -461,7 +460,6 @@ namespace Terminal.Screens
             var isSelected = (IsPlayerAtPosition(y, Size.Width - 1) || IsPlayerAtPosition(y + 1, Size.Width - 1)) && (endAbove || endBelow);
             DrawLineSelectedOrDefault(end, isSelected);
             Console.WriteLine();
-            //Console.WriteLine(end);
         }
 
         #region Bottom line
