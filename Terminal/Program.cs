@@ -103,8 +103,9 @@ namespace Terminal
             while (true)
             {
                 var mission = game.GetCurrentMission();
-                var actionController = game.GetActionController();
-                gameView.Show(mission.CurrentFloor, actionController);
+                var floor = mission.CurrentFloor;
+                var actionController = game.GetActionController(floor);
+                gameView.Show(floor, actionController);
             }
         }
     }
