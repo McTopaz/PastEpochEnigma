@@ -29,7 +29,6 @@ namespace Engine.Models
             Container.Register<RoomSorter>(Lifestyle.Singleton);
             Container.Register<FloorPlanFactory>(Lifestyle.Singleton);
             Container.Register<RandomPathGenerator>(Lifestyle.Singleton);
-            Container.Register<ActionController>(Lifestyle.Singleton);
         }
 
         public Settings Settings { get; set; }
@@ -43,9 +42,9 @@ namespace Engine.Models
             return Missions[_index];
         }
 
-        public ActionController GetActionController()
+        public ActionController GetActionController(Floor floor)
         {
-            return Container.GetInstance<ActionController>();
+            return new ActionController(floor);
         }
 
         public void Init()
