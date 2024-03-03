@@ -19,11 +19,12 @@ namespace Engine.Models
         public bool HasBranchingRooms { get; set; } = false;
         public Awarness Awarness { get; set; } = new Awarness();
         public List<Room> Rooms { get; set; } = new List<Room>();
-        public Point Position { get; set; }
+        public Point Position => CurrentRoom.Position;
         public DifficultLevel DifficultLevel { get; set; } = DifficultLevel.Easy;
         public Floor? Above { get; set; }
         public Floor? Below { get; set; }
         public List<Room> PredeterminedRooms { get; set; }
+        public Room CurrentRoom { get; internal set; }
         public Direction ForbiddenDirection { get; set; } = Direction.None;
         public List<(Direction Direction, Point Position)> Path = new List<(Direction direction, Point Position)>();
 
