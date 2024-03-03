@@ -16,6 +16,11 @@ namespace Terminal.Screens
 {
     internal class GameView : ScreenBase
     {
+        const ConsoleKey UpKey = ConsoleKey.UpArrow;
+        const ConsoleKey DownKey = ConsoleKey.DownArrow;
+        const ConsoleKey LeftKey = ConsoleKey.LeftArrow;
+        const ConsoleKey RightKey = ConsoleKey.RightArrow;
+
         private const int RoomWidth = 5;
         private const int RoomHeight = 3;
         private const string Doorway = " ";
@@ -54,9 +59,55 @@ namespace Terminal.Screens
             Show();
         }
 
+        private void ShowInvalidInput(string reason)
+        {
+            Console.Clear();
+
+            DisplayGameHeader();
+            DisplayFloorName();
+            DisplayVerticalMargin();
+            DisplayRoomGrid();
+            DisplayVerticalMargin();
+            DisplayInformation(reason);
+
+            Thread.Sleep(1500);
+        }
+
         protected override void ExecuteCommand(ConsoleKeyInfo input)
         {
+            var direction = GetInputDirection(input.Key);
             
+            if (direction == Direction.None)
+            {
+                ShowInvalidInput("Unknwn input");
+                return;
+            }
+
+            var result = _actionController.Move(direction);
+
+            if (!result.CanMove)
+            {
+                ShowInvalidInput(result.Reason);
+            }
+
+            Show();
+        }
+
+        private Direction GetInputDirection(ConsoleKey input)
+        {
+            switch (input)
+            {
+                case UpKey:
+                    return Direction.Up;
+                case DownKey:
+                    return Direction.Down;
+                case LeftKey:
+                    return Direction.Left;
+                case RightKey:
+                    return Direction.Right;
+                default:
+                    return Direction.None;
+            }
         }
 
         private void CalculateActualFloorSize()
