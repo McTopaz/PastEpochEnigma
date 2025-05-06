@@ -17,24 +17,32 @@ function loadSplashScreen() {
   fetch("view/splash/splash.html")
     .then(response => response.text())
     .then(html => {
-      // Skapa ett container-element och sätt in HTML:en
       const container = document.createElement("div");
       container.innerHTML = html;
-
-      // Lägg till i DOM
       document.body.prepend(container);
     })
     .catch(err => {
       console.error("Kunde inte ladda splash-screen:", err);
-      startGame(); // Kör igång spelet ändå om splashen inte kan laddas
+      startGame();
     });
 }
 
-// Gör startGame tillgänglig globalt så splash-knappen kan anropa den
 window.startGame = () => {
   const splash = document.getElementById("splash-screen");
   if (splash) splash.remove();
 
-  document.getElementById("game-container").style.display = "block";
-  // Lägg till eventuell init-logik här
+  loadMainScreen();
 };
+
+function loadMainScreen() {
+  fetch("view/main/main.html")
+    .then(response => response.text())
+    .then(html => {
+      const mainContainer = document.createElement("div");
+      mainContainer.innerHTML = html;
+      document.body.appendChild(mainContainer);
+    })
+    .catch(err => {
+      console.error("Kunde inte ladda huvudvyn:", err);
+    });
+}
