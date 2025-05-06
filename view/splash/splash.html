@@ -1,3 +1,51 @@
-<div id="splash-screen">
-    <h1>🎮 Splash</h1>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: black;
+      color: white;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    .splash-screen {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 2rem;
+      box-sizing: border-box;
+    }
+
+    .ascii-box {
+      max-width: 100%;
+      max-height: 100%;
+      overflow: auto;
+    }
+
+    pre {
+      margin: 0;
+      white-space: pre;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="splash-screen">
+    <div class="ascii-box">
+      <pre>
+    ____             __     ______                 __       ______      _                      
+   / __ \____  _____/ /_   / ____/___  ____  _____/ /_     / ____/___  (_)___  ____ ___  ____ _
+  / /_/ / __ `/ ___/ __/  / __/ / __ \/ __ \/ ___/ __ \   / __/ / __ \/ / __ `/ __ `__ \/ __ `/
+ / ____/ /_/ (__  ) /_   / /___/ /_/ / /_/ / /__/ / / /  / /___/ / / / / /_/ / / / / / / /_/ / 
+/_/    \__,_/____/\__/  /_____/ .___/\____/\___/_/ /_/  /_____/_/ /_/_/\__, /_/ /_/ /_/\__,_/  
+                             /_/                                      /____/                   
+      </pre>
+    </div>
+  </div>
+</body>
+</html>
