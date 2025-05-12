@@ -11,12 +11,26 @@ export function runAppFlow() {
 }
 
 function showSplash() {
-    fetch("view/splash/splash.html")
+    fetch("/view/splash/splash.html")
         .then(res => res.text())
         .then(html => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, "text/html");
             const container = document.createElement("div");
-            container.innerHTML = html;
+
+            container.innerHTML = doc.body.innerHTML;
             document.body.prepend(container);
+
+            doc.querySelectorAll("script").forEach(oldScript => {
+                const newScript = document.createElement("script");
+                if (oldScript.src) {
+                    newScript.src = oldScript.src;
+                    newScript.type = oldScript.type || "text/javascript";
+                } else {
+                    newScript.textContent = oldScript.textContent;
+                }
+                document.body.appendChild(newScript);
+            });
 
             setTimeout(() => {
                 container.remove();
