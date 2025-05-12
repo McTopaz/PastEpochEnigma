@@ -1,3 +1,5 @@
+import { GameSubTitle } from "/entities/constants.js";
+
 const logos = [
     "/entities/asciiArts/horizontalSplashLogo.txt",
     "/entities/asciiArts/verticalSplashLogo.txt"
@@ -18,3 +20,4 @@ export function showRandomSplash() {
 }
 
 showRandomSplash();
+document.getElementById("subTitle").textContent = GameSubTitle;
