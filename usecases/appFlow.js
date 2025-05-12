@@ -11,7 +11,7 @@ export function runAppFlow() {
 }
 
 function showSplash() {
-    const splashCssHref = "/view/splash/splash.css";
+    const splashCssHref = "view/splash/splash.css";
 
     const existingLink = document.querySelector(`link[href="${splashCssHref}"]`);
     if (!existingLink) {
@@ -21,7 +21,7 @@ function showSplash() {
         document.head.appendChild(link);
     }
 
-    fetch("/view/splash/splash.html")
+    fetch("view/splash/splash.html")
         .then(res => res.text())
         .then(html => {
             const parser = new DOMParser();
