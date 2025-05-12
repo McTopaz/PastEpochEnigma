@@ -11,6 +11,16 @@ export function runAppFlow() {
 }
 
 function showSplash() {
+    const splashCssHref = "/view/splash/splash.css";
+
+    const existingLink = document.querySelector(`link[href="${splashCssHref}"]`);
+    if (!existingLink) {
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = splashCssHref;
+        document.head.appendChild(link);
+    }
+
     fetch("/view/splash/splash.html")
         .then(res => res.text())
         .then(html => {
