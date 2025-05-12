@@ -9,6 +9,8 @@ html, body {
     border-radius: 2%;
     border: 5px solid black;
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
     align-items: center;
 }
@@ -17,4 +19,11 @@ html, body {
     color: black;
     text-align: center;
     white-space: pre;
+}
+
+.subTitle {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 1.2rem;
+  color: black;
 }
