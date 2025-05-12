@@ -1,0 +1,24 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    background-color: white;
+    font-family: 'Courier New', Courier, monospace;
+    height: calc(100% - 10px);
+}
+
+.borderBox {
+    height: 100%;
+    border-radius: 2%;
+    border: 5px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.asciiLogo {
+    color: black;
+    text-align: center;
+    white-space: pre;
+}
