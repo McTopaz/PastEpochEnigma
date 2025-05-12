@@ -11,46 +11,37 @@ export function runAppFlow() {
 }
 
 function showSplash() {
-    const splashCssHref = "view/splash/splash.css";
+  const splashCssHref = "view/splash/splash.css";
 
-    const existingLink = document.querySelector(`link[href="${splashCssHref}"]`);
-    if (!existingLink) {
-        const link = document.createElement("link");
-        link.rel = "stylesheet";
-        link.href = splashCssHref;
-        document.head.appendChild(link);
-    }
+  const existingLink = document.querySelector(`link[href="${splashCssHref}"]`);
+  if (!existingLink) {
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = splashCssHref;
+    document.head.appendChild(link);
+  }
 
-    fetch("view/splash/splash.html")
-        .then(res => res.text())
-        .then(html => {
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, "text/html");
-            const container = document.createElement("div");
+  fetch("view/splash/splash.html")
+    .then(res => res.text())
+    .then(html => {
+      const container = document.createElement("div");
+      container.innerHTML = html;
+      document.body.prepend(container);
 
-            container.innerHTML = doc.body.innerHTML;
-            document.body.prepend(container);
+      // Init, if endpoint exists.
+      import("../view/splash/splash.js").then(module => {
+        module.initSplashView();
+      });
 
-            doc.querySelectorAll("script").forEach(oldScript => {
-                const newScript = document.createElement("script");
-                if (oldScript.src) {
-                    newScript.src = oldScript.src;
-                    newScript.type = oldScript.type || "text/javascript";
-                } else {
-                    newScript.textContent = oldScript.textContent;
-                }
-                document.body.appendChild(newScript);
-            });
-
-            setTimeout(() => {
-                container.remove();
-                showMainGame();
-            }, SplashDuration);
-        })
-        .catch(error => {
-            console.error("Kunde inte ladda splash-vyn:", error);
-            showMainGame();
-        });
+      setTimeout(() => {
+        container.remove();
+        showMainGame();
+      }, SplashDuration);
+    })
+    .catch(error => {
+      console.error("Kunde inte ladda splash-vyn:", error);
+      showMainGame();
+    });
 }
 
 function showMainGame() {
