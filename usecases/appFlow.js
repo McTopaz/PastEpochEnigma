@@ -30,7 +30,6 @@ function showSplash() {
     .then(res => res.text())
     .then(baseHtml => {
       document.body.innerHTML = baseHtml;
-
       return fetch("view/splash/splash.html");
     })
     .then(res => res.text())
@@ -38,14 +37,13 @@ function showSplash() {
       const content = document.getElementById("content");
       content.innerHTML = splashHtml;
 
-      return import("../view/base/base.js").then(() => {
-        return import("../view/splash/splash.js");
+      return import("/view/base/base.js").then(() => {
+        return import("/view/splash/splash.js");
       });
     })
     .then((splashModule) => {
-      if (typeof splashModule.initSplashView === "function") {
-        splashModule.initSplashView();
-      }
+      const splash = new splashModule.Splash();
+      splash.init();
 
       setTimeout(() => {
         showMainGame();
