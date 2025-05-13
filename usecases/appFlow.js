@@ -10,17 +10,21 @@ export function runAppFlow() {
     }
 }
 
-function showSplash() {
-  const splashCssHref = "view/splash/splash.css";
-
-  const existingLink = document.querySelector(`link[href="${splashCssHref}"]`);
-  if (!existingLink) {
+function loadCssInDocument(href) {
+    if (!document.querySelector(`link[href="${href}"]`)) {
     const link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = splashCssHref;
+    link.href = href;
     document.head.appendChild(link);
   }
+}
 
+function showSplash() {
+  const baseCssHref = "view/base/base.css";
+  const splashCssHref = "view/splash/splash.css";
+
+  loadCssInDocument(baseCssHref);
+  loadCssInDocument(splashCssHref);
 
   fetch("view/base/base.html")
     .then(res => res.text())
