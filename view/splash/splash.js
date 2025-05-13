@@ -1,23 +1,29 @@
+import { Base } from "../base/base.js";
 import { GameSubTitle } from "/entities/constants.js";
 
 const logos = [
-    "/entities/asciiArts/horizontalSplashLogo.txt",
-    "/entities/asciiArts/verticalSplashLogo.txt"
-  ];
+  "/entities/asciiArts/horizontalSplashLogo.txt",
+  "/entities/asciiArts/verticalSplashLogo.txt"
+];
 
-export function showRandomSplash() {
-  const randomIndex = Math.floor(Math.random() * logos.length);
-  const chosenLogo = logos[randomIndex];
+export class Splash extends Base {
+  init() {
+    super.init();
+    this.#randomLogo();
+    document.getElementById("subTitle").textContent = GameSubTitle;
+  }
 
-  fetch(chosenLogo)
-    .then(res => res.text())
-    .then(logo => {
-      document.getElementById("asciiLogo").textContent = logo;
-    })
-    .catch(error => {
-      console.error("Unable to load splash logo", error);
-    });
+  #randomLogo() {
+    const randomIndex = Math.floor(Math.random() * logos.length);
+    const chosenLogo = logos[randomIndex];
+
+    fetch(chosenLogo)
+      .then(res => res.text())
+      .then(logo => {
+        document.getElementById("asciiLogo").textContent = logo;
+      })
+      .catch(err => {
+        console.error("Kunde inte ladda splash-logo:", err);
+      });
+  }
 }
-
-showRandomSplash();
-document.getElementById("subTitle").textContent = GameSubTitle;
