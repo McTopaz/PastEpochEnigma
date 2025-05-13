@@ -1,4 +1,4 @@
-import { GameSubTitle, GameVersion, Createdby } from "/entities/constants.js";
+import { GameSubTitle } from "/entities/constants.js";
 
 const logos = [
     "/entities/asciiArts/horizontalSplashLogo.txt",
@@ -21,5 +21,3 @@ export function showRandomSplash() {
 
 showRandomSplash();
 document.getElementById("subTitle").textContent = GameSubTitle;
-document.getElementById("version").textContent = `Version: ${GameVersion}`;
-document.getElementById("createdBy").textContent = `Created by: ${Createdby}`;
