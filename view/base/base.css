@@ -1,0 +1,37 @@
+html, body {
+    background-color: white;
+    font-family: 'Courier New', Courier, monospace;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.borderBox {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border-radius: 2%;
+    border: 5px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.corner {
+  position: absolute;
+  font-size: 0.8rem;
+  color: #333;
+}
+
+.bottom-left {
+  bottom: 5px;
+  left: 10px;
+}
+
+.bottom-right {
+  bottom: 5px;
+  right: 10px;
+}
