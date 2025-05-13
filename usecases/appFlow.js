@@ -38,12 +38,14 @@ function showSplash() {
       const content = document.getElementById("content");
       content.innerHTML = splashHtml;
 
-      // Init view if callback exists.
-      import("../view/splash/splash.js").then(module => {
-        if (typeof module.initSplashView === "function") {
-          module.initSplashView();
-        }
+      return import("../view/base/base.js").then(() => {
+        return import("../view/splash/splash.js");
       });
+    })
+    .then((splashModule) => {
+      if (typeof splashModule.initSplashView === "function") {
+        splashModule.initSplashView();
+      }
 
       setTimeout(() => {
         showMainGame();
