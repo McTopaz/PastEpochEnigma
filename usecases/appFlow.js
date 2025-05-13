@@ -21,20 +21,27 @@ function showSplash() {
     document.head.appendChild(link);
   }
 
-  fetch("view/splash/splash.html")
-    .then(res => res.text())
-    .then(html => {
-      const container = document.createElement("div");
-      container.innerHTML = html;
-      document.body.prepend(container);
 
-      // Init, if endpoint exists.
+  fetch("view/base/base.html")
+    .then(res => res.text())
+    .then(baseHtml => {
+      document.body.innerHTML = baseHtml;
+
+      return fetch("view/splash/splash.html");
+    })
+    .then(res => res.text())
+    .then(splashHtml => {
+      const content = document.getElementById("content");
+      content.innerHTML = splashHtml;
+
+      // Init view if callback exists.
       import("../view/splash/splash.js").then(module => {
-        module.initSplashView();
+        if (typeof module.initSplashView === "function") {
+          module.initSplashView();
+        }
       });
 
       setTimeout(() => {
-        container.remove();
         showMainGame();
       }, SplashDuration);
     })
