@@ -1,4 +1,5 @@
-import { SplashDuration } from "../entities/constants.js";
+import { ViewPaths } from "/entities/urlPaths.js";
+import { SplashDuration } from "/entities/constants.js";
 
 export function runAppFlow() {
     const shouldShowSplash  = true;
@@ -20,7 +21,7 @@ function loadCssInDocument(href) {
 }
 
 function loadHtmlInDocument(viewHtmlPath) {
-  return fetch("view/base/base.html")
+  return fetch(ViewPaths.baseHtml)
     .then(res => res.text())
     .then(baseHtml => {
       document.body.innerHTML = baseHtml;
@@ -34,7 +35,7 @@ function loadHtmlInDocument(viewHtmlPath) {
 }
 
 function showViewThen({ htmlUrl, cssUrl, scriptUrl, viewClass, duration, onComplete }) {
-  const baseCssHref = "view/base/base.css";
+  const baseCssHref = ViewPaths.baseCss;
 
   loadCssInDocument(baseCssHref);
   loadCssInDocument(cssUrl);
@@ -93,10 +94,10 @@ function showView({ htmlUrl, cssUrl, scriptUrl, viewClass }) {
 }
 
 function showSplash() {
-    showViewThen({
-    htmlUrl: "view/splash/splash.html",
-    cssUrl: "view/splash/splash.css",
-    scriptUrl: "/view/splash/splash.js",
+  showViewThen({
+    htmlUrl: ViewPaths.splashHtml,
+    cssUrl: ViewPaths.splashCss,
+    scriptUrl: ViewPaths.splashScript,
     viewClass: "Splash",
     duration: SplashDuration,
     onComplete: showMain
@@ -105,9 +106,9 @@ function showSplash() {
 
 function showMain() {
   showView({
-    htmlUrl: "view/main/main.html",
-    cssUrl: "view/main/main.css",
-    scriptUrl: "/view/main/main.js",
+    htmlUrl: ViewPaths.mainHtml,
+    cssUrl: ViewPaths.mainCss,
+    scriptUrl: ViewPaths.mainScript,
     viewClass: "Main"
   });
 }
