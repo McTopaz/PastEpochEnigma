@@ -1,4 +1,5 @@
 import { ViewPaths } from "/entities/urlPaths.js";
+import { ViewParts } from "/entities/viewParts.js";
 import { SplashDuration } from "/entities/constants.js";
 
 export function runAppFlow() {
@@ -21,7 +22,7 @@ function loadCssInDocument(href) {
 }
 
 function loadHtmlInDocument(viewHtmlPath) {
-  return fetch(ViewPaths.baseHtml)
+  return fetch(ViewPaths.base.html)
     .then(res => res.text())
     .then(baseHtml => {
       document.body.innerHTML = baseHtml;
@@ -34,14 +35,12 @@ function loadHtmlInDocument(viewHtmlPath) {
     });
 }
 
-function showViewThen({ htmlUrl, cssUrl, scriptUrl, viewClass, duration, onComplete }) {
-  const baseCssHref = ViewPaths.baseCss;
+function showViewThen({ viewParts, viewClass, duration, onComplete }) {
+  loadCssInDocument(ViewPaths.base.css);
+  loadCssInDocument(viewParts.css);
 
-  loadCssInDocument(baseCssHref);
-  loadCssInDocument(cssUrl);
-
-  loadHtmlInDocument(htmlUrl)
-    .then(() => import(scriptUrl))
+  loadHtmlInDocument(viewParts.html)
+    .then(() => import(viewParts.script))
     .then((module) => {
 
     const ViewClass = module[viewClass];
@@ -67,14 +66,12 @@ function showViewThen({ htmlUrl, cssUrl, scriptUrl, viewClass, duration, onCompl
     });
 }
 
-function showView({ htmlUrl, cssUrl, scriptUrl, viewClass }) {
-  const baseCssHref = "view/base/base.css";
+function showView({ viewParts, viewClass }) {
+  loadCssInDocument(ViewPaths.base.css);
+  loadCssInDocument(viewParts.css);
 
-  loadCssInDocument(baseCssHref);
-  loadCssInDocument(cssUrl);
-
-  loadHtmlInDocument(htmlUrl)
-    .then(() => import(scriptUrl))
+  loadHtmlInDocument(viewParts.html)
+    .then(() => import(viewParts.script))
     .then((module) => {
 
       const ViewClass = module[viewClass];
@@ -95,9 +92,7 @@ function showView({ htmlUrl, cssUrl, scriptUrl, viewClass }) {
 
 function showSplash() {
   showViewThen({
-    htmlUrl: ViewPaths.splashHtml,
-    cssUrl: ViewPaths.splashCss,
-    scriptUrl: ViewPaths.splashScript,
+    viewParts: ViewPaths.splash,
     viewClass: "Splash",
     duration: SplashDuration,
     onComplete: showMain
@@ -106,9 +101,7 @@ function showSplash() {
 
 function showMain() {
   showView({
-    htmlUrl: ViewPaths.mainHtml,
-    cssUrl: ViewPaths.mainCss,
-    scriptUrl: ViewPaths.mainScript,
+    viewParts: ViewPaths.main,
     viewClass: "Main"
   });
 }
