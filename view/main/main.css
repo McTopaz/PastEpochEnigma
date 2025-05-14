@@ -24,11 +24,32 @@
   flex-grow: 1;
 }
 
-.instruction {
-  font-weight: bold;
-  margin-bottom: 8px;
+.menu {
+  display: inline-flex;
+  flex-direction: column;
+  font-family: monospace;
+  gap: 0.5rem;
+  margin: 0 auto;
 }
 
-.menu {
-  font-family: monospace;
+.option {
+  margin-bottom: 12px;
+  font-size: xx-large;
+}
+
+.menu-row {
+  display: grid;
+  grid-template-columns: max-content auto;
+  column-gap: 12px;
+  font-size: x-large;
+}
+
+.left {
+  text-align: left;
+  white-space: nowrap;
+}
+
+.right {
+  text-align: right;
+  white-space: nowrap;
 }
