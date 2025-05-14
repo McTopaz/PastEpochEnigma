@@ -1,0 +1,12 @@
+.asciiLogo {
+    color: black;
+    text-align: center;
+    white-space: pre;
+}
+
+.subTitle {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 1.2rem;
+  color: black;
+}
