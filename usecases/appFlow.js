@@ -19,40 +19,62 @@ function loadCssInDocument(href) {
   }
 }
 
-function showSplash() {
-  const baseCssHref = "view/base/base.css";
-  const splashCssHref = "view/splash/splash.css";
-
-  loadCssInDocument(baseCssHref);
-  loadCssInDocument(splashCssHref);
-
-  fetch("view/base/base.html")
+function loadHtmlInDocument(viewHtmlPath) {
+  return fetch("view/base/base.html")
     .then(res => res.text())
     .then(baseHtml => {
       document.body.innerHTML = baseHtml;
-      return fetch("view/splash/splash.html");
+      return fetch(viewHtmlPath);
     })
     .then(res => res.text())
-    .then(splashHtml => {
+    .then(viewHtml => {
       const content = document.getElementById("content");
-      content.innerHTML = splashHtml;
-
-      return import("/view/base/base.js").then(() => {
-        return import("/view/splash/splash.js");
-      });
-    })
-    .then((splashModule) => {
-      const splash = new splashModule.Splash();
-      splash.init();
-
-      setTimeout(() => {
-        showMainGame();
-      }, SplashDuration);
-    })
-    .catch(error => {
-      console.error("Kunde inte ladda splash-vyn:", error);
-      showMainGame();
+      content.innerHTML = viewHtml;
     });
+}
+
+function showViewThen({ htmlUrl, cssUrl, scriptUrl, viewClass, duration, onComplete }) {
+  const baseCssHref = "view/base/base.css";
+
+  loadCssInDocument(baseCssHref);
+  loadCssInDocument(cssUrl);
+
+  loadHtmlInDocument(htmlUrl)
+    .then(() => import(scriptUrl))
+    .then((module) => {
+
+    const ViewClass = module[viewClass];
+    
+    if (ViewClass && typeof ViewClass === "function") {
+      const viewInstance = new ViewClass();
+      if (typeof viewInstance.init === "function") {
+        viewInstance.init();
+      }
+    } else {
+      console.warn("Invalid or missing view class:", viewClassName);
+    }
+
+      if (duration > 0 && typeof onComplete === "function") {
+        setTimeout(onComplete, duration);
+      }
+    })
+    .catch((error) => {
+      console.error("Error while displaying view:", error);
+      if (typeof onComplete === "function") {
+        onComplete();
+      }
+    });
+}
+
+function showSplash() {
+    showViewThen({
+    htmlUrl: "view/splash/splash.html",
+    cssUrl: "view/splash/splash.css",
+    scriptUrl: "/view/splash/splash.js",
+    viewClass: "Splash",
+    duration: SplashDuration,
+    onComplete: showMainGame
+  });
 }
 
 function showMainGame() {
