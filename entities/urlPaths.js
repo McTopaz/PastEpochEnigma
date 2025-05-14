@@ -1,21 +1,17 @@
+import { ViewParts } from "/entities/viewParts.js";
+
 const repoName = "PastEpochEnigma";
 export const BASE_PATH = window.location.pathname.includes(`/${repoName}/`)
   ? `/${repoName}/`
   : "/";
 
 export const ViewPaths = {
-  baseHtml: `${BASE_PATH}view/base/base.html`,
-  baseCss: `${BASE_PATH}view/base/base.css`,
-  baseScript: `${BASE_PATH}view/base/base.js`,
-  splashHtml: `${BASE_PATH}view/splash/splash.html`,
-  splashCss: `${BASE_PATH}view/splash/splash.css`,
-  splashScript: `${BASE_PATH}view/splash/splash.js`,
-  mainHtml: `${BASE_PATH}view/main/main.html`,
-  mainCss: `${BASE_PATH}view/main/main.css`,
-  mainScript: `${BASE_PATH}view/main/main.js`
+  base: new ViewParts("base", BASE_PATH),
+  splash: new ViewParts("splash", BASE_PATH),
+  main: new ViewParts("main", BASE_PATH),
 };
 
-export const asciiPaths = {
+export const AsciiPaths = {
   horizontalLogo: `${BASE_PATH}entities/asciiArts/horizontalSplashLogo.txt`,
   verticalLogo: `${BASE_PATH}entities/asciiArts/verticalSplashLogo.txt`,
   menuLogo: `${BASE_PATH}entities/asciiArts/menuLogo.txt`
