@@ -6,7 +6,7 @@ export function runAppFlow() {
     if (shouldShowSplash ) {
         showSplash();
     } else {
-        showMainGame();
+        showMain();
     }
 }
 
@@ -66,6 +66,32 @@ function showViewThen({ htmlUrl, cssUrl, scriptUrl, viewClass, duration, onCompl
     });
 }
 
+function showView({ htmlUrl, cssUrl, scriptUrl, viewClass }) {
+  const baseCssHref = "view/base/base.css";
+
+  loadCssInDocument(baseCssHref);
+  loadCssInDocument(cssUrl);
+
+  loadHtmlInDocument(htmlUrl)
+    .then(() => import(scriptUrl))
+    .then((module) => {
+
+      const ViewClass = module[viewClass];
+      
+      if (ViewClass && typeof ViewClass === "function") {
+        const viewInstance = new ViewClass();
+        if (typeof viewInstance.init === "function") {
+          viewInstance.init();
+        }
+      } else {
+        console.warn("Invalid or missing view class:", viewClassName);
+      }
+    })
+    .catch((error) => {
+      console.error("Error while displaying view:", error);
+    });
+}
+
 function showSplash() {
     showViewThen({
     htmlUrl: "view/splash/splash.html",
@@ -73,19 +99,15 @@ function showSplash() {
     scriptUrl: "/view/splash/splash.js",
     viewClass: "Splash",
     duration: SplashDuration,
-    onComplete: showMainGame
+    onComplete: showMain
   });
 }
 
-function showMainGame() {
-    fetch("view/main/main.html")
-        .then(res => res.text())
-        .then(html => {
-            const mainContainer = document.createElement("div");
-            mainContainer.innerHTML = html;
-            document.body.appendChild(mainContainer);
-        })
-        .catch(error => {
-            console.error("Kunde inte ladda huvudvyn:", error);
-        });
+function showMain() {
+  showView({
+    htmlUrl: "view/main/main.html",
+    cssUrl: "view/main/main.css",
+    scriptUrl: "/view/main/main.js",
+    viewClass: "Main"
+  });
 }
