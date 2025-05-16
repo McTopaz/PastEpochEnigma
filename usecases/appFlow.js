@@ -12,6 +12,13 @@ export function runAppFlow() {
     }
 }
 
+export function showIntroduction() {
+  showView({
+    viewParts: ViewPaths.introduction,
+    viewClass: "Introduction"
+  })
+}
+
 function loadCssInDocument(href) {
     if (!document.querySelector(`link[href="${href}"]`)) {
     const link = document.createElement("link");
