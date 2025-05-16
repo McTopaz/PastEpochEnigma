@@ -1,36 +1,51 @@
 @import url('../styles/variables.css');
 
 html, body {
-    background-color: white;
-    font-family: 'Courier New', Courier, monospace;
-    height: 100%;
-    margin: 0;
-    padding: 0;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: white;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .borderBox {
-    position: absolute;
-    top: var(--spacing);
-    left: var(--spacing);
-    right: var(--spacing);
-    bottom: var(--spacing);
-    border-radius: var(--radius);
-    border: var(--outerBorder);
-    display: flex;
+  position: absolute;
+  top: var(--spacing);
+  left: var(--spacing);
+  right: var(--spacing);
+  bottom: var(--spacing);
+
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius);
+  border: var(--outerBorder);
+  box-sizing: border-box;
+}
+
+.content {
+  flex-grow: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: #333;
+  padding-bottom: var(--bigSpacing);
 }
 
 .corner {
   position: absolute;
-  font-size: 0.8rem;
-  color: #333;
+  white-space: nowrap;
 }
 
 .bottom-left {
-  bottom: var(--smallSpacing);
   left: var(--spacing);
 }
 
 .bottom-right {
-  bottom: var(--smallSpacing);
   right: var(--spacing);
 }
