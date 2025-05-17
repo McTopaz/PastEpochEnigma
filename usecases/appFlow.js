@@ -3,13 +3,13 @@ import { ViewParts } from "/entities/viewParts.js";
 import { SplashDuration } from "/entities/constants.js";
 
 export function runAppFlow() {
-    const shouldShowSplash  = true;
+  const shouldShowSplash  = true;
 
-    if (shouldShowSplash ) {
-        showSplash();
-    } else {
-        showMain();
-    }
+  if (shouldShowSplash ) {
+      showSplash();
+  } else {
+      showMain();
+  }
 }
 
 export function showIntroduction() {
@@ -95,6 +95,23 @@ function showView({ viewParts, viewClass }) {
     .catch((error) => {
       console.error("Error while displaying view:", error);
     });
+}
+
+function showBase() {
+  loadCssInDocument(ViewPaths.base.css);
+
+  fetch('/view/base/base.html')
+    .then(response => response.text())
+    .then(html => {
+      document.body.innerHTML = html;
+
+      import('/view/base/base.js')
+        .then(module => {
+            const ViewClass = module["Base"];
+            const instance = new ViewClass();
+            instance.init();
+        });
+    })
 }
 
 function showSplash() {
