@@ -24,9 +24,11 @@ html, body {
 
 .content {
   flex-grow: 1;
-  overflow: hidden;
+  min-height: 0;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  background-color: red;
 }
 
 .info {
@@ -38,7 +40,6 @@ html, body {
 }
 
 .corner {
-  position: absolute;
   white-space: nowrap;
 }
 
