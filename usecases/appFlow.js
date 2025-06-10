@@ -4,7 +4,7 @@ import { SplashDuration } from "/entities/constants.js";
 
 export function runAppFlow() {
   const shouldShowSplash  = true;
-
+  
   if (shouldShowSplash ) {
       showSplash();
   } else {
