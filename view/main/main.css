@@ -1,12 +1,15 @@
 @import url('../styles/variables.css');
 
 .container {
+  margin-left: var(--spacing);
+  padding-bottom: var(--spacing);
+  max-height: 100%;
+  overflow: auto;
+  box-sizing: border-box;
+  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  margin-left: var(--spacing);
-  height: 100%;
-  box-sizing: border-box;
+  background-color: transparent;
 }
 
 .asciiLogo {
