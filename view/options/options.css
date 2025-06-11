@@ -1,0 +1,21 @@
+@import url('../styles/variables.css');
+
+.container {
+  padding: var(--spacing);
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+  flex: 1 1 auto;
+  box-sizing: border-box;
+}
+
+.options-title {
+  font-size: 2rem;
+  margin-bottom: var(--spacing);
+  text-align: center;
+}
+
+.options-content {
+  flex: 1;
+  font-size: 1.1rem;
+}
