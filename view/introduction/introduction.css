@@ -1,20 +1,27 @@
 @import url('../styles/variables.css');
 
 .container {
+  margin-left: var(--spacing);
+  margin-right: var(--spacing);
+  padding-bottom: var(--spacing);
+  max-height: 100%;
+  overflow: auto;
+  box-sizing: border-box;
+  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  margin-left: var(--spacing);
-  height: 100%;
-  box-sizing: border-box;
+  background-color: transparent;
 }
 
 .asciiLogo {
-    color: black;
-    text-align: center;
-    white-space: pre;
+  color: black;
+  text-align: center;
+  white-space: pre;
 }
 
-.spacer {
+.text {
   flex-grow: 1;
+  overflow-y: auto;
+  background-color: transparent;
+  text-align: left;
 }
