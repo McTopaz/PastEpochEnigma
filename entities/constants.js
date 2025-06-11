@@ -3,3 +3,5 @@ export const GameTitle = "Epoch Past Enigma";
 export const GameSubTitle = "Some SubTitle";
 export const Createdby = "Mc_Topaz";
 export const SplashDuration = 2000;
+export const EvilPlaceholder = "<evil>";
+export const EvilName = "*evil*";
