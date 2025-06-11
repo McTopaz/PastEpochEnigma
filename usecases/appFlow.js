@@ -2,8 +2,10 @@ import { ViewPaths } from "/entities/urlPaths.js";
 import { ViewParts } from "/entities/viewParts.js";
 import { SplashDuration } from "/entities/constants.js";
 
+let currentViewInstance = null;
+
 export function runAppFlow() {
-  const shouldShowSplash  = true;
+  const shouldShowSplash = false; // Change this to true to show the splash screen
   
   if (shouldShowSplash ) {
       showSplash();
@@ -50,16 +52,20 @@ function showViewThen({ viewParts, viewClass, duration, onComplete }) {
     .then(() => import(viewParts.script))
     .then((module) => {
 
-    const ViewClass = module[viewClass];
-    
-    if (ViewClass && typeof ViewClass === "function") {
-      const viewInstance = new ViewClass();
-      if (typeof viewInstance.init === "function") {
-        viewInstance.init();
+      if (currentViewInstance && typeof currentViewInstance.destroy === "function") {
+          console.log("Destroying current view instance:", currentViewInstance);
+          currentViewInstance.destroy();
       }
-    } else {
-      console.warn("Invalid or missing view class:", viewClassName);
-    }
+
+      const ViewClass = module[viewClass];
+      if (ViewClass && typeof ViewClass === "function") {
+        currentViewInstance = new ViewClass();
+        if (typeof currentViewInstance.init === "function") {
+          currentViewInstance.init();
+        }
+      } else {
+        console.warn("Invalid or missing view class:", viewClassName);
+      }
 
       if (duration > 0 && typeof onComplete === "function") {
         setTimeout(onComplete, duration);
@@ -81,12 +87,17 @@ function showView({ viewParts, viewClass }) {
     .then(() => import(viewParts.script))
     .then((module) => {
 
+      if (currentViewInstance && typeof currentViewInstance.destroy === "function") {
+        console.log("Destroying current view instance:", currentViewInstance);
+        currentViewInstance.destroy();
+      }
+
       const ViewClass = module[viewClass];
-      
       if (ViewClass && typeof ViewClass === "function") {
-        const viewInstance = new ViewClass();
-        if (typeof viewInstance.init === "function") {
-          viewInstance.init();
+        currentViewInstance = new ViewClass();
+        if (typeof currentViewInstance.init === "function") {
+          console.log("Initializing view:", viewClass);
+          currentViewInstance.init();
         }
       } else {
         console.warn("Invalid or missing view class:", viewClassName);
@@ -123,7 +134,7 @@ function showSplash() {
   });
 }
 
-function showMain() {
+export function showMain() {
   showView({
     viewParts: ViewPaths.main,
     viewClass: "Main"

@@ -1,4 +1,5 @@
 import { Base } from "../base/base.js";
+import { showMain } from "/usecases/appFlow.js";
 
 const menuLogo = "/entities/asciiArts/introductionLogo.txt";
 const text = "/entities/texts/introduction.txt"
@@ -11,7 +12,7 @@ export class Introduction extends Base {
   }
 
   #logo() {
-   fetch(menuLogo)
+    fetch(menuLogo)
       .then(res => res.text())
       .then(logo => {
         document.getElementById("asciiLogo").textContent = logo;
@@ -30,5 +31,11 @@ export class Introduction extends Base {
       .catch(err => {
         console.error("Unable to load text:", err);
       });
+  }
+
+  hanldeKeyboardEvent(event) {
+    if (event.key === "Escape" || event.key === "Enter") {
+      showMain();
+    }
   }
 }
