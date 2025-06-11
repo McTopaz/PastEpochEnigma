@@ -1,7 +1,6 @@
 @import url('../styles/variables.css');
 
 .container {
-  margin-left: var(--spacing);
   padding-bottom: var(--spacing);
   max-height: 100%;
   overflow: auto;

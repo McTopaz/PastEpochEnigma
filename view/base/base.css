@@ -14,6 +14,7 @@ html, body {
   left: var(--spacing);
   right: var(--spacing);
   bottom: var(--spacing);
+  padding: var(--spacing);
 
   display: flex;
   flex-direction: column;
@@ -37,17 +38,9 @@ html, body {
   justify-content: space-between;
   font-size: 0.8rem;
   color: #333;
-  padding-bottom: var(--bigSpacing);
+  background-color: transparent;
 }
 
 .corner {
   white-space: nowrap;
-}
-
-.bottom-left {
-  left: var(--spacing);
-}
-
-.bottom-right {
-  right: var(--spacing);
 }
