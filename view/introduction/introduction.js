@@ -1,5 +1,6 @@
 import { Base } from "../base/base.js";
 import { showMain } from "/usecases/appFlow.js";
+import { EvilPlaceholder, EvilName } from "/entities/constants.js";
 
 const menuLogo = "/entities/asciiArts/introductionLogo.txt";
 const text = "/entities/texts/introduction.txt"
@@ -26,7 +27,9 @@ export class Introduction extends Base {
     fetch(text)
       .then(res => res.text())
       .then(text => {
-        document.getElementById("text").innerHTML = text.replace(/\n/g, "<br>");
+        text = text.replace(/\n/g, "<br>")
+          .replace(EvilPlaceholder, EvilName);
+        document.getElementById("text").innerHTML = text;
       })
       .catch(err => {
         console.error("Unable to load text:", err);
