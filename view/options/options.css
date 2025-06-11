@@ -1,21 +1,23 @@
 @import url('../styles/variables.css');
 
 .container {
-  padding: var(--spacing);
+  max-height: 100%;
+  overflow: auto;
+  box-sizing: border-box;
+  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
   background-color: transparent;
-  flex: 1 1 auto;
-  box-sizing: border-box;
 }
 
-.options-title {
-  font-size: 2rem;
-  margin-bottom: var(--spacing);
+.asciiLogo {
+  color: black;
   text-align: center;
+  white-space: pre;
 }
 
-.options-content {
-  flex: 1;
-  font-size: 1.1rem;
+.text {
+  flex-grow: 1;
+  overflow-y: auto;
+  background-color: transparent;
 }

@@ -10,6 +10,7 @@ export const ViewPaths = {
   splash: new ViewParts("splash", BASE_PATH),
   main: new ViewParts("main", BASE_PATH),
   introduction: new ViewParts("introduction", BASE_PATH),
+  options: new ViewParts("options", BASE_PATH),
 };
 
 export const AsciiPaths = {

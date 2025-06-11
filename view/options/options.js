@@ -1,16 +1,28 @@
 import { Base } from "../base/base.js";
+import { showMain } from "/usecases/appFlow.js";
+
+const menuLogo = "/entities/asciiArts/optionsLogo.txt";
 
 export class Options extends Base {
   init() {
     super.init();
-    // Initialize options view here
+    this.#logo();
+  }
+
+  #logo() {
+    fetch(menuLogo)
+      .then(res => res.text())
+      .then(logo => {
+        document.getElementById("asciiLogo").textContent = logo;
+      })
+      .catch(err => {
+        console.error("Unable to load logo:", err);
+      });
   }
 
   hanldeKeyboardEvent(event) {
-    // Handle keyboard events for options view here
-    // Example: Close options on Escape
-    if (event.key === "Escape") {
-      // Implement navigation or close logic
+    if (event.key === "Escape" || event.key === "Enter") {
+      showMain();
     }
   }
 }

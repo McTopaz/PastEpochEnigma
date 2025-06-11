@@ -1,3 +1,4 @@
+import { showOptions } from "../../usecases/appFlow.js";
 import { Base } from "../base/base.js";
 import { GameSubTitle } from "/entities/constants.js";
 import { showIntroduction } from "/usecases/appFlow.js";
@@ -25,6 +26,9 @@ export class Main extends Base {
   hanldeKeyboardEvent(event) {
     if (event.key === "3" || event.key.toUpperCase() === "I") {
       showIntroduction();
+    }
+    else if (event.key === "4" || event.key.toUpperCase() === "O") {
+      showOptions();
     }
   }
 }

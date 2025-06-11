@@ -140,3 +140,10 @@ export function showMain() {
     viewClass: "Main"
   });
 }
+
+export function showOptions() {
+  showView({
+    viewParts: ViewPaths.options,
+    viewClass: "Options"
+  });
+}
