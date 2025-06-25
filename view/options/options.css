@@ -22,6 +22,10 @@
   background-color: transparent;
 }
 
+.spacer {
+  flex-grow: 1;
+}
+
 .menu {
   display: grid;
   grid-template-columns: max-content minmax(8em, 1fr) max-content;
