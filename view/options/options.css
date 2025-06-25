@@ -16,12 +16,6 @@
   white-space: pre;
 }
 
-.text {
-  flex-grow: 1;
-  overflow-y: auto;
-  background-color: transparent;
-}
-
 .spacer {
   flex-grow: 1;
 }
