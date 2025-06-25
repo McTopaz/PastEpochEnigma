@@ -21,11 +21,24 @@ export function showIntroduction() {
   })
 }
 
+function ensureBaseCssLoaded() {
+  if (!document.querySelector(`link[data-base-css]`)) {
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = ViewPaths.base.css;
+    link.setAttribute('data-base-css', '');
+    document.head.appendChild(link);
+  }
+}
+
 function loadCssInDocument(href) {
-    if (!document.querySelector(`link[href="${href}"]`)) {
+  document.querySelectorAll('link[data-view-css]').forEach(link => link.remove());
+
+  if (!document.querySelector(`link[href="${href}"]`)) {
     const link = document.createElement("link");
     link.rel = "stylesheet";
     link.href = href;
+    link.setAttribute('data-view-css', '');
     document.head.appendChild(link);
   }
 }
@@ -45,7 +58,7 @@ function loadHtmlInDocument(viewHtmlPath) {
 }
 
 function showViewThen({ viewParts, viewClass, duration, onComplete }) {
-  loadCssInDocument(ViewPaths.base.css);
+  ensureBaseCssLoaded();
   loadCssInDocument(viewParts.css);
 
   loadHtmlInDocument(viewParts.html)
@@ -80,7 +93,7 @@ function showViewThen({ viewParts, viewClass, duration, onComplete }) {
 }
 
 function showView({ viewParts, viewClass }) {
-  loadCssInDocument(ViewPaths.base.css);
+  ensureBaseCssLoaded();
   loadCssInDocument(viewParts.css);
 
   loadHtmlInDocument(viewParts.html)
