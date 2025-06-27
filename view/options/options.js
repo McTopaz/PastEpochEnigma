@@ -3,6 +3,8 @@ import { showMain } from "/usecases/appFlow.js";
 import { settings } from "/entities/settings.js";
 import { Difficulties } from "/entities/constants.js";
 import { Difficulties as DifficaultiesTexts } from "/entities/constants/texts.js";
+import { Modes } from "/entities/constants.js";
+import { Modes as ModesTexts } from "/entities/constants/texts.js";
 
 const menuLogo = "/entities/asciiArts/optionsLogo.txt";
 
@@ -32,6 +34,11 @@ export class Options extends Base {
     document.getElementById("mediumLabel").textContent = DifficaultiesTexts.Medium;
     document.getElementById("hard").value = Difficulties.Hard;
     document.getElementById("hardLabel").textContent = DifficaultiesTexts.Hard;
+
+    document.getElementById("normal").value = Modes.Normal;
+    document.getElementById("normalLabel").textContent = ModesTexts.Normal;
+    document.getElementById("speedrun").value = Modes.Speedrun;
+    document.getElementById("speedrunLabel").textContent = ModesTexts.Speedrun;
   }
 
   #applySettings() {
@@ -54,10 +61,9 @@ export class Options extends Base {
       const difficulties = [Difficulties.Easy, Difficulties.Medium, Difficulties.Hard];
       settings.difficulty = this.#cycleOptions(difficulties, settings.difficulty);
       this.#applySettings();
-      console.log(settings.difficulty);
     }
     else if (event.key === "2" || event.key.toUpperCase() === "M") {
-      const modes = ["normal", "speedrun"];
+      const modes = [Modes.Normal, Modes.Speedrun];
       settings.mode = this.#cycleOptions(modes, settings.mode);
       this.#applySettings();
     }
