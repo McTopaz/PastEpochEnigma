@@ -5,3 +5,9 @@ export const Createdby = "Mc_Topaz";
 export const SplashDuration = 2000;
 export const EvilPlaceholder = "<evil>";
 export const EvilName = "*evil*";
+
+export const Difficulties = {
+    Easy: "Easy",
+    Medium: "Medium",
+    Hard: "Hard"
+}
