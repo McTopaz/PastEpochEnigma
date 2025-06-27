@@ -7,7 +7,7 @@ export const EvilPlaceholder = "<evil>";
 export const EvilName = "*evil*";
 
 export const Difficulties = {
-    Easy: "Easy",
-    Medium: "Medium",
-    Hard: "Hard"
+    Easy: "easy",
+    Medium: "medium",
+    Hard: "hard"
 }
