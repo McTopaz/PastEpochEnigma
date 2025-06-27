@@ -10,4 +10,9 @@ export const Difficulties = {
     Easy: "easy",
     Medium: "medium",
     Hard: "hard"
-}
+};
+
+export const Modes = {
+    Normal: "normal",
+    Speedrun: "speedrun"
+};
