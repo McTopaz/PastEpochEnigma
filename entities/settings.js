@@ -1,8 +1,8 @@
-import { Difficulties } from "/entities/constants.js";
+import { Difficulties, Modes } from "/entities/constants.js";
 
 export const settings = {
     difficulty: Difficulties.Easy,
-    mode: "normal",
+    mode: Modes.Normal,
 
     get isNormalMode() {
         return this.mode === "normal";
