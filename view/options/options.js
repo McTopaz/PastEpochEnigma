@@ -1,6 +1,8 @@
 import { Base } from "../base/base.js";
 import { showMain } from "/usecases/appFlow.js";
 import { settings } from "/entities/settings.js";
+import { Difficulties } from "/entities/constants.js";
+import { Difficulties as DifficaultiesTexts } from "/entities/constants/texts.js";
 
 const menuLogo = "/entities/asciiArts/optionsLogo.txt";
 
@@ -8,6 +10,7 @@ export class Options extends Base {
   init() {
     super.init();
     this.#logo();
+    this.#applyOptions();
     this.#applySettings();
   }
 
@@ -20,6 +23,15 @@ export class Options extends Base {
       .catch(err => {
         console.error("Unable to load logo:", err);
       });
+  }
+
+  #applyOptions() {
+    document.getElementById("easy").value = Difficulties.Easy;
+    document.getElementById("easyLabel").textContent = DifficaultiesTexts.Easy;
+    document.getElementById("medium").value = Difficulties.Medium;
+    document.getElementById("mediumLabel").textContent = DifficaultiesTexts.Medium;
+    document.getElementById("hard").value = Difficulties.Hard;
+    document.getElementById("hardLabel").textContent = DifficaultiesTexts.Hard;
   }
 
   #applySettings() {
@@ -39,9 +51,10 @@ export class Options extends Base {
       showMain();
     }
     else if (event.key === "1" || event.key.toUpperCase() === "D") {
-      const difficulties = ["easy", "medium", "hard"];
+      const difficulties = [Difficulties.Easy, Difficulties.Medium, Difficulties.Hard];
       settings.difficulty = this.#cycleOptions(difficulties, settings.difficulty);
       this.#applySettings();
+      console.log(settings.difficulty);
     }
     else if (event.key === "2" || event.key.toUpperCase() === "M") {
       const modes = ["normal", "speedrun"];
